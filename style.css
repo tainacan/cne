@@ -1,0 +1,228 @@
+/**
+ * Theme Name: Cadastro Nacional de Eventos
+ * Description: Tema filho do Blocksy para o Cadastro Nacional de Eventos do Ibram
+ * Author: wetah
+ * Template: blocksy
+ * Text Domain: cne
+ * Version: 0.2.2
+ */
+
+/* Widget de Menu no rodapé */
+footer .widget-menu {
+    font-size: 21px;
+    font-weight: 700;
+}
+footer .widget-menu li {
+    margin-bottom: 0.875rem;
+}
+
+/* Customizações do formulário de newsletter */
+.tnp-subscription .tnp-field input[type="submit"] {
+	width: 100%;
+	font-size: 28px;
+	text-transform: uppercase;
+	margin-top: 32px;
+}
+.tnp-subscription .tnp-field {
+	margin-bottom: 20px !important;
+	position: relative;
+}
+.tnp-subscription input[type="text"],
+.tnp-subscription input[type="email"],
+.tnp-subscription input[type="submit"],
+.tnp-subscription select,
+.tnp-subscription textarea,
+.tnp-profile input[type="text"],
+.tnp-profile input[type="email"],
+.tnp-profile input[type="submit"],
+.tnp-profile select,
+.tnp-profile textarea {
+	background-color: var(--theme-palette-color-6);
+	min-height: 58px;
+}
+.tnp-subscription .tnp-field.tnp-field-profile {
+  width: 48%;
+  display: inline-block;
+}
+.tnp-subscription .tnp-field.tnp-field-profile:has(#tnp-profile_2) {
+	margin-left: 3%;
+}
+
+/*
+ // Label flutuante
+.tnp-subscription .tnp-field label {
+  position: absolute;
+	font-size: 16px;
+  top: 18px;
+  bottom: 0;
+  left: 11px;
+  transition: 0.2s;
+}
+.tnp-subscription .tnp-field:has(input:focus) label,
+.tnp-subscription .tnp-field:has(input:valid) label {
+  top: -18px;
+} */
+
+/* Formulários do plugin User Registration */
+#user-registration {
+	box-shadow: none !important;
+	background-color: transparent !important;
+}
+.ur-frontend-form {
+	border: none;
+	padding: 0;
+	box-shadow: none;
+}
+.ur-frontend-form.ur-frontend-form--rounded form input[type="submit"],
+.ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
+.ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-prev,
+.ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-next {
+	border-radius: 100em;
+	width: 100%;
+	margin-top: 2rem;
+}
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="text"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="email"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="url"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="password"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="date"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="number"],
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid textarea,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid select {
+	background-color: var(--theme-palette-color-6);
+}
+
+#filters-modal .filters-components-list .collection-name {
+	display: none;
+}
+
+.tainacan-list-container .tainacan-list .metadata-title p {
+	font-weight: bold;
+	font-size: 1em !important;
+}
+.tainacan-list-container .tainacan-list .tainacan-list-item-thumbnail,
+.tainacan-list-container .tainacan-list img {
+	width: 110px !important;
+}
+.hero-section[data-type="type-2"] .ct-title-label {
+	font-size: 16px;
+}
+.entry-content:not(.ct-container) .wp-block-tainacan-faceted-search:not(.alignfull) .theme-items-list:not(.is-fullscreen) .search-control {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+/* Simplifica o metadado de contatos */
+.metadata-slug-contatos .tainacan-relationship-metadatum .tainacan-metadatum {
+	padding-left: 0 !important;
+}
+
+/* Seção de endereço */
+@media screen and (min-width: 968px) {
+	.tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata {
+		--metadata-column-width: 140px;
+	}
+	.tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > .metadata-type-geocoordinate {
+		column-span: all;
+		display: block;
+	}
+}
+
+/* Filtros horizontais */
+@media screen and (min-width: 769px) {
+	.theme-items-list {
+		--tainacan-filter-menu-width-theme: 100% !important;
+		grid-template-columns: 100% !important;
+		grid-template-rows: auto auto auto !important;
+		grid-template-areas:
+			"searchcontrol" 
+			"filters" 
+			"itemslist" !important;
+	}
+	.theme-items-list:not(.is-fullscreen).is-filters-menu-open .items-list-area {
+		max-width: 100% !important;
+		width: 100% !important;
+	}
+	.theme-items-list .filter-tags-list {
+		padding: 1em 0 !important;
+	}
+	.theme-items-list #filters-modal {
+		grid-area: filters;
+		justify-self: start;
+		align-self: normal;
+		width: 100%;
+		min-width: 100%;
+		overflow: visible;
+	}
+	.theme-items-list #filters-modal .modal-content {
+		overflow: visible !important;
+	}
+	.theme-items-list #filters-modal .link-style.collapse-all,
+	.theme-items-list #filters-modal .link-style.collapse-all + br {
+		display: none;
+		visibility: hidden;
+	}
+	.theme-items-list #filters-modal .filters-components-list {
+		width: 100%;
+		display: flex;
+		gap: 1.25rem;
+		flex-wrap: wrap;
+		margin-bottom: 0px !important;
+	}
+	.theme-items-list #filters-modal .filters-components-list > div:not(.filter-item-forms) {
+		display: inline-flex;
+		width: auto;
+		gap: 1.25rem;
+		flex-wrap: wrap;
+		margin-bottom: 0px !important;
+	}
+	.theme-items-list #filters-modal .filters-components-list .filter-item-forms .collapse-trigger {
+		pointer-events: none;
+		margin-left: 0;
+	}
+	.tainacan-modal .tainacan-form .field:not(:last-child),
+	.theme-items-list .tainacan-form .field:not(:last-child) {
+		margin-bottom: 0.5em !important;
+	}
+	.theme-items-list #filters-modal .filters-components-list .filter-item-forms .collapse-trigger .icon {
+		display: none;
+		visibility: hidden;
+	}
+	.theme-items-list #filters-modal .filters-components-list .filter-item-forms .collapse-content div:has(p.has-text-centered) {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+	}
+	.theme-items-list #tainacanFiltersButton {
+		display: none;
+		visibility: hidden;
+	}
+}
+.theme-items-list #filters-label-landmark {
+	margin-bottom: 0.5em !important;
+}
+.theme-items-list #tainacanViewModesSection,
+.theme-items-list #tainacanFullScreenViewMode,
+.theme-items-list .search-control-item--displayed-metadata-dropdown {
+	display: none !important;
+	visibility: hidden;
+}
+.theme-items-list .search-control .search-control-item.search-control-item--search {
+	margin: 0 !important;
+	margin-bottom: 0 !important;
+	width: 100% !important;
+}
+.theme-items-list .search-control .search-control-item.search-control-item--search .search-area {
+	width: 100% !important;
+	max-width: 100% !important;
+}
+.theme-items-list .search-control-item--search .dropdown-trigger::before {
+	content: 'Busca textual';
+	display: block;
+	font-size: 1rem;
+	color: var(--tainacan-heading-color);
+	visibility: visible;
+	width: auto;
+	height: 1.875rem;
+	font-weight: 600;
+}
