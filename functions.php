@@ -38,16 +38,16 @@ function cne_fetch_args_posts_items_repository( $args, $entity ) {
 
 	$referer_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 	if ( !empty($referer_url) ) {
-		$query_string = parse_url($referer_url, PHP_URL_QUERY);
-		parse_str($query_string, $params);
-		//error_log($referer_url);
-
-		$args['post_type'] = array_filter(
-			$args['post_type'], 
-			function($collection_post_type) {
-				return $collection_post_type !== cne_get_instituicoes_collection_post_type();
-			}
-		);
+		$path_string = parse_url($referer_url, PHP_URL_PATH);
+		
+		if ( $path_string === '/itens/' || $path_string === '/items/') {
+			$args['post_type'] = array_filter(
+				$args['post_type'], 
+				function($collection_post_type) {
+					return $collection_post_type !== cne_get_instituicoes_collection_post_type();
+				}
+			);
+		}
 	}
 
 	return $args;
@@ -113,7 +113,7 @@ function cne_preset_atividade_instituicao($item) {
 							if ( $new_instituicao_item_metadatum->validate() ) {
 								\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $new_instituicao_item_metadatum );
 								
-								cne_preset_atividade_location_from_instituicao($item, $from_instituicao);
+								cne_preset_atividade_data_from_instituicao($item, $from_instituicao);
 							}
 						}
 					}
@@ -125,15 +125,35 @@ function cne_preset_atividade_instituicao($item) {
 
 add_action('tainacan-insert', 'cne_preset_atividade_instituicao', 10, 1);
 
-function cne_preset_atividade_location_from_instituicao($item_atividade, $instituicao_id) {
+function cne_preset_atividade_data_from_instituicao($item_atividade, $instituicao_id) {
 
 	$metadata_mapping = [
-		'73' => '38402',	// Região (Instituição) => Região (Atividade)
-		'1232' => '38388',  // Endereço
-		'104' => '43915',   // Estado 
-		'77' => '38390',    // Cidade 
-		'1203' => '38386',  // Bairro 
-		'151' => '38384'    // Complemento
+		'38402' => '38402',	// Região (Instituição) => Região (Atividade)
+		'38396' => '38396', // Estado 
+		'38390' => '38390', // Cidade 
+		'38386' => '38386', // Bairro 
+		'38388' => '38388', // Endereço
+		'38384' => '38384', // Complemento
+		'85235' => '85235', // CEP
+		'38382' => '38382', // Número
+		'85237' => '85237', // Plus Code
+		'85239' => '85239', // Geo Localização
+
+		'85081' => '85081', // Telefone
+		'85083' => '85083', // Telefone privado
+		'85087' => '85087', // E-mail 
+		'85089' => '85089', // E-mail privado
+        '85103' => '85103', // Site 
+        '85282' => '85282', // Redes Sociais
+    ];
+
+	$child_metadata_mapping = [
+        '85286' => '85286',  // ... => Facebook
+        '85309' => '85309',  // ... => YouTube
+        '85303' => '85303',  // ... => Instagram
+        '85316' => '85316',  // ... => TikTok
+        '85295' => '85295',  // ... => Twitter
+		'85421' => '85421'   // ... => Outra rede social
     ];
 
 	$tainacan_items_repository = \Tainacan\Repositories\Items::get_instance();
@@ -141,22 +161,58 @@ function cne_preset_atividade_location_from_instituicao($item_atividade, $instit
 
 	if ( $item_instituicao instanceof \Tainacan\Entities\Item ) {
 
+		// Percorre os metadados da instituição e copia para a atividade
 		foreach($metadata_mapping as $instituicao_metadatum_id => $atividade_metadatum_id) {
 			
 			$instituicao_metadatum = new \Tainacan\Entities\Metadatum( $instituicao_metadatum_id );
 			$atividade_metadatum = new \Tainacan\Entities\Metadatum( $atividade_metadatum_id );
 
+			// Verifica se os dois objetos de metadados foram montados corretamente
 			if ( $instituicao_metadatum instanceof \Tainacan\Entities\Metadatum && $atividade_metadatum instanceof \Tainacan\Entities\Metadatum ) {
+				
 				$instituicao_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $item_instituicao, $instituicao_metadatum );
 
 				if ( $instituicao_item_metadatum->has_value() ) {
+
 					$atividade_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $item_atividade, $atividade_metadatum );
 
+					// Insere o valor no metadado apenas se ele ainda não tiver sido preenchido
 					if ( !$atividade_item_metadatum->has_value() ) {
-						$atividade_item_metadatum->set_value( $instituicao_item_metadatum->get_value() );
 						
-						if ( $atividade_item_metadatum->validate() ) {
-							\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_item_metadatum );
+						// No caso do metadado composto, percorre o vetor de metadados filhos
+						if ( $instituicao_metadatum->get_metadata_type() == 'Tainacan\Metadata_Types\Compound' && $atividade_metadatum->get_metadata_type() == 'Tainacan\Metadata_Types\Compound' ) {
+
+							if ( !$instituicao_metadatum->is_multiple() ) {
+
+								$instituicao_child_item_metadata = $instituicao_item_metadatum->get_value();
+								
+								$parent_meta_id = null;
+								foreach ($instituicao_child_item_metadata as $child_instituicao_metadatum_id => $instituicao_child_item_metadatum) {
+									$atividade_child_metadatum = false;
+
+									if ( $instituicao_child_item_metadatum->has_value() ) {
+
+										$atividade_child_metadatum = new \Tainacan\Entities\Metadatum( $child_metadata_mapping[$child_instituicao_metadatum_id] );
+
+										if ( $atividade_child_metadatum instanceof \Tainacan\Entities\Metadatum ) {
+											$atividade_child_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $item_atividade, $atividade_child_metadatum, null, $parent_meta_id );
+											$atividade_child_item_metadatum->set_value( $instituicao_child_item_metadatum->get_value() );
+
+											if ( $atividade_child_item_metadatum->validate() ) {
+												$updated_atividade_child_metadum = \Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_child_item_metadatum );
+												$parent_meta_id = $updated_atividade_child_metadum->get_parent_meta_id();
+											}
+										}
+									}
+								}
+							}
+						} else {
+						
+							$atividade_item_metadatum->set_value( $instituicao_item_metadatum->get_value() );
+							
+							if ( $atividade_item_metadatum->validate() ) {
+								\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_item_metadatum );
+							}
 						}
 					}
 				}
@@ -338,6 +394,9 @@ function cne_add_collections_to_toolbar($admin_bar) {
 			),
 		));
 	}
+
+	wp_reset_postdata();
+	wp_reset_query();
 	
 }
 add_action('admin_bar_menu', 'cne_add_collections_to_toolbar', 100);
@@ -348,7 +407,6 @@ require get_stylesheet_directory() . '/inc/gestor-tweaks.php';
 require get_stylesheet_directory() . '/inc/customizer.php';
 require get_stylesheet_directory() . '/inc/instituicao.php';
 require get_stylesheet_directory() . '/inc/opcoes-das-colecoes.php';
-require get_stylesheet_directory() . '/inc/hook-kit-digital-item.php';
 //require get_stylesheet_directory() . '/inc/block-styles.php';
 require get_stylesheet_directory() . '/inc/block-filters.php';
 

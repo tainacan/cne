@@ -91,30 +91,29 @@ function cne_create_instituicao() {
         '274' => '142',     // Tipo do Museu
         '279' => '29593',   // Temática do Museu
         '259' => '29956',   // Esfera Administrativa
-        '1587' => '29965',  // Redes Sociais
+        '1587' => '85282',  // Redes Sociais
 
-        '1367' => '1232',   // Endereço (Logradouro)
-        '15563' => '104',   // Estado 
-        '11568' => '77',    // Cidade 
-        '2261' => '1203',   // Bairro 
-        '1379' => '151',    // Complemento 
-        '1375' => '29435',  // Número 
-        '2797' => '29442',  // CEP 
-        '228' => '1211',    // Telefone 
+        '1367' => '38388',  // Endereço (Logradouro)
+        '15563' => '38396', // Estado 
+        '11568' => '38390', // Cidade 
+        '2261' => '38386',  // Bairro 
+        '1379' => '38384',  // Complemento 
+        '1375' => '38382',  // Número 
+        '2797' => '85235',  // CEP 
+        '1219' => '85081',  // Telefone 
         '1508' => '29943',  // Dias e horários de aberturo para o público 
         '1503' => '29946',  // Valor da entrada 
         '1517' => '29949',  // Política de Gratuidade 
-        '1219' => '123',    // Telefone 
-        '1213' => '115',    // E-mail 
-        '1200' => '265',    // Site 
+        '1213' => '85087',  // E-mail 
+        '1200' => '85103',  // Site 
     ];
 
     $child_metadata_mapping = [
-        '15626' => '29969', // ... => Facebook
-        '2249' => '29996', // ... => YouTube
-        '39908' => '30001', // ... => Instagram
-        '119857' => '29986', // ... => TikTok
-        '39901' => '29974', // ... => Twitter
+        '15626' => '85286',  // ... => Facebook
+        '2249' => '85309',   // ... => YouTube
+        '39908' => '85303',  // ... => Instagram
+        '119857' => '85316', // ... => TikTok
+        '39901' => '85295',  // ... => Twitter
     ];
 
     if ( $new_item->validate() ) {
