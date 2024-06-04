@@ -11,6 +11,9 @@ require get_stylesheet_directory() . '/inc/utils.php';
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
+	
+	if ( is_page( 'cadastro' ) )
+		wp_enqueue_script( 'cne-register-form-script', get_stylesheet_directory_uri() . '/assets/js/register-form.js', array(), wp_get_theme()->get('Version'), true );
 });
 
 /** 
@@ -400,6 +403,21 @@ function cne_add_collections_to_toolbar($admin_bar) {
 	
 }
 add_action('admin_bar_menu', 'cne_add_collections_to_toolbar', 100);
+
+/**
+ * Muda ícone de conta 
+ */
+add_filter('blocksy:header:account:icons', function ($icon) {
+    $icon['type-1'] = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_669_2704" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+			<rect width="24" height="24" fill="#D9D9D9"/>
+		</mask>
+		<g mask="url(#mask0_669_2704)">
+			<path d="M5 17V10H7V17H5ZM11 17V10H13V17H11ZM2 21V19H22V21H2ZM17 17V10H19V17H17ZM2 8V6L12 1L22 6V8H2ZM6.45 6H17.55L12 3.25L6.45 6Z" fill="#1C1B1F"/>
+		</g>
+	</svg>';
+    return $icon;
+});
 
 
 /* ----------------------------- INC IMPORTS  ----------------------------- */

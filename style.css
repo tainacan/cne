@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.2.7
+ * Version: 0.3.1
  */
 
 /* Widget de Menu no rodapé */
@@ -77,7 +77,7 @@ footer .widget-menu li {
 .ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
 .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-prev,
 .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-next {
-	border-radius: 100em;
+	border-radius: 6px;
 	width: 100%;
 	margin-top: 2rem;
 }
@@ -89,7 +89,42 @@ footer .widget-menu li {
 .ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="number"],
 .ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid textarea,
 .ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid select {
-	background-color: var(--theme-palette-color-6);
+	border-radius: 8px !important;
+	height: 48px !important;
+	border-color: var(--theme-palette-color-5) !important;
+}
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="text"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="email"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="url"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="password"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="date"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="number"]:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid textarea:hover,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid select:hover {
+	border-color: var(--theme-palette-color-1) !important;
+}
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="text"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="email"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="url"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="password"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="date"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="number"]:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid textarea:focus,
+.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid select:focus {
+	border-color: var(--theme-palette-color-2) !important;
+}
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="text"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="email"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="url"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="password"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="date"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="number"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="timepicker"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid input[type="phone"]::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid textarea::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid select::placeholder,
+.ur-frontend-form .ur-form-row .ur-form-grid .__PrivateStripeElement::placeholder {
+	color: var(--theme-palette-color-5) !important;
 }
 
 #filters-modal .filters-components-list .collection-name {
