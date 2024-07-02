@@ -97,6 +97,22 @@ if ( defined ('TAINACAN_VERSION') && !function_exists('cne_filter_tainacan_facet
                 'type' => 'number',
                 'default' => 24
             );
+            $metadata['attributes']['shouldNotHideFiltersOnMobile'] = array(
+                'type' => 'boolean',
+                'default' => true
+            );
+            $metadata['attributes']['displayFiltersHorizontally'] = array(
+                'type' => 'boolean',
+                'default' => true
+            );
+            $metadata['attributes']['hideFilterCollapses'] = array(
+                'type' => 'boolean',
+                'default' => true
+            );
+            $metadata['attributes']['filtersInlineWidth'] = array(
+                'type' => 'number',
+                'default' => 250
+            );
         }
         return $metadata;
     };

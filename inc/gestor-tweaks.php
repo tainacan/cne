@@ -182,8 +182,7 @@ function cne_add_welcome_message() {
 
 		if ( $parent_base === 'edit' && cne_get_instituicoes_collection_post_type() === $post_type ) : ?>
 			<div class="cne-admin-welcome-panel">
-				<h1>Boas vindas ao <img alt="Visite Museus" src="https://evento.museus.gov.br/wp-content/uploads/2024/01/VISITE-MUSEUS.svg"></h1>
-				<p class="subtitle">O novo Cadastro Nacional de Eventos do Instituto Brasileiro de Museus.</p>
+				<h1><div class="welcome-intro">Boas vindas ao </div><img alt="Visite Museus" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo-tipo.svg'; ?>"></h1>
 				<br>
 				<p>
 					Comece cadastrando sua instituição ou importando ela do MuseusBR, se for um Museu Cadastrado.<br>

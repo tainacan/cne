@@ -27,6 +27,9 @@ function cne_collection_form () {
     );
     $terms = get_terms($args);
 
+    if ( is_wp_error( $terms ) || empty( $terms ) )
+        return;
+
     ob_start();
     ?>
     <div class="tainacan-taxonomy-collection"> 

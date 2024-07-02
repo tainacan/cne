@@ -12,8 +12,13 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
 	
+	wp_enqueue_style( 'view-mode-cnegrid', get_stylesheet_directory_uri() . '/assets/css/view-mode-cnegrid.css', array(), wp_get_theme()->get('Version') );
+	
 	if ( is_page( 'cadastro' ) )
 		wp_enqueue_script( 'cne-register-form-script', get_stylesheet_directory_uri() . '/assets/js/register-form.js', array(), wp_get_theme()->get('Version'), true );
+
+	if ( is_single() && cne_get_instituicoes_collection_post_type() == get_post_type() )
+		wp_enqueue_style( 'cne-instituicao-single', get_stylesheet_directory_uri() . '/assets/css/instituicao-single.css', array(), wp_get_theme()->get('Version') );
 });
 
 /** 
@@ -29,7 +34,7 @@ function cne_admin_enqueue_styles() {
 		'edit_admin_url' => admin_url( 'edit.php'),
     ) );
 }
-add_action( 'admin_enqueue_scripts', 'cne_admin_enqueue_styles' );
+add_action( 'admin_enqueue_scripts', 'cne_admin_enqueue_styles', 3 );
 
 /**
  * Lista somente os itens das coleções de eventos no nível repositório
@@ -319,7 +324,7 @@ function cne_add_collections_to_toolbar($admin_bar) {
 			$instituicoes_items->the_post();
 			$admin_bar->add_menu( array(
 				'id'    => 'instituicao-' . get_the_ID(),
-				'title' => get_the_title(),
+				'title' => __( 'Minha instituição', 'cne' ),
 				'href'  =>  admin_url( 'admin.php?page=instituicao&id=' . get_the_ID() ),
 				'meta'  => array(
 					'title' => get_the_title()
@@ -328,7 +333,7 @@ function cne_add_collections_to_toolbar($admin_bar) {
 			$admin_bar->add_menu( array(
 				'parent' => 'instituicao-' . get_the_ID(),	
 				'id'    => 'colecao-instituicoes',
-				'title' => __( 'Todas as minhas instituições', 'cne' ),
+				'title' => __( 'Gerenciar todas as minhas instituições', 'cne' ),
 				'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
 				'meta'  => array(
 					'title' => __( 'Todas as minhas instituições', 'cne' ),        
@@ -410,15 +415,66 @@ add_action('admin_bar_menu', 'cne_add_collections_to_toolbar', 100);
 add_filter('blocksy:header:account:icons', function ($icon) {
     $icon['type-1'] = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<mask id="mask0_669_2704" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-			<rect width="24" height="24" fill="#D9D9D9"/>
+			<rect width="24" height="24" fill="var(--theme-icon-color, var(--theme-text-color))"/>
 		</mask>
 		<g mask="url(#mask0_669_2704)">
-			<path d="M5 17V10H7V17H5ZM11 17V10H13V17H11ZM2 21V19H22V21H2ZM17 17V10H19V17H17ZM2 8V6L12 1L22 6V8H2ZM6.45 6H17.55L12 3.25L6.45 6Z" fill="#1C1B1F"/>
+			<path d="M5 17V10H7V17H5ZM11 17V10H13V17H11ZM2 21V19H22V21H2ZM17 17V10H19V17H17ZM2 8V6L12 1L22 6V8H2ZM6.45 6H17.55L12 3.25L6.45 6Z" fill="var(--theme-icon-color, var(--theme-text-color))"/>
 		</g>
 	</svg>';
     return $icon;
 });
 
+/* Registra modos de visualização */
+function cne_register_tainacan_view_modes() {
+	if ( function_exists( 'tainacan_register_view_mode' ) ) {
+
+		// Grid
+		tainacan_register_view_mode('cnegrid', array(
+			'label' => __( 'Cartão do Visite Museus', 'cne' ),
+			'description' => __( 'Uma grade de itens de atividades e instituições feita para o VisiteMUSEUS', 'cne' ),
+			'icon' => '<span class="icon"><i class="tainacan-icon tainacan-icon-viewcards tainacan-icon-1-25em"></i></span>',
+			'dynamic_metadata' => false,
+			'template' => get_stylesheet_directory() . '/tainacan/view-mode-cnegrid.php'
+		));
+
+		// Grid 2
+		tainacan_register_view_mode('cnegrid2', array(
+			'label' => __( 'Cartão de instituição', 'cne' ),
+			'description' => __( 'Uma grade de itens de instituições feita para o VisiteMUSEUS', 'cne' ),
+			'icon' => '<span class="icon"><i class="tainacan-icon tainacan-icon-viewrecords tainacan-icon-1-25em"></i></span>',
+			'dynamic_metadata' => false,
+			'template' => get_stylesheet_directory() . '/tainacan/view-mode-cnegrid.php'
+		));
+	}
+}
+add_action( 'after_setup_theme', 'cne_register_tainacan_view_modes' );
+
+/* Define o novo Cartões como modo de visualização padrão */
+function cne_set_default_view_mode($default) {
+	if ( !is_admin() )
+		return 'cnegrid';
+
+	return $default;
+}
+add_filter( 'tainacan-default-view-mode-for-themes', 'cne_set_default_view_mode', 10, 1 );
+
+function cne_set_enabled_view_modes($registered_view_modes_slugs) {
+
+	if ( !is_admin() )
+		return [ 'cnegrid', 'cnegrid2' ];
+
+	return $registered_view_modes_slugs;
+}
+add_filter( 'tainacan-enabled-view-modes-for-themes', 'cne_set_enabled_view_modes', 10, 1 );
+
+add_filter('blocksy:typography:google:use-remote', function () {
+	return false;
+});
+  
+add_filter('blocksy_typography_font_sources', function ($sources) {
+	unset($sources['google']);
+	return $sources;
+});
 
 /* ----------------------------- INC IMPORTS  ----------------------------- */
 require get_stylesheet_directory() . '/inc/gestor-tweaks.php';
@@ -427,6 +483,8 @@ require get_stylesheet_directory() . '/inc/instituicao.php';
 require get_stylesheet_directory() . '/inc/opcoes-das-colecoes.php';
 //require get_stylesheet_directory() . '/inc/block-styles.php';
 require get_stylesheet_directory() . '/inc/block-filters.php';
+require get_stylesheet_directory() . '/inc/block-bindings.php';
+require get_stylesheet_directory() . '/inc/instituicao-single-tweaks.php';
 
 /* -------------------------- MUSEUSBR FETCHER -----------------*/
 require get_stylesheet_directory() . '/museusbr-fetcher/museusbr-fetcher.php';

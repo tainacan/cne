@@ -135,3 +135,18 @@ function cne_get_atividades($args = array(), $id_instituicao = null, $ids_evento
 
     return $items;
 }
+
+/* Builds navigation link for custom view modes */
+function cne_get_item_link_for_navigation($item_url, $index) {
+		
+	if ( $_GET && isset($_GET['paged']) && isset($_GET['perpage']) ) {
+		$query = '';
+		$perpage = (int)$_GET['perpage'];
+		$paged = (int)$_GET['paged'];
+		$index = (int)$index;
+		$query .= '&pos=' . ( ($paged - 1) * $perpage + $index );
+		$query .= '&source_list=' . (is_tax() ? 'term' : 'collection');
+		return $item_url . '?' .  $_SERVER['QUERY_STRING'] . $query;
+	}
+	return $item_url;
+}
