@@ -1,0 +1,280 @@
+.tainacan-cne-grid-container {
+    font-size: 16px;
+    padding: 4px 4px 16px 4px;
+    display: -ms-grid;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, max(368px, 25%));
+    grid-template-rows: auto;
+    grid-gap: 28px;
+    justify-content: flex-start;
+    margin-top: 0px;
+    list-style: none;
+    animation-name: appear;
+    animation-duration: 0.5s;
+}
+
+.tainacan-cne-grid-container .tainacan-cne-grid-item {
+    margin: 0px;
+    display: block;
+    text-decoration: none !important;
+    width: 100%;
+    background-color: var(--theme-palette-color-6);
+    border-radius: 8px;
+    align-self: flex-start;
+}
+
+.tainacan-cne-grid-container > section.section {
+    grid-column: 1/-1;
+}
+
+.tainacan-cne-grid-container .tainacan-cne-grid-item.skeleton {
+    width: 100%;
+}
+
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    margin: 0;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: calc(100% * (234 / 370));
+}
+.tainacan-cne-grid-container--3.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail:before {
+    padding-top: calc(100% * (400 / 280));
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0px;
+    object-fit: cover;
+    object-position: center;
+    width: 100% !important;
+    height: 100% !important;
+    transition: height 0.2s ease, width 0.2s ease;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail img:not([src]) {
+    text-align: center;
+    font-size: 1rem;
+    font-style: italic;
+    color: #555;
+    background: var(--paletteColor5);
+    padding: 30% 2rem;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail .skeleton {
+    position: absolute;
+    z-index: -1;
+    background-color: #e0e0e0;
+    bottom: 0;
+}
+
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail.placeholder img {
+    padding: 2rem;
+    background-color: #f2f2f2;
+    opacity: 0.85;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item:hover .cne-grid-item-thumbnail {
+    background-color: #dbdbdb;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item:hover .cne-grid-item-thumbnail img {
+    width: 105% !important;
+    height: 105% !important;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata {
+    padding: 24px;
+    display: grid;
+    grid-template-areas:
+        'tipo        tipo       ' 
+        'instituicao instituicao' 
+        'data        hora       ' 
+        'nome        nome       ';
+    grid-template-rows: 54px 48px 48px 48px;
+    grid-template-columns: 1fr 1fr;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item a,
+.tainacan-cne-grid-container .tainacan-cne-grid-item a:hover,
+.tainacan-cne-grid-container .tainacan-cne-grid-item a:focus,
+.tainacan-cne-grid-container .tainacan-cne-grid-item a:focus-within {
+    color: inherit;
+    text-decoration: none;
+}
+.tainacan-cne-grid-container > .tainacan-cne-grid-item > a {
+    cursor: pointer;
+    display: block;
+}
+.tainacan-cne-grid-container > .tainacan-cne-grid-item > a:hover,
+.tainacan-cne-grid-container > .tainacan-cne-grid-item > a:focus,
+.tainacan-cne-grid-container > .tainacan-cne-grid-item > a:focus-within {
+    box-shadow: 0 0 6px -4px var(--theme-palette-color-3);
+    border-radius: 8px;
+}
+.tainacan-cne-grid-container > .tainacan-cne-grid-item > a:focus-visible {
+    box-shadow: 0 0 4px 0px var(--theme-palette-color-1);
+    border-radius: 8px;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade {
+    grid-area: tipo;
+    align-self: end;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade p {
+    text-transform: uppercase;
+    font-size: 28px;
+    margin-bottom: 0;
+    color: #4b4b4b !important;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-instituicao-2 {
+    grid-area: instituicao;
+    align-self: start;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-instituicao-2 p {
+    font-weight: bold;
+    color: var(--theme-palette-color-1) !important;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-inicio-da-atividade,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-fim-da-atividade {
+    grid-area: data;
+    align-self: center;
+    display: inline-block;
+    position: relative;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-fim-da-atividade {
+    margin-left: 5em;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-fim-da-atividade {
+    grid-area: hora;
+    align-self: center;
+    display: inline-block;
+    position: relative;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade {
+    margin-left: 1em;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-fim-da-atividade {
+    justify-self: end
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-inicio-da-atividade + .metadata-slug-data-de-fim-da-atividade::before {
+    content: ' a ';
+    display: inline-block;
+    font-weight: bold;
+    font-size: 21px;
+    color: var(--theme-palette-color-4);
+    position: absolute;
+    top: 0;
+    left: -0.813em;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade + .metadata-slug-horario-de-fim-da-atividade::before {
+    content: ' às ';
+    display: inline-block;
+    font-size: 21px;
+    color: var(--theme-palette-color-4);
+    position: absolute;
+    top: 0;
+    left: -1.25em;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-inicio-da-atividade p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-data-de-fim-da-atividade p {
+    font-weight: bold;
+    font-size: 21px;
+    color: var(--theme-palette-color-4);
+    margin-bottom: 0;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-fim-da-atividade p {
+    font-size: 21px;
+    color: var(--theme-palette-color-4);
+    margin-bottom: 0;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-type-core_title {
+    grid-area: nome;
+    align-self: start;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-type-core_title p {
+    color: var(--theme-palette-color-4);
+    margin-bottom: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
+/* Grid the Instituições */
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail {
+    display: flex;
+    align-items: flex-end;
+    align-items: last baseline;
+    gap: 16px;
+    padding: 16px 16px 0px 16px;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail h4 {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: var(--theme-palette-color-1) !important;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail img {
+    width: 136px;
+    height: 136px;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata {
+    padding: 16px;
+    gap: 16px;
+    display: grid;
+    grid-template-areas:
+        'regiao    estado    cidade   ' 
+        'descricao descricao descricao';
+    grid-template-rows: 20px 85px;
+    grid-template-columns: 80px 25px auto;
+    grid-template-columns: min-content 25px auto;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-regiao {
+    grid-area: regiao;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-estado {
+    grid-area: estado;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-cidade {
+    grid-area: cidade;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-regiao p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-estado p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-cidade p {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--theme-palette-color-12);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 210px;
+    white-space: nowrap;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-descricao {
+    grid-area: descricao;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-descricao p {
+    color: var(--theme-palette-color-4);
+    margin-bottom: 0;
+    overflow: hidden;
+    line-height: normal;
+    display: -webkit-box;
+    line-clamp: 4; 
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}

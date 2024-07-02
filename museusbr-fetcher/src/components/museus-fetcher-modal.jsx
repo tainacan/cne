@@ -26,8 +26,8 @@ const MuseusFetcherModal = () => {
 
     return (
         <>
-            <Button size="compact" variant="secondary" onClick={ openModal }>
-                { __( 'Importar museu do MuseusBR', 'cne' ) }
+            <Button size="compact" variant="primary" onClick={ openModal }>
+                { __( 'Importar instituição do MuseusBR', 'cne' ) }
             </Button>
             { isOpen && (
             <Modal 

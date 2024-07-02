@@ -9,6 +9,7 @@ const MuseusBRFetcherButton = () => {
 
 domReady( () => {
     const newButtonRoot = document.createElement("span");
+    newButtonRoot.classList.add('museusbr-fetcher-button-container')
     
     const elementAfterButton = document.getElementsByClassName('wp-header-end')[0];
     
