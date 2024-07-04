@@ -26,9 +26,11 @@ if (wp && wp.hooks) {
     wp.hooks.addFilter('tainacan_item_edition_after_update_redirect', 'tainacan-hooks', getTainacanItemEditionRedirect);
 
     function tainacanItemEditionItemLoaded (collection, item) {
+
+        // Adiciona botão de link para o kit digital do evento
         if (collection && collection.cne_kit_digital_do_evento) {
             const documentField = document.getElementsByClassName('document-field');
-            if (documentField.length) {
+            if ( documentField.length ) {
                 const wrapper = document.createElement('div');
                 wrapper.style.width = '100%';
                 wrapper.style.textAlign = 'right';
@@ -44,7 +46,65 @@ if (wp && wp.hooks) {
                 documentField[0].prepend(wrapper);
             }
         }
+
+        // Adiciona título customizado para a página de edição de itens
+        const pageContainer = document.getElementById('collection-page-container');
+        if (pageContainer) {
+            const newPageTitle = document.createElement('h1');
+            newPageTitle.innerText = ( item.status === 'auto-draft' ? 'Inscrição da ' : 'Edição da ' ) + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'Instituição' : 'Atividade' );
+            newPageTitle.classList.add('cne-tainacan-page-title');
+
+            const newPageSubtitle = document.createElement('p');
+
+            if ( item.status === 'auto-draft' )
+                newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Criar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
+            else
+                newPageSubtitle.innerText = 'Preencha os campos no seu tempo. As informações serão salvas automaticamente.';
+
+            newPageSubtitle.classList.add('cne-tainacan-page-subtitle');
+
+            const statusWrapper = document.createElement('div');
+            statusWrapper.classList.add('cne-tainacan-page-status-wrapper');
+
+            const statusLabel = document.createElement('span');
+            statusLabel.classList.add('cne-tainacan-page-status-label');
+            statusLabel.innerText = tainacan_plugin.i18n['status_' + item.status];
+
+            const statusIcon = document.createElement('i');
+            switch ( item.status ) {
+                case 'auto-draft':
+                    statusWrapper.style.color = '#3C4D76';
+                    statusIcon.dataset.feather = 'loader';
+                    break;
+                case 'draft':
+                    statusWrapper.style.color = '#9B9B9B';
+                    statusIcon.dataset.feather = 'edit';
+                    break;
+                case 'private':
+                    statusIcon.dataset.feather = 'lock';
+                    break;
+                case 'publish':
+                    statusWrapper.style.color = '#218963';
+                    statusIcon.dataset.feather = 'check-circle';
+                    break;
+            }
+
+            statusWrapper.appendChild(statusIcon);
+            statusWrapper.appendChild(statusLabel);
+
+            const newPageTitleContainer = document.createElement('div');
+            newPageTitleContainer.classList.add('cne-tainacan-page-title-container');
+            newPageTitleContainer.appendChild(statusWrapper);
+            newPageTitleContainer.appendChild(newPageTitle);
+            newPageTitleContainer.appendChild(newPageSubtitle);
+
+            pageContainer.insertBefore(newPageTitleContainer, pageContainer.firstChild);
+
+            feather.replace();
+        }
+
         
+        // Altera rótulos dos elementos do formulário de edição de itens
         if ( collection.id == cne_theme.instituicoes_collection_id ) {
             tainacan_plugin.i18n.label_ready_to_create_item = 'Pronto para criar esta instituição?';
             tainacan_plugin.i18n.instruction_create_item_select_status = 'Selecione um status para a visibilidade da instituição no site. Você poderá alterar no futuro.';
@@ -85,4 +145,52 @@ if (wp && wp.hooks) {
         tainacan_plugin.i18n.info_metadata_section_hidden_conditional = 'Área desabilidata devido a um valor selecionado anterioremente.';
     }
     wp.hooks.addAction('tainacan_item_edition_item_loaded', 'tainacan-hooks', tainacanItemEditionItemLoaded);
+
+    function tainacanItemEditionItemMetadataLoaded() {
+
+        // Cria seção "Imagens" para o campo de anexos
+        const imagensSectionBox = document.getElementsByClassName('sticky-container');
+        if ( imagensSectionBox.length ) {
+            const existingSecxtionLabel = document.getElementById('cne-images-section-label');
+
+            if ( !existingSecxtionLabel ) {
+                const sectionLabel = document.createElement('div');
+                sectionLabel.id = 'cne-images-section-label';
+                sectionLabel.classList.add('section-label');
+                sectionLabel.classList.add('metadata-section-header');
+
+                const sectionCollapse = document.createElement('span');
+                sectionCollapse.classList.add('collapse-handle');
+
+                const sectionTitle = document.createElement('label');
+                sectionTitle.style.padding = '0 0.75rem 0 0.75rem';
+                sectionTitle.innerText = 'Imagens';
+
+                sectionCollapse.appendChild(sectionTitle);
+                sectionLabel.appendChild(sectionCollapse);
+
+                imagensSectionBox[0].insertBefore(sectionLabel, imagensSectionBox[0].firstChild);
+            }
+        }
+
+        // Adiciona números para as seções
+        const sectionLabels = document.getElementsByClassName('metadata-section-header') || [];
+
+        for (let i = 0; i < sectionLabels.length; i++) {
+            // Cria contador
+            const sectionLabel = sectionLabels[i];
+            const sectionCounter = document.createElement('span');
+            sectionCounter.innerHTML = (i + 1);
+            sectionCounter.classList.add('section-counter');
+
+            // Cria indicador de quantas seções restam
+            const sectionCountInfo = document.createElement('div');
+            sectionCountInfo.classList.add('section-count-info');
+            sectionCountInfo.innerHTML = '<span>Passo ' + (i + 1) + '</span> de ' + (sectionLabels.length) + '<hr><hr style="width: ' + ( 100 * (i + 1) )/sectionLabels.length + '%">';
+
+            sectionLabel.insertBefore(sectionCounter, sectionLabel.firstChild);
+            sectionLabel.appendChild(sectionCountInfo);
+        }
+    }
+    wp.hooks.addAction('tainacan_item_edition_metadata_loaded', 'tainacan-hooks', tainacanItemEditionItemMetadataLoaded);
 }

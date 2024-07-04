@@ -95,12 +95,13 @@
     padding: 24px;
     display: grid;
     grid-template-areas:
-        'tipo        tipo       ' 
-        'instituicao instituicao' 
-        'data        hora       ' 
-        'nome        nome       ';
-    grid-template-rows: 54px 48px 48px 48px;
-    grid-template-columns: 1fr 1fr;
+        'tipo        tipo        tipo        tipo       ' 
+        'instituicao instituicao instituicao instituicao' 
+        'data        data        hora        hora       ' 
+        'nome        nome        nome        nome       '
+        'regiao      estado      cidade      cidade   '; 
+    grid-template-rows: 54px 48px 48px 48px 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item a,
 .tainacan-cne-grid-container .tainacan-cne-grid-item a:hover,
@@ -215,6 +216,33 @@
     -webkit-box-orient: vertical;
 }
 
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-regiao,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-regiao-2 {
+    grid-area: regiao;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-estado,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-estado-2 {
+    grid-area: estado;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-cidade,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-cidade-2 {
+    grid-area: cidade;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-regiao p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-estado p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-cidade p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-regiao-2 p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-estado-2 p,
+.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-cidade-2 p {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--theme-palette-color-12);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 210px;
+    white-space: nowrap;
+}
+
 /* Grid the Instituições */
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail {
     display: flex;
@@ -244,26 +272,6 @@
     grid-template-rows: 20px 85px;
     grid-template-columns: 80px 25px auto;
     grid-template-columns: min-content 25px auto;
-}
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-regiao {
-    grid-area: regiao;
-}
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-estado {
-    grid-area: estado;
-}
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-cidade {
-    grid-area: cidade;
-}
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-regiao p,
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-estado p,
-.tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-cidade p {
-    font-weight: bold;
-    font-size: 14px;
-    color: var(--theme-palette-color-12);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 210px;
-    white-space: nowrap;
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-descricao {
     grid-area: descricao;

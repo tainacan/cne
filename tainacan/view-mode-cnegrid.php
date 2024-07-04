@@ -9,18 +9,17 @@
 		'38421', // Horário de Início
 		'38416', // Horário de Término
 		'48', 	 // Nome da Atividade
+		'38402', // Região
+		'38396', // Estado
+		'38390', // Cidade
+	];
+	$instituicao_metadata_ids = [
 		// Instituições
-		'85982', // Região
-		'85989', // Estado
+		'38402', // Região
+		'38396', // Estado
 		'85998', // Cidade
 		'20' 	 // Descrição
 	];
-	// $metadata_ids = [
-	// 	'12950', // Tipo da Atividade
-	// 	'1298', // Instituição
-	// 	'283', // Data de Início
-	// 	'270', 	 // Nome da Atividade
-	// ];
 
 	function cne_view_mode_grid_date_without_year($date_format) {
 		return 'd/m';
@@ -64,7 +63,7 @@
 					<div class="cne-grid-metadata">
 						<?php
 							$item_metadata = tainacan_get_the_metadata([
-								'metadata__in' => $metadata_ids,
+								'metadata__in' => get_post_type() == cne_get_instituicoes_collection_post_type() ? $instituicao_metadata_ids : $metadata_ids,
 								'display_slug_as_class' => true,
 								'before_title' => '<h3 class="screen-reader-text">',
 							]);

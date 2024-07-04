@@ -10,8 +10,8 @@ require get_stylesheet_directory() . '/inc/utils.php';
  */
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
 	
+	wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
 	wp_enqueue_style( 'view-mode-cnegrid', get_stylesheet_directory_uri() . '/assets/css/view-mode-cnegrid.css', array(), wp_get_theme()->get('Version') );
 	
 	if ( is_page( 'cadastro' ) )
@@ -19,14 +19,19 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	if ( is_single() && cne_get_instituicoes_collection_post_type() == get_post_type() )
 		wp_enqueue_style( 'cne-instituicao-single', get_stylesheet_directory_uri() . '/assets/css/instituicao-single.css', array(), wp_get_theme()->get('Version') );
+
+	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
+	wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
 });
 
 /** 
  * Registra estilo do lado admin
  */
 function cne_admin_enqueue_styles() {
+	wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
+	wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
 	wp_enqueue_style( 'cne-admin-style', get_stylesheet_directory_uri() . '/admin.css', array(), wp_get_theme()->get('Version') );
-	wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks'), wp_get_theme()->get('Version') );
+	wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks', 'cne-feather-icons'), wp_get_theme()->get('Version') );
 	
 	wp_localize_script( 'cne-admin-script', 'cne_theme', array(
         'instituicoes_collection_id' => cne_get_instituicoes_collection_id(),

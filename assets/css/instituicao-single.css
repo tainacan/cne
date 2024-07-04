@@ -214,6 +214,28 @@
 .single .tainacan-item-section__metadata .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a:hover {
     background-color: var(--theme-palette-color-6);
 }
+.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 .tainacan-metadata-label {
+    display: none !important;
+}
+.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a {
+    padding: 12px 32px;
+    border-radius: 6px;
+    background: #F8D300;
+    display: block;
+    font-size: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:hover,
+.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:focus {
+    background: #FDE453;
+    color: var(--theme-palette-color-1);
+}
+.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a::before {
+    content: 'Ingressos';
+    display: block;
+    font-size: 1rem;
+}
 
 .single .tainacan-item-section--items-related-to-this .wp-block-group__inner-container > h3 {
     font-size: 21px;
@@ -226,4 +248,3 @@
 .single .tainacan-item-section--items-related-to-this .wp-block-group__inner-container > h3::before {
     content: 'Atividades inscritas em ';
 }
-

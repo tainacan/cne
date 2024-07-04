@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.7.0
+ * Version: 0.7.2
  */
 
 :root {
@@ -304,8 +304,10 @@ footer .widget-menu li {
 	visibility: hidden;
 }
 .theme-items-list .search-control .search-control-item.search-control-item--search {
-	margin: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 	margin-bottom: 0 !important;
+	margin-top: 1px !important;
 }
 .theme-items-list #items-list-area #items-list-results .pagination-area .pagination .pagination-link {
 	height: 2.5em;
@@ -332,6 +334,10 @@ footer .widget-menu li {
 }
 .theme-items-list #filters-modal .modal-content #filters-items-list .filters-components-list hr {
 	display: none;
+}
+.theme-items-list #filters-modal.horizontal-filters .modal-content {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
 .theme-items-list #items-list-area .filter-tags-list {
 	padding: 0;
