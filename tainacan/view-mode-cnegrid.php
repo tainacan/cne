@@ -4,22 +4,47 @@
 		// Atividades
 		'38411', // Tipo da Atividade
 		'38430', // Instituição
-		'38424', // Data de Início
-		'38419', // Data de Término
 		'38421', // Horário de Início
 		'38416', // Horário de Término
-		'48', 	 // Nome da Atividade
-		'38402', // Região
 		'38396', // Estado
 		'38390', // Cidade
 	];
+	$data_metadata_ids = [
+		'38424', // Data de Início
+		'38419', // Data de Término
+	];
 	$instituicao_metadata_ids = [
 		// Instituições
-		'38402', // Região
 		'38396', // Estado
-		'85998', // Cidade
+		'38390', // Cidade
 		'20' 	 // Descrição
 	];
+
+	$allowed_attrs = array(
+		'class' => true,
+		'id' => true,
+		'style' => true,
+		'aria-hidden' => true,
+		'name' => true,
+		'value' => true,
+		'type' => true,
+		'role' => true,
+		'aria-label' => true,
+		'aria-labelledby' => true,
+		'aria-describedby' => true
+	);
+	$valid_elements = array(
+		'h2' => $allowed_attrs,
+		'h3' => $allowed_attrs,
+		'h4' => $allowed_attrs,
+		'h5' => $allowed_attrs,
+		'h6' => $allowed_attrs,
+		'p' => $allowed_attrs,
+		'span'	=> $allowed_attrs,
+		'div' => $allowed_attrs,
+		'strong' => $allowed_attrs,
+		'em' => $allowed_attrs
+	);
 
 	function cne_view_mode_grid_date_without_year($date_format) {
 		return 'd/m';
@@ -49,6 +74,19 @@
 							</div>
 						<?php endif; ?>
 					<?php else: ?>
+						<?php 
+							$datas_item_medatata = tainacan_get_the_metadata([
+								'metadata__in' => $data_metadata_ids,
+								'display_slug_as_class' => true,
+								'before_title' => '<h3 class="screen-reader-text">',
+							]); 
+							
+							if ( $datas_item_medatata ) :?>
+								<div class="cne-grid-item-date">
+									<?php echo wp_kses($datas_item_medatata, $valid_elements); ?>
+								</div>
+							<?php endif;
+						?>
 						<?php if ( has_post_thumbnail() ) : ?>
 							<div class="cne-grid-item-thumbnail">
 								<?php the_post_thumbnail( 'tainacan-large-full' ); ?>
@@ -67,33 +105,11 @@
 								'display_slug_as_class' => true,
 								'before_title' => '<h3 class="screen-reader-text">',
 							]);
-							$allowed_attrs = array(
-								'class' => true,
-								'id' => true,
-								'style' => true,
-								'aria-hidden' => true,
-								'name' => true,
-								'value' => true,
-								'type' => true,
-								'role' => true,
-								'aria-label' => true,
-								'aria-labelledby' => true,
-								'aria-describedby' => true
-							);
-							echo wp_kses($item_metadata,
-								array(
-									'h2' => $allowed_attrs,
-									'h3' => $allowed_attrs,
-									'h4' => $allowed_attrs,
-									'h5' => $allowed_attrs,
-									'h6' => $allowed_attrs,
-									'p' => $allowed_attrs,
-									'span'	=> $allowed_attrs,
-									'div' => $allowed_attrs,
-									'strong' => $allowed_attrs,
-									'em' => $allowed_attrs
-								)
-							);
+							
+							if ( get_post_type() !== cne_get_instituicoes_collection_post_type() )
+								echo '<div class="metadata-type-core_title"><p>' . get_the_title() . '</p></div>';
+
+							echo wp_kses($item_metadata, $valid_elements);
 						?>
 					</div>
 				</a>

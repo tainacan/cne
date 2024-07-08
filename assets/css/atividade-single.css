@@ -1,73 +1,47 @@
-.single .instituicao-title-and-thumbnail-container {
-   display: flex;
-   gap: 42px;
-   align-items: baseline;
-}
-@media screen and (max-width: 768px) {
-    .single .instituicao-title-and-thumbnail-container {
-        flex-wrap: wrap;
-    }
-}
-.single .instituicao-thumbnail {
-    max-width: 127px;
-    width: 127px;
-    height: auto;
-}
-.single .instituicao-main-section {
+.single .atividade-main-section {
     display: flex;
     gap: 42px;
 }
-.single .instituicao-main-section > * {
+.single .atividade-main-section > * {
     flex-basis: calc(50% - 42px);
     flex-shrink: 0;
     flex-grow: 1;
     max-width: 50%;
 }
-.single .instituicao-description > * {
+.single .atividade-description > * {
     max-width: 466px ;
 }
 @media screen and (max-width: 1000px) {  
-    .single .instituicao-main-section > * {
+    .single .atividade-main-section > * {
         flex-basis: 100%;
         max-width: 100%;
     }
-    .single .instituicao-description > * {
+    .single .atividade-description > * {
         max-width: 100% ;
     }
 }
-.single .instituicao-description .metadata-type-text {
+.single .atividade-description .metadata-type-text {
     font-size: 21px;
     font-weight: 700;
 }
-.single .instituicao-atividades-header {
-    padding: 16px 32px;
-    background-color: var(--theme-palette-color-2);
-    color: white;
-}
-.single .instituicao-atividades-header .instituicao-atividades-header-title {
-    font-size: 21px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-}
 
-.single .instituicao-gallery {
+.single .atividade-gallery {
     --theme-border-radius: 0px;
 }
   
-.single .instituicao-gallery .tainacan-media-component {
+.single .atividade-gallery .tainacan-media-component {
     gap: 0px;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main ul.swiper-wrapper {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main ul.swiper-wrapper {
     max-height: var(--tainacan-media-main-carousel-height, 60vh);
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main li.swiper-slide {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main li.swiper-slide {
     padding: 0;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content {
     text-align: center;
     display: flex;
     align-items: center;
@@ -75,13 +49,13 @@
     overflow: hidden;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content a:first-of-type,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content p:first-of-type {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content a:first-of-type,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content p:first-of-type {
     padding: 0;
     flex-grow: 1;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content img {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content img {
     width: auto;
     height: 100%;
     max-width: unset;
@@ -90,18 +64,18 @@
 }
   
 @media (min-aspect-ratio: 1 / 1) {
-    .single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content img {
+    .single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content img {
         width: 100%;
         height: auto;
     }
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content video,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content audio {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content video,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-slide-content audio {
     margin: calc( 1.5 * var(--swiper-navigation-size));
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main li.swiper-slide .swiper-slide-metadata {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main li.swiper-slide .swiper-slide-metadata {
     background-color: var(--tainacan-media-background-color, var(--theme-palette-color-7, var(--paletteColor7)));
     border-radius: 2px;
     padding: 0.5rem 1rem;
@@ -112,8 +86,8 @@
     left: calc( 1.5 * var(--swiper-navigation-size));
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-button-prev,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-button-next {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-button-prev,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main .swiper-button-next {
     border-radius: 100em;
     padding: 1.5em;
     width: var(--swiper-navigation-size);
@@ -121,27 +95,27 @@
     transition: background-color 0.2s ease;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main:hover .swiper-button-prev,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main:hover .swiper-button-next,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main:focus .swiper-button-prev,
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main:focus .swiper-button-next {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main:hover .swiper-button-prev,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main:hover .swiper-button-next,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main:focus .swiper-button-prev,
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main:focus .swiper-button-next {
     background: var(--tainacan-media-background-color, var(--theme-palette-color-7, var(--paletteColor7)));
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-thumbs ul.swiper-wrapper {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-thumbs ul.swiper-wrapper {
     max-width: 100%;
     margin: 0;
 }
   
-.single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-thumbs li.swiper-slide:not(.has-fixed-height) {
+.single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-thumbs li.swiper-slide:not(.has-fixed-height) {
     max-width: var(--tainacan-media-thumbs-carousel-item-size, 136px);
 }
 
-.single .tainacan-instituicao-single-body {
+.single .tainacan-atividade-single-body {
     display: block;
 }
 
-.single .tainacan-instituicao-single-body .tainacan-item-section--metadata-sections {
+.single .tainacan-atividade-single-body .tainacan-item-section--metadata-sections {
     display: grid;
     gap: 42px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -251,22 +225,4 @@
     content: 'Ingressos';
     display: block;
     font-size: 1rem;
-}
-
-.single .tainacan-item-section--items-related-to-this .wp-block-group__inner-container > h3 {
-    font-size: 21px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    padding: 16px 32px;
-    background-color: var(--theme-palette-color-1);
-}
-.single .tainacan-item-section--items-related-to-this .wp-block-group__inner-container > h3::before {
-    content: 'Atividades inscritas em ';
-}
-.single .tainacan-item-section--items-related-to-this .wp-block-buttons {
-    text-align: right;
-}
-.single .tainacan-item-section--items-related-to-this .wp-block-buttons a {
-    min-height: 44px !important;
 }

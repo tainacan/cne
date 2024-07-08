@@ -462,7 +462,6 @@ function cne_set_default_view_mode($default) {
 	return $default;
 }
 add_filter( 'tainacan-default-view-mode-for-themes', 'cne_set_default_view_mode', 10, 1 );
-
 function cne_set_enabled_view_modes($registered_view_modes_slugs) {
 
 	if ( !is_admin() )
@@ -472,14 +471,61 @@ function cne_set_enabled_view_modes($registered_view_modes_slugs) {
 }
 add_filter( 'tainacan-enabled-view-modes-for-themes', 'cne_set_enabled_view_modes', 10, 1 );
 
+/* Disables Google Fonts as we won'r use them */
 add_filter('blocksy:typography:google:use-remote', function () {
 	return false;
 });
-  
 add_filter('blocksy_typography_font_sources', function ($sources) {
 	unset($sources['google']);
 	return $sources;
 });
+
+/* Adiciona a informação do post type nos cartões da busca */
+function cne_add_post_type_to_card() {
+	if ( is_search() ) {
+		$post_type_object = get_post_type_object( get_post_type() );
+
+		if ( !$post_type_object )
+			return;
+
+		if ( !$post_type_object->labels || !$post_type_object->labels->singular_name )
+			return;
+
+		$post_type_label = $post_type_object->labels->singular_name;
+		?>
+		<ul class="entry-meta" data-type="simple:slash" data-id="meta_2">
+			<li class="meta-post-type" itemprop="type">
+				<span itemprop="name"> <?php echo $post_type_label; ?></span>
+			</li>
+		</ul>
+		<?php
+	}
+}
+add_action('blocksy:loop:card:end', 'cne_add_post_type_to_card', 10);
+
+function cne_add_collection_id_filtering_to_body_class( $classes ) {
+	$current_metaquery = isset($_GET['metaquery']) ? $_GET['metaquery'] : false;
+
+	if ( !$current_metaquery || !count( $current_metaquery ) )
+		return $classes;
+
+	foreach( $current_metaquery as $metaquery ) {
+		if ( isset($metaquery['value']) && isset($metaquery['key']) && $metaquery['key'] === 'collection_id' ) {
+			if ( is_array( $metaquery['value'] ) ) {
+				foreach ($metaquery['value'] as $value) {
+					$classes[] = 'filtered-by-collection-' . $value;
+				}
+			} else {
+				$classes[] = 'filtered-by-collection-' . $metaquery['value'];
+			}
+
+			break;
+		}
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'cne_add_collection_id_filtering_to_body_class' );
 
 /* ----------------------------- INC IMPORTS  ----------------------------- */
 require get_stylesheet_directory() . '/inc/gestor-tweaks.php';
@@ -490,6 +536,7 @@ require get_stylesheet_directory() . '/inc/opcoes-das-colecoes.php';
 require get_stylesheet_directory() . '/inc/block-filters.php';
 require get_stylesheet_directory() . '/inc/block-bindings.php';
 require get_stylesheet_directory() . '/inc/instituicao-single-tweaks.php';
+require get_stylesheet_directory() . '/inc/atividade-single-tweaks.php';
 
 /* -------------------------- MUSEUSBR FETCHER -----------------*/
 require get_stylesheet_directory() . '/museusbr-fetcher/museusbr-fetcher.php';

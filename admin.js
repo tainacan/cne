@@ -27,26 +27,6 @@ if (wp && wp.hooks) {
 
     function tainacanItemEditionItemLoaded (collection, item) {
 
-        // Adiciona botão de link para o kit digital do evento
-        if (collection && collection.cne_kit_digital_do_evento) {
-            const documentField = document.getElementsByClassName('document-field');
-            if ( documentField.length ) {
-                const wrapper = document.createElement('div');
-                wrapper.style.width = '100%';
-                wrapper.style.textAlign = 'right';
-                wrapper.style.margin = '0.5rem 0';
-
-                const button = document.createElement('a');
-                button.classList.add('button');
-                button.href = collection.cne_kit_digital_do_evento;
-                button.innerText = 'Acessar Kit Digital';
-                button.target = '_blank';
-                wrapper.appendChild(button);
-
-                documentField[0].prepend(wrapper);
-            }
-        }
-
         // Adiciona título customizado para a página de edição de itens
         const pageContainer = document.getElementById('collection-page-container');
         if (pageContainer) {
@@ -103,9 +83,47 @@ if (wp && wp.hooks) {
             feather.replace();
         }
 
+        // Extrai ID da Coleção da URL (já que não podemos confiar no objeto collection de estar carregado)
+        const itemEditionUrl = document.location && document.location.hash ? document.location.hash : '';
+        const regexForCollectionId = /#\/collections\/(\d+)\/items\/(?:\d+|new)/;
+        const matches = itemEditionUrl.match(regexForCollectionId);
+        const collectionId =  matches ? matches[1] : null;
+
+        if ( collectionId && !isNaN(collectionId) && collectionId !== cne_theme.instituicoes_collection_id ) {
+            const collectionEndpoint = tainacan_plugin.tainacan_api_url + '/collections/' + collectionId + '?fetch_only=cne_kit_digital_do_evento';
+            fetch(collectionEndpoint)
+                .then(response => response.json())
+                .then(data => {
+                    collection = data;
+                    
+                   // Adiciona botão de link para o kit digital do evento
+                    if (collection && collection.cne_kit_digital_do_evento) {
+                        const documentField = document.getElementsByClassName('document-field');
+
+                        if ( documentField.length ) {
+                            const wrapper = document.createElement('div');
+                            wrapper.style.width = '100%';
+                            wrapper.style.textAlign = 'right';
+                            wrapper.style.margin = '0.5rem 0';
+
+                            const button = document.createElement('a');
+                            button.classList.add('button');
+                            button.href = collection.cne_kit_digital_do_evento;
+                            button.innerText = 'Acessar Kit Digital';
+                            button.target = '_blank';
+                            wrapper.appendChild(button);
+
+                            documentField[0].prepend(wrapper);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar coleção', error);
+                });
+        }
         
         // Altera rótulos dos elementos do formulário de edição de itens
-        if ( collection.id == cne_theme.instituicoes_collection_id ) {
+        if ( collectionId == cne_theme.instituicoes_collection_id ) {
             tainacan_plugin.i18n.label_ready_to_create_item = 'Pronto para criar esta instituição?';
             tainacan_plugin.i18n.instruction_create_item_select_status = 'Selecione um status para a visibilidade da instituição no site. Você poderá alterar no futuro.';
             tainacan_plugin.i18n.helpers_label.items.document.description = 'Uma imagem represente a instituição.';
@@ -151,9 +169,9 @@ if (wp && wp.hooks) {
         // Cria seção "Imagens" para o campo de anexos
         const imagensSectionBox = document.getElementsByClassName('sticky-container');
         if ( imagensSectionBox.length ) {
-            const existingSecxtionLabel = document.getElementById('cne-images-section-label');
+            const existingSectionLabel = document.getElementById('cne-images-section-label');
 
-            if ( !existingSecxtionLabel ) {
+            if ( !existingSectionLabel ) {
                 const sectionLabel = document.createElement('div');
                 sectionLabel.id = 'cne-images-section-label';
                 sectionLabel.classList.add('section-label');

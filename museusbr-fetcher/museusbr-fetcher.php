@@ -183,7 +183,7 @@ function cne_create_instituicao() {
             }
 
             // No caso no metadaoo de Região, insere-se baseando-se no Estado
-            if ( $item_metadatum['metadatumId'] == '15563' && $item_metadatum['metadatumValue'] ) {
+            if ( $item_metadatum['metadatumId'] == '38402' && $item_metadatum['metadatumValue'] ) {
 
                 $regiao_metadatum = new \Tainacan\Entities\Metadatum( 73 );
                 $new_regiao_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $new_item, $regiao_metadatum );

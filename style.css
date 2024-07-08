@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.7.2
+ * Version: 0.8.0
  */
 
 :root {
@@ -203,33 +203,29 @@ footer .widget-menu li {
 @media screen and (max-width: 1290px) {
 	.theme-items-list,
 	#filters-modal {
-		--tainacan-filters-inline-width: 180px !important;
-	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
-		--tainacan-filters-inline-width: 230px !important;
-	}
-}
-@media screen and (max-width: 1000px) {
-	.theme-items-list,
-	#filters-modal {
 		--tainacan-filters-inline-width: 140px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
-		--tainacan-filters-inline-width: 220px !important;
+		--tainacan-filters-inline-width: 200px !important;
+	}
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+		--tainacan-filters-inline-width: 130px !important;
 	}
 }
-@media screen and (max-width: 858px) {
+@media screen and (max-width: 1080px) {
 	.theme-items-list,
 	#filters-modal {
-		--tainacan-filters-inline-width: 100% !important;
+		--tainacan-filters-inline-width: 120px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
-		--tainacan-filters-inline-width: 100% !important;
+		--tainacan-filters-inline-width: 160px !important;
 	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025),
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86403) {
-		--tainacan-filters-inline-width: 100%;
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+		--tainacan-filters-inline-width: 130px !important;
 	}
+}
+
+@media screen and (max-width: 890px) {
 	.theme-items-list:not(.is-fullscreen).is-filters-menu-open .search-control .search-control-item--search {
 		width: 100%;
 		padding-right: 0px;
@@ -253,6 +249,18 @@ footer .widget-menu li {
 		padding-bottom: 0 !important;
 	}
 }
+@media screen and (max-width: 740px) {
+	.theme-items-list,
+	#filters-modal {
+		--tainacan-filters-inline-width: 100% !important;
+	}
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms {
+		--tainacan-filters-inline-width: 100% !important;
+	}
+}
+.theme-items-list .filter-item-forms .datepicker .dropdown-menu {
+	left: -125px;
+}
 .entry-content:not(.ct-container) .theme-items-list:not(.is-fullscreen) {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -265,12 +273,14 @@ footer .widget-menu li {
 		'itemslist     itemslist   ';
 	align-items: flex-start;
 }
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025),
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86403) {
-	--tainacan-filters-inline-width: 88px;
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+	--tainacan-filters-inline-width: 120px;
+}
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025) {
+	--tainacan-filters-inline-width: 80px;
 }
 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
-	--tainacan-filters-inline-width: 346px;
+	--tainacan-filters-inline-width: 214px;
 }
 .theme-items-list:not(.is-fullscreen).is-filters-menu-open .search-control .search-control-item .search-area {
 	min-width: 100% !important;
@@ -281,10 +291,10 @@ footer .widget-menu li {
 	margin-bottom: 0 !important;
 }
 .theme-items-list:not(.is-fullscreen) .search-control {
-	padding-top: 18px !important;
+	padding-top: 23px !important;
 }
 .entry-content:not(.ct-container) .theme-items-list:not(.is-fullscreen) .search-control {
-	padding-top: 16px !important;
+	padding-top: 25px !important;
 }
 @media screen and (min-width: 769px) {
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters #filters-modal.horizontal-filters .filters-components-list .filter-item-forms:not(:last-child) {
@@ -292,7 +302,9 @@ footer .widget-menu li {
 	}
 }
 .theme-items-list .filter-item-forms > .label {
-	display: none !important;	
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	margin: 4px 6px;
 }
 .theme-items-list #filters-label-landmark {
 	display: none !important;
@@ -307,7 +319,7 @@ footer .widget-menu li {
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 	margin-bottom: 0 !important;
-	margin-top: 1px !important;
+	margin-top: 21px !important;
 }
 .theme-items-list #items-list-area #items-list-results .pagination-area .pagination .pagination-link {
 	height: 2.5em;
@@ -381,6 +393,12 @@ footer .widget-menu li {
     min-height: 52px;
 }
 
+/* Hide date filter when filtering by institutions */
+body.filtered-by-collection-14 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+	display: none !important;
+	visibility: hidden !important;
+}
+
 /* Collection items list header */
 body[class^='post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .entry-header .page-title,
 body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .entry-header .page-title,
@@ -405,6 +423,31 @@ body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .en
 	height: 150%;
 	bottom: calc(100% - 8px);
 }
+body[class^='post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .entry-header:has(.ct-title-label),
+body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .entry-header:has(.ct-title-label),
+[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header:has(.ct-title-label),
+[data-prefix="tainacan-repository-items_archive"] .hero-section[data-type="type-2"] .entry-header:has(.ct-title-label) {
+	padding-bottom: calc(68px - 3rem);
+}
+body[class^='post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .page-title .ct-title-label,
+body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .page-title .ct-title-label,
+[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .page-title .ct-title-label,
+[data-prefix="tainacan-repository-items_archive"] .hero-section[data-type="type-2"] .page-title .ct-title-label {
+	display: block;
+	font-size: 24px;
+	text-transform: none;
+	margin-bottom: .5em;
+	background: var(--theme-palette-color-1);
+	color: var(--theme-palette-color-8);
+	align-self: flex-start;
+	padding: 14px 32px;
+	min-width: min(328px, 60%);
+	border-radius: 8px;
+	position: absolute;
+	left: 0;
+	top: -5rem;
+	font-weight: 600;
+}
 
 /* Term Taxonomy items list header */
 body.term-norte[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
@@ -422,6 +465,11 @@ body.term-sudeste[data-prefix="tainacan-terms-items_archive"] .hero-section[data
 body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
 	--theme-palette-color-1: var(--theme-palette-color-17);
 }
+body.term-norte[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-description,
+body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-description {
+	--theme-text-color: var(--theme-palette-color-1);
+}
+
 
 /* Single de todos os itens */
 .tainacan-item-single-page .tainacan-item-single h3.tainacan-single-item-section {

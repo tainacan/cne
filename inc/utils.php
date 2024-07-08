@@ -50,7 +50,7 @@ function cne_get_evento_collection_post_type() {
  * Função utilitaria para verificar se um post type é de alguma coleção do Tainacan
  */
 function cne_is_post_type_a_tainacan_collection( $post_type ) {
-	return strpos($post_type, 'tnc_col_') !== false;
+	return $post_type && strpos($post_type, 'tnc_col_') !== false;
 }
 
 /**
