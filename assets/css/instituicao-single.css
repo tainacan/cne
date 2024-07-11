@@ -1,12 +1,19 @@
 .single .instituicao-title-and-thumbnail-container {
    display: flex;
    gap: 42px;
-   align-items: baseline;
+   align-items: last baseline;
 }
 @media screen and (max-width: 768px) {
     .single .instituicao-title-and-thumbnail-container {
         flex-wrap: wrap;
     }
+}
+.single .instituicao-title-and-thumbnail-container .page-title {
+    max-width: 500px;
+}
+.single .metadata-slug-sigla p {
+    color: var(--theme-palette-color-3);
+    margin-bottom: 0.5em;
 }
 .single .instituicao-thumbnail {
     max-width: 127px;
@@ -16,6 +23,7 @@
 .single .instituicao-main-section {
     display: flex;
     gap: 42px;
+    flex-wrap: wrap;
 }
 .single .instituicao-main-section > * {
     flex-basis: calc(50% - 42px);
@@ -149,6 +157,25 @@
     grid-template-areas: 'funcionamento funcionamento endereco endereco'
                          'contato geral endereco endereco';
 }
+@media screen and (max-width: 1000px) {
+    .single .tainacan-instituicao-single-body .tainacan-item-section--metadata-sections {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: 'funcionamento funcionamento funcionamento'
+                            'contato geral geral'
+                            'endereco endereco endereco';
+    }
+}
+@media screen and (max-width: 768px) {
+    .single .tainacan-instituicao-single-body .tainacan-item-section--metadata-sections {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas: 'funcionamento'
+                            'contato'
+                            'geral'
+                            'endereco';
+    }
+}
 
 .single .tainacan-item-section--metadata:has(#metadata-section-funcionamento) {
     grid-area: funcionamento;
@@ -269,4 +296,57 @@
 }
 .single .tainacan-item-section--items-related-to-this .wp-block-buttons a {
     min-height: 44px !important;
+}
+
+.tainacan-item-single-page .tainacan-item-single h3.tainacan-single-item-section {
+	color: var(--theme-palette-color-3);
+}
+
+/* Simplifica o metadado de contatos */
+.single .metadata-slug-contatos .tainacan-relationship-metadatum .tainacan-metadatum {
+	padding-left: 0 !important;
+}
+
+/* Seção de endereço */
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 12px;
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > * {
+    flex-basis: calc(33.32% - 8px);
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata p {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > .metadata-slug-endereco-2,
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > .metadata-slug-complemento-endereco,
+.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > .metadata-type-geocoordinate {
+    flex-basis: 100%;
+}
+@media screen and (min-width: 968px) {
+	.single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata >.metadata-slug-regiao-2 {
+        flex-basis: 110px;
+    }
+    .single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata >.metadata-slug-estado-2 {
+        flex-basis: 62px;
+    }
+    .single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata >.metadata-slug-cidade-2,
+    .single .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata >.metadata-slug-bairro-2 {
+        flex-basis: calc((100% - 110px - 68px)/2 - 36px);
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
+}
+.single .instituicao-aviso-area {
+    display: flex;
+    align-items: center;
+    max-width: var(--theme-default-editor, var(--theme-block-max-width));
+    width: var(--theme-default-editor, var(--theme-block-width));
+    margin: 1rem auto;
+    justify-content: center;
+    gap: 1rem;
+    font-weight: bold;
+    color: var(--theme-palette-color-3);
 }

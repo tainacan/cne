@@ -32,8 +32,8 @@ $metadata_args = array(
     'display_slug_as_class' => true,
     'before' 				=> '<div class="tainacan-item-section__metadatum metadata-type-$type" id="$id">',
     'after' 				=> '</div>',
-    'before_title' => '<h4 class="tainacan-metadata-label">',
-    'after_title' => '</h4>',
+    'before_title' => '<h3 class="tainacan-metadata-label">',
+    'after_title' => '</h3>',
     'before_value' => '<p class="tainacan-metadata-value">',
     'after_value' => '</p>',
     'exclude_title' => true

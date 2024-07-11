@@ -1,6 +1,8 @@
 .single .atividade-main-section {
     display: flex;
+    align-items: flex-start;
     gap: 42px;
+    flex-wrap: wrap;
 }
 .single .atividade-main-section > * {
     flex-basis: calc(50% - 42px);
@@ -8,31 +10,131 @@
     flex-grow: 1;
     max-width: 50%;
 }
-.single .atividade-description > * {
-    max-width: 466px ;
+.single .atividade-main-section .page-title {
+    --theme-headings-color: var(--theme-palette-color-3);
 }
 @media screen and (max-width: 1000px) {  
     .single .atividade-main-section > * {
         flex-basis: 100%;
         max-width: 100%;
     }
-    .single .atividade-description > * {
-        max-width: 100% ;
+}
+.single .atividade-description {
+    display: flex;
+    gap: 24px 3.875em;
+    flex-wrap: wrap;
+}
+.single .atividade-description > * {
+    flex-basis: 100%;
+}
+.single .atividade-description p {
+    margin-bottom: 0;
+}
+.single .atividade-description .metadata-slug-data-de-inicio-da-atividade,
+.single .atividade-description .metadata-slug-data-de-fim-da-atividade,
+.single .atividade-description .metadata-slug-horario-de-inicio-da-atividade,
+.single .atividade-description .metadata-slug-horario-de-fim-da-atividade {
+    flex-basis: 56px;
+    flex-shrink: 1;
+    flex-grow: 0;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+.single .atividade-description .metadata-slug-horario-de-fim-da-atividade,
+.single .atividade-description .metadata-slug-data-de-fim-da-atividade {
+    margin-left: -0.35em;
+}
+.single .atividade-description .metadata-slug-horario-de-inicio-da-atividade .date-icon svg,
+.single .atividade-description .metadata-slug-data-de-inicio-da-atividade .date-icon svg {
+    margin-bottom: -2px;
+}
+.single .atividade-description .metadata-slug-data-de-inicio-da-atividade::after {
+    content: ' a ';
+    display: inline-block;
+    font-weight: bold;
+    font-size: 24px;
+    position: absolute;
+    bottom: 0;
+    right: -1.125em;
+}
+.single .atividade-description .metadata-slug-horario-de-inicio-da-atividade::after {
+    content: ' às ';
+    display: inline-block;
+    font-weight: bold;
+    font-size: 24px;
+    position: absolute;
+    bottom: 0;
+    right: -1.35em;
+}
+.single .atividade-description .metadata-slug-data-de-inicio-da-atividade,
+.single .atividade-description .metadata-slug-horario-de-inicio-da-atividade {
+    flex-basis: 101px;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-classificacao-indicativa,
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2,
+.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita {
+    flex-basis: calc((100% - 32px)/2);
+    flex-shrink: 1;
+    flex-grow: 0;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-formato-da-atividade {
+    flex-basis: 100%;
+}
+@media screen and (max-width: 680px) {
+    .single .tainacan-item-section-cne-important .metadata-slug-classificacao-indicativa,
+    .single .tainacan-item-section-cne-important .metadata-slug-formato-da-atividade,
+    .single .tainacan-item-section-cne-important .metadata-slug-ingressos-2,
+    .single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita  {
+        flex-basis: 100%;
+    }
+    .single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita {
+        width: 100% !important;
     }
 }
-.single .atividade-description .metadata-type-text {
-    font-size: 21px;
-    font-weight: 700;
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 .tainacan-metadata-label,
+.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita .tainacan-metadata-label {
+    display: none !important;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita {
+    position: absolute;
+    color: #218963;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    width: calc((100% - 32px)/2);
+    top: -0.5em;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 a {
+    padding: 12px 32px;
+    border-radius: 6px;
+    background: var(--theme-palette-color-11);
+    color: var(--theme-palette-color-8);
+    display: block;
+    font-size: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 a:hover {
+    background: #9D336F;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 a:focus {
+    background: #E46DB0;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 a::before {
+    content: 'Ingressos';
+    display: block;
+    font-size: 1rem;
 }
 
 .single .atividade-gallery {
     --theme-border-radius: 0px;
 }
-  
 .single .atividade-gallery .tainacan-media-component {
     gap: 0px;
-}
-  
+} 
 .single .atividade-gallery .tainacan-media-component .tainacan-media-component__swiper-main ul.swiper-wrapper {
     max-height: var(--tainacan-media-main-carousel-height, 60vh);
 }
@@ -61,6 +163,7 @@
     max-width: unset;
     object-fit: cover;
     object-position: center;
+    border-radius: 8px;
 }
   
 @media (min-aspect-ratio: 1 / 1) {
@@ -119,24 +222,61 @@
     display: grid;
     gap: 42px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: 'funcionamento funcionamento endereco endereco'
-                         'contato geral endereco endereco';
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 'importante importante endereco endereco'
+                         'contato enderecovirtual endereco endereco'
+                         'contatoprivado enderecovirtual endereco endereco'
+                         'compartilhe compartilhe endereco endereco';
 }
-
-.single .tainacan-item-section--metadata:has(#metadata-section-funcionamento) {
-    grid-area: funcionamento;
+@media screen and (max-width: 1000px) {
+    .single .tainacan-atividade-single-body .tainacan-item-section--metadata-sections {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-areas: 'importante importante enderecovirtual'
+                             'contato enderecovirtual enderecovirtual'
+                             'contatoprivado enderecovirtual enderecovirtual'
+                             'endereco endereco endereco'
+                             'compartilhe compartilhe compartilhe';
+    }
 }
-.single .tainacan-item-section--metadata:has(#metadata-section-endereco) {
+@media screen and (max-width: 768px) {
+    .single .tainacan-atividade-single-body .tainacan-item-section--metadata-sections {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas: 'importante'
+                             'contato'
+                             'contatoprivado'
+                             'enderecovirtual'
+                             'endereco'
+                             'compartilhe';
+    }
+}
+.single .tainacan-item-section-cne-important {
+    grid-area: importante !important;
+    display: flex;
+    gap: 24px 32px;
+    flex-wrap: wrap;
+    position: relative;
+}
+.single .tainacan-item-section-cne-important .tainacan-metadata-label {
+    --theme-font-weight: 700;
+    --theme-text-transform: uppercase;
+    --theme-font-size: 20px !important;
+    --theme-line-height: 1.3;
+    --section-alignment: left;
+}
+.single .tainacan-item-section--metadata:has(#metadata-section-endereco-fisico-da-atividade) {
     grid-area: endereco;
 }
-.single .tainacan-item-section--metadata:has(#metadata-section-contato) {
+.single .tainacan-item-section--metadata:has(#metadata-section-endereco-virtual-da-atividade) {
+    grid-area: enderecovirtual;
+}
+.single .tainacan-item-section--metadata:has(#metadata-section-contato-2) {
     grid-area: contato;
 }
-.single .tainacan-item-section--metadata:has(#metadata-section-default_section) {
-    grid-area: geral;
+.single .tainacan-item-section--metadata:has(#metadata-section-contato-privado-2) {
+    grid-area: contatoprivado;
 }
-
 .single .tainacan-item-section--metadata #metadata-section-default_section {
     display: none;
 }
@@ -151,11 +291,14 @@
 .single .tainacan-item-section__metadata .metadata-type-geocoordinate .tainacan-metadata-label {
     display: none;
 }
-.single #metadata-section-contato + .tainacan-item-section__metadata .tainacan-metadata-label,
-.single #metadata-section-contato + .tainacan-item-section__metadata .child-metadatum-label {
+.single #metadata-section-contato-2 + .tainacan-item-section__metadata .tainacan-metadata-label,
+.single #metadata-section-contato-2 + .tainacan-item-section__metadata .child-metadatum-label,
+.single #metadata-section-contato-privado-2 + .tainacan-item-section__metadata .tainacan-metadata-label,
+.single #metadata-section-contato-privado-2 + .tainacan-item-section__metadata .child-metadatum-label {
     display: none;
 }
-.single #metadata-section-contato + .tainacan-item-section__metadata .tainacan-metadata-value {
+.single #metadata-section-contato-2 + .tainacan-item-section__metadata .tainacan-metadata-value,
+.single #metadata-section-contato-privado-2 + .tainacan-item-section__metadata .tainacan-metadata-value {
     margin-bottom: 0;
 }
 .single .tainacan-item-section__metadata .metadata-slug-redes-sociais .tainacan-compound-group {
@@ -202,27 +345,96 @@
 .single .tainacan-item-section__metadata .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a:hover {
     background-color: var(--theme-palette-color-6);
 }
-.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 .tainacan-metadata-label {
-    display: none !important;
+
+/* Area de compartilhar */
+.single .ct-share-box {
+    grid-area: compartilhe;
+    width: 100%;
+    border: 1px solid var(--theme-palette-color-5);
+    border-radius: 8px;
+    padding: 1.75em 2em;
+    margin-bottom: 2.5rem;
+    align-self: end;
 }
-.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a {
-    padding: 12px 32px;
-    border-radius: 6px;
-    background: var(--theme-palette-color-11);
-    color: var(--theme-palette-color-8);
-    display: block;
-    font-size: 0;
+.single .ct-share-box[data-type="type-1"] > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+}
+.single .atividade-evento-area + .ct-share-box {
+    display: none;
+    visibility: hidden;
+}
+
+/* Banner da instituição */
+.single .atividade-instituicao-area {
+    padding: 24px 32px;
+    background-color: var(--theme-palette-color-6);
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--theme-container-width);
+    max-width: var(--theme-block-max-width);
+    text-align: center;
+    font-size: 14px;
     font-weight: bold;
+    border-radius: 8px;
+}
+.single .atividade-instituicao-area p {
+    margin-bottom: 0.25rem;
+}
+.single .atividade-instituicao-area .tainacan-metadata-value {
+    font-weight: 600;
+    font-size: 24px;
     text-transform: uppercase;
 }
-.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:hover {
-    background: #9D336F;
+.single .atividade-evento-area {
+    margin: 32px auto;
+    width: var(--theme-container-width);
+    max-width: var(--theme-block-max-width);
 }
-.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:focus {
-    background: #E46DB0;
+.single .atividade-evento-area img {
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
 }
-.single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a::before {
-    content: 'Ingressos';
-    display: block;
-    font-size: 1rem;
+
+.tainacan-item-single-page .tainacan-item-single h3.tainacan-single-item-section {
+	color: var(--theme-palette-color-3);
+}
+
+/* Simplifica o metadado de contatos */
+.single .metadata-slug-contatos .tainacan-relationship-metadatum .tainacan-metadatum {
+	padding-left: 0 !important;
+}
+
+/* Seção de endereço */
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 12px;
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > * {
+    flex-basis: calc(33.32% - 8px);
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata p {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > .metadata-slug-endereco-2,
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > .metadata-slug-complemento-endereco,
+.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > .metadata-type-geocoordinate {
+    flex-basis: 100%;
+}
+@media screen and (min-width: 968px) {
+	.single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-regiao-2 {
+        flex-basis: 110px;
+    }
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-estado-2 {
+        flex-basis: 62px;
+    }
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-cidade-2,
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-bairro-2 {
+        flex-basis: calc((100% - 110px - 68px)/2 - 36px);
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
 }

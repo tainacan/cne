@@ -17,8 +17,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	if ( is_page( 'cadastro' ) )
 		wp_enqueue_script( 'cne-register-form-script', get_stylesheet_directory_uri() . '/assets/js/register-form.js', array(), wp_get_theme()->get('Version'), true );
 
-	if ( is_single() && cne_get_instituicoes_collection_post_type() == get_post_type() )
+	if ( is_singular() && cne_get_instituicoes_collection_post_type() == get_post_type() )
 		wp_enqueue_style( 'cne-instituicao-single', get_stylesheet_directory_uri() . '/assets/css/instituicao-single.css', array(), wp_get_theme()->get('Version') );
+
+	if ( is_singular() && cne_is_post_type_a_tainacan_collection( get_post_type() ) && cne_get_instituicoes_collection_post_type() != get_post_type() )
+		wp_enqueue_style( 'cne-atividade-single', get_stylesheet_directory_uri() . '/assets/css/atividade-single.css', array(), wp_get_theme()->get('Version') );
 
 	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
 	wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
@@ -28,16 +31,21 @@ add_action( 'wp_enqueue_scripts', function () {
  * Registra estilo do lado admin
  */
 function cne_admin_enqueue_styles() {
-	wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
-	wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
 	wp_enqueue_style( 'cne-admin-style', get_stylesheet_directory_uri() . '/admin.css', array(), wp_get_theme()->get('Version') );
-	wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks', 'cne-feather-icons'), wp_get_theme()->get('Version') );
-	
-	wp_localize_script( 'cne-admin-script', 'cne_theme', array(
-        'instituicoes_collection_id' => cne_get_instituicoes_collection_id(),
-		'instituicao_admin_url' => admin_url( 'admin.php?page=instituicao'),
-		'edit_admin_url' => admin_url( 'edit.php'),
-    ) );
+		
+	if ( cne_user_is_gestor() ) {
+		wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
+		wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
+		wp_enqueue_style( 'cne-gestor-admin-style', get_stylesheet_directory_uri() . '/assets/css/gestor-admin.css', array(), wp_get_theme()->get('Version') );
+		
+		wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks', 'cne-feather-icons'), wp_get_theme()->get('Version') );
+		
+		wp_localize_script( 'cne-admin-script', 'cne_theme', array(
+			'instituicoes_collection_id' => cne_get_instituicoes_collection_id(),
+			'instituicao_admin_url' => admin_url( 'admin.php?page=instituicao'),
+			'edit_admin_url' => admin_url( 'edit.php'),
+		) );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'cne_admin_enqueue_styles', 3 );
 
@@ -234,6 +242,12 @@ function cne_preset_atividade_data_from_instituicao($item_atividade, $instituica
 	}
 }
 
+/* Remove edição em linha (Edição rápida) das tabelas padrão do WordPress */
+function cne_remove_quick_edit( $actions ) {
+	unset($actions['inline hide-if-no-js']);
+	return $actions;
+}
+
 /**
  * Inclui a coleção de instituições no menu admin e altera seus rótulos
  */
@@ -304,6 +318,15 @@ function cne_list_collections_in_admin($args, $post_type) {
 		$args['labels']['item_updated'] = __( 'Atividade atualizada', 'cne ');// Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’
 		$args['labels']['item_link'] = __( 'Link da atividade', 'cne ');// Title for a navigation link block variation. Default is ‘Post Link’ / ‘Page Link’.
 		$args['labels']['item_link_description'] = __( 'Um link para uma atividade', 'cne ');// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
+	}
+
+	add_filter('post_row_actions','cne_remove_quick_edit', 10, 1);
+	add_filter('page_row_actions','cne_remove_quick_edit', 10, 1);
+	add_filter('tag_row_actions','cne_remove_quick_edit', 10, 1);
+	add_filter('user_row_actions','cne_remove_quick_edit', 10, 1);
+	add_filter('media_row_actions','cne_remove_quick_edit', 10, 1);
+	foreach ($tainacan_collections_post_types as $collection_post_type) {
+		add_filter($collection_post_type . '_row_actions','cne_remove_quick_edit', 10, 1);
 	}
 
     return $args;

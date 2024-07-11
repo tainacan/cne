@@ -182,7 +182,8 @@ function cne_add_welcome_message() {
 
 		if ( $parent_base === 'edit' && cne_get_instituicoes_collection_post_type() === $post_type ) : ?>
 			<div class="cne-admin-welcome-panel">
-				<h1><div class="welcome-intro">Boas vindas ao </div><img alt="Visite Museus" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo-tipo.svg'; ?>"></h1>
+				<h1><div class="welcome-intro">Boas vindas ao </div><img style="width: 766px; max-width: 100%;" alt="Visite Museus" src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo-horizontal.svg'; ?>"></h1>
+				<p><em>A plataforma de promoção dos museus brasileiros</em></p>
 				<br>
 				<p>
 					Comece cadastrando sua instituição ou importando ela do MuseusBR, se for um Museu Cadastrado.<br>

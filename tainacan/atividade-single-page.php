@@ -48,6 +48,7 @@ $metadata_args = array(
 );
 
 $sections_args = array(
+    'metadata_sections__not_in' => [ \Tainacan\Entities\Metadata_Section::$default_section_slug ],
     'before' => '<section class="tainacan-item-section tainacan-item-section--metadata">',
     'after' => '</section>',
     'before_name' => '<h2 class="tainacan-single-item-section" id="metadata-section-$slug">',
@@ -63,8 +64,10 @@ do_action( 'tainacan-blocksy-single-item-top' );
 do_action( 'tainacan-blocksy-single-item-after-title' );
 
 ?>
-<div class="tainacan-item-single tainacan-instituicao-single-body"> 
+<div class="tainacan-item-single tainacan-atividade-single-body"> 
     <div class="tainacan-item-section tainacan-item-section--metadata-sections">
+        <?php do_action('cne-atividade-important-metadata'); ?>
         <?php tainacan_the_metadata_sections( $sections_args ); ?>
+        <?php echo blocksy_get_social_share_box(); ?>
     </div>
 </div>

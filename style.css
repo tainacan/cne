@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.8.0
+ * Version: 0.9.3
  */
 
 :root {
@@ -91,7 +91,7 @@ footer .widget-menu li {
 .ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
 .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-prev,
 .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-next {
-	border-radius: 6px;
+	border-radius: 8px !important;
 	width: 100%;
 	margin-top: 2rem;
 }
@@ -140,6 +140,12 @@ footer .widget-menu li {
 .ur-frontend-form .ur-form-row .ur-form-grid .__PrivateStripeElement::placeholder {
 	color: var(--theme-palette-color-5) !important;
 }
+.user-registration-message,
+.user-registration-error,
+.user-registration-info {
+	max-width: 300px;
+	border-radius: 8px;
+}
 
 /* Image (icon) inside button */
 .wp-block-button__link.wp-element-button > img {
@@ -159,38 +165,12 @@ footer .widget-menu li {
 #filters-modal .filters-components-list .collection-name {
 	display: none;
 }
-
-.tainacan-list-container .tainacan-list .metadata-title p {
-	font-weight: bold;
-	font-size: 1em !important;
-}
-.tainacan-list-container .tainacan-list .tainacan-list-item-thumbnail,
-.tainacan-list-container .tainacan-list img {
-	width: 110px !important;
-}
 .hero-section[data-type="type-2"] .ct-title-label {
 	font-size: 16px;
 }
 .entry-content:not(.ct-container) .wp-block-tainacan-faceted-search:not(.alignfull) .theme-items-list:not(.is-fullscreen) .search-control {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
-}
-
-/* Simplifica o metadado de contatos */
-.metadata-slug-contatos .tainacan-relationship-metadatum .tainacan-metadatum {
-	padding-left: 0 !important;
-}
-
-/* Seção de endereço */
-@media screen and (min-width: 968px) {
-	.tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata {
-		--metadata-column-width: 110px;
-	}
-	.tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata >.metadata-slug-endereco,
-	.tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata > .metadata-type-geocoordinate {
-		column-span: all;
-		display: block;
-	}
 }
 
 /* Lista de itens simplificada e com iltros horizontais */
@@ -470,8 +450,3 @@ body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-typ
 	--theme-text-color: var(--theme-palette-color-1);
 }
 
-
-/* Single de todos os itens */
-.tainacan-item-single-page .tainacan-item-single h3.tainacan-single-item-section {
-	color: var(--theme-palette-color-3);
-}

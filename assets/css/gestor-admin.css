@@ -1,0 +1,531 @@
+.user-is-gestor {
+    --tainacan-secondary: #2271b1;
+    --tainacan-turquoise5: #2271b1;
+    --tainacan-primary: #f6f7f7;
+    --wordpress-topbar-height: 55px;
+}
+.user-is-gestor #tainacan-admin-app {
+    --tainacan-background-color: #fff;
+    --tainacan-sidebar-width: 0px;
+    --tainacan-one-column: 1.25rem;
+    --tainacan-gray1: #fafafa;
+    --tainacan-gray2: #c3c4c7;
+    --tainacan-label-color: #4b4b4b;
+    --tainacan-info-color: #9b9b9b;
+    --tainacan-input-color: #2c3338;
+    --tainacan-input-border-color: #bcb8b8;
+    --tainacan-input-border-radius: 6px;
+    --tainacan-success: var(--theme-palette-color-1);
+    --tainacan-dropdownmenu-border-radius: 8px;
+    --tainacan-button-border-radius: 8px;
+    position: unset;
+    font-size: 1.063em;
+}
+body.user-is-gestor.tainacan-admin-page {
+    padding-top: 0;
+}
+.user-is-gestor #adminmenumain {
+    display: none;
+}
+.user-is-gestor #wpcontent {
+    padding-left: 0;
+    margin-left: 0;
+}
+.user-is-gestor #wpcontent .wrap {
+    margin: 24px 4.5%;
+}
+.user-is-gestor.edit-php.post-type-museusbr-museus .subsubsub li:not(.mine) {
+    display: none;
+    visibility: hidden;
+}
+.user-is-gestor #wpbody-content {
+    padding-bottom: 0;
+}
+
+/* Esconde alguns filtros nas listas de atividades */
+.user-is-gestor ul.subsubsub li.all,
+.user-is-gestor ul.subsubsub li.draft .count {
+    display: none;
+}
+.user-is-gestor #tainacan-admin-app .is-secondary-content,
+.user-is-gestor #tainacan-admin-app.is-fullheight,
+.user-is-gestor #tainacan-admin-app #collection-page-container {
+    height: calc(100vh - var(--wordpress-topbar-height));
+    background: transparent;
+}
+.user-is-gestor #tainacan-admin-app #collection-page-container {
+    padding: 0px 0px 24px 0px;
+}
+.user-is-gestor #tainacan-admin-app #collection-page-container .tainacan-form > .columns .column {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+@media screen and (min-width: 769px) {
+    .user-is-gestor #tainacan-admin-app #collection-page-container .tainacan-form > .columns .column.main-column > .b-tabs .tab-content {
+        padding-left: 0px;
+        padding-right: 20px;
+    }
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container #tainacanTabsSwiper,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container #tainacanTabsSwiper {
+    display: none;
+    visibility: hidden;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container #tainacanTabsSwiper + .tab-content,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container #tainacanTabsSwiper + .tab-content {
+    border: none;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .sticky-container,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .sticky-container {
+    position: unset;
+    overflow: visible;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .sticky-container > hr,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .sticky-container > hr {
+    opacity: 0;
+}
+.user-is-gestor #tainacan-admin-app #collection-page-container > .tainacan-form {
+    margin-bottom: 60px;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-page-title {
+    margin-top: 0;
+    display: none;
+    visibility: hidden;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-page-title h1 {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+    margin-right: 0px;
+    padding: 9px 0 4px;
+    line-height: 1.3;
+}
+.user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container {
+    text-align: left;
+    padding: 42px 1rem 68px 1rem;
+}
+.user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container h1 {
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--tainacan-label-color);
+}
+.user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container .cne-tainacan-page-status-wrapper {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin: 1.25rem 1rem;
+    font-weight: 500;
+}
+@media screen and (max-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container {
+        text-align: center;
+    }
+    .user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container h1 {
+        font-size: 42px;
+    }
+    .user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container .cne-tainacan-page-status-wrapper {
+        float: none;
+        justify-content: center;
+    }
+}
+.user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container p {
+    text-transform: uppercase;
+    color: var(--tainacan-label-color);
+    margin-top: 0.75rem;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-page-title .breadcrumbs,
+.user-is-gestor #tainacan-admin-app .tainacan-page-title hr,
+.user-is-gestor #tainacan-admin-app #collection-page-container .sub-header,
+.user-is-gestor #tainacan-admin-app #collection-page-container .back-link {
+    display: none;
+    visibility: hidden;
+}
+@media screen and (min-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list {
+        column-count: 2;
+        column-gap: 2rem;
+    }
+}
+@media screen and (max-width: 769px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns {
+        margin-left: calc(2 * var(--tainacan-one-column));
+        margin-right: calc(1 * var(--tainacan-one-column));
+    }
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list > .metadata-section-description-help-info,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list > .metadata-section-description-help-info {
+    column-span: all;
+    text-transform: uppercase;
+    margin-left: 0;    
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .metadata-section-header,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .metadata-section-header {
+    border-bottom: none;
+    background: white;
+    border-bottom: 1px solid #A3BFDC;
+    position: sticky;
+    top: 0px;
+    z-index: 9999;
+    margin-bottom: 0.5rem;
+}
+.user-is-gestor #tainacan-admin-app .section-counter {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background: var(--theme-palette-color-1);
+    color: white;
+    text-align: center;
+    border-radius: 100em;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    margin-left: calc(-2 * var(--tainacan-one-column) + 4px);
+}
+.user-is-gestor #tainacan-admin-app .section-count-info {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--tainacan-info-color);
+    width: 90px;
+}
+.user-is-gestor #tainacan-admin-app .section-count-info span {
+    color: var(--tainacan-secondary);
+}
+.user-is-gestor #tainacan-admin-app .section-count-info hr:first-of-type {
+    margin-top: 0.5rem;
+    height: 6px;
+    border-radius: 8px;
+    background: #D9DDE6 !important;
+}
+.user-is-gestor #tainacan-admin-app .section-count-info hr:last-of-type {
+    margin-top: -20px;
+    height: 12px;
+    border-radius: 6px;
+    background: var(--tainacan-secondary) !important;
+}
+@media screen and (min-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .section-count-info {
+        float: right;
+    }
+}
+
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .metadata-section-header .collapse-handle,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .metadata-section-header .collapse-handle {
+    background-color: var(--theme-palette-color-8);
+    padding-right: 1rem;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .metadata-section-header label,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .metadata-section-header label {
+    text-transform: uppercase;
+    padding-right: 1rem;
+    background-color: var(--theme-palette-color-8);
+    font-size: 38px !important;
+    font-weight: 700 !important;
+}
+@media screen and (max-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .metadata-section-header label,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .metadata-section-header label {
+        font-size: 28px !important;
+    }
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .section-label label .icon,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .section-label label .icon,
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .section-label label .has-text-gray,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .section-label label .has-text-gray {
+    display: none;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container > .tainacan-form > .columns,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container > .tainacan-form > .columns {
+    flex-direction: column;
+    margin-left: calc(2 * var(--tainacan-one-column));
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container > .tainacan-form > .columns > .column,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container > .tainacan-form > .columns > .column {
+    width: 100% !important;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list > .field,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list > .field {
+    margin-left: 0px !important;
+    padding: 10px 0px !important;
+    break-inside: avoid;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .section-box,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .section-box {
+    padding-left: 0;
+    padding-right: 0;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-finder-column .column-label {
+    border-bottom: 1px solid var(--tainacan-gray2);
+}
+.user-is-gestor #tainacan-admin-app .tainacan-finder-columns-container,
+.user-is-gestor #tainacan-admin-app .tainacan-relationship-results-container {
+    background-color: #fff !important;
+    border: 1px solid var(--tainacan-gray2) !important;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-finder-columns-container:first-child {
+    border: none !important;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-finder-columns-container:first-child .tainacan-finder-column {
+    border: none !important;
+}
+
+/* Descrição dos metadados abaixo do metadado */
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div {
+    display: flex;
+    flex-direction: column;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div > .metadatum-description-help-info,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div > .metadatum-description-help-info {
+    order: 2;
+    padding: 0.125rem 1rem 0rem 0.125rem;
+    margin-bottom: 0;
+}
+
+/* Composto */
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound > .collapse-handle > .label, 
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound > .collapse-handle > .label {
+    text-transform: uppercase;
+    color: var(--theme-palette-color-3);
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs {
+    display: block;
+}
+@media screen and (min-width: 768px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound {
+        column-span: all;
+        width: 100%;
+    }
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs {
+        padding-left: 0;
+        border-left: none;
+        margin-left: 0;
+        padding-top: 0;
+    }
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 1.5rem;
+    }
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs > .field,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs > .field {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        break-inside: avoid;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-compound .child-metadata-inputs .multiple-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 12px 1.5rem;
+    }
+}
+
+/* Coluna de radio buttons das regiões e modelo da instituição*/
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--29927 .tainacan-finder-column.has-only-one-column ul,
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--85982 .tainacan-finder-column.has-only-one-column ul,
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38402 .tainacan-finder-column.has-only-one-column ul {
+    column-count: unset;
+    display: flex;
+    flex-wrap: wrap;
+}
+/* Coluna de radio buttons dos estados */
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--85989 .tainacan-finder-column.has-only-one-column ul,
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38396 .tainacan-finder-column.has-only-one-column ul {
+    column-count: 4;
+}
+.user-is-gestor #tainacan-admin-app .child-metadata-inputs {
+    padding-left: 16px;
+}
+
+/* Metadado de cidades esconde as abas de seleção da taxonomia */
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38390 nav.tabs {
+    display: none;
+    visibility: hidden;
+
+}
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38390 .tainacan-form {
+    margin-top: 0;
+}
+
+/* Estiliza botão de taxonomias no input de tax */
+.user-is-gestor #tainacan-admin-app .tainacan-checkbox-search-section .field.has-addons > p.control > button {
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-checkbox-search-section .field.has-addons > p.control + .control > input {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+/* Estiliza os botões de input numérico */
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-component--tainacan-numeric .b-numberinput .control > input {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-component--tainacan-numeric .b-numberinput .plus > button {
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+}
+
+/* Esconde título dos anexos */
+.user-is-gestor #tainacan-admin-app .file-item figcaption {
+    display: none;
+}
+.user-is-gestor #tainacan-admin-app .pagination-area {
+    margin: 0;
+}
+
+/* Cores e dimensões dos inputs em geral */
+.user-is-gestor #tainacan-admin-app input.input,
+.user-is-gestor #tainacan-admin-app .input,
+.user-is-gestor #tainacan-admin-app input[type="color"].input,
+.user-is-gestor #tainacan-admin-app input[type="date"].input,
+.user-is-gestor #tainacan-admin-app input[type="datetime-local"].input,
+.user-is-gestor #tainacan-admin-app input[type="datetime"].input,
+.user-is-gestor #tainacan-admin-app input[type="email"].input,
+.user-is-gestor #tainacan-admin-app input[type="number"].input,
+.user-is-gestor #tainacan-admin-app input[type="month"].input,
+.user-is-gestor #tainacan-admin-app input[type="password"].input,
+.user-is-gestor #tainacan-admin-app input[type="search"].input,
+.user-is-gestor #tainacan-admin-app input[type="tel"].input,
+.user-is-gestor #tainacan-admin-app input[type="text"].input,
+.user-is-gestor #tainacan-admin-app input[type="time"].input,
+.user-is-gestor #tainacan-admin-app input[type="url"].input,
+.user-is-gestor #tainacan-admin-app input[type="week"].input {
+    min-height: 48px;
+}
+.user-is-gestor #tainacan-admin-app input.input:hover,
+.user-is-gestor #tainacan-admin-app .input:hover,
+.user-is-gestor #tainacan-admin-app textarea.textarea:hover,
+.user-is-gestor #tainacan-admin-app .textarea:hover,
+.user-is-gestor #tainacan-admin-app input[type="color"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="date"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="datetime-local"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="datetime"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="email"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="number"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="month"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="password"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="search"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="tel"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="text"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="time"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="url"].input:hover,
+.user-is-gestor #tainacan-admin-app input[type="week"].input:hover {
+    border-color: var(--theme-palette-color-12);
+}
+.user-is-gestor #tainacan-admin-app .field:has(.help.is-danger) {
+    --tainacan-input-border-color: var(--tainacan-red2);
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container > .tainacan-form hr,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container > .tainacan-form hr {
+    background: var(--tainacan-gray2);
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer {
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-width: var(--cne-max-admin-container, 1170px);
+    margin: 0 auto;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: none;
+    height: 80px;
+    background: #e6e8ee;
+}
+@media screen and (max-width: 768px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer {
+        height: 110px;
+    }
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer::before,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer::before {
+    content: '';
+    background: #e6e8ee;
+    width: 100vw;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: calc(-1 * (100vw - 100%) / 2);
+    right: calc(-1 * (100vw - 100%) / 2);
+    z-index: -1;
+}
+
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer .footer-message,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer .footer-message {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--tainacan-label-color);
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer .button.is-outlined,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer .button.is-outlined {
+    display: none;
+    visibility: hidden;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-radio.radio input[type="radio"] + .check::before,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-radio.radio input[type="radio"] + .check::before {
+    background-color: var(--tainacan-secondary) !important;
+    margin-left: calc(-1.125em * 0.5);
+    margin-bottom: calc(-1.125em * 0.5);
+    width: 1.125em;
+    height: 1.125em;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-radio.radio input[type="radio"] + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-radio.radio input[type="radio"] + .check {
+    width: 1.125em;
+    height: 1.125em;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-radio.radio input[type="radio"]:hover + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-radio.radio input[type="radio"]:hover + .check {
+    border-color: var(--tainacan-secondary) !important;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-radio.radio input[type="radio"]:not(:checked) + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-radio.radio input[type="radio"]:not(:checked) + .check {
+    border-color: var(--tainacan-input-border-color) !important;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-checkbox.checkbox input[type="checkbox"]:checked + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-checkbox.checkbox input[type="checkbox"]:checked + .check {
+    background: var(--tainacan-secondary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:rgb(255,255,255)' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E") no-repeat center center !important;
+    border-color: var(--tainacan-secondary) !important;
+    background-size: 0.75em 0.75em !important;
+    background-position: center !important;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-checkbox.checkbox input[type="checkbox"] + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-checkbox.checkbox input[type="checkbox"] + .check {
+    border-radius: 5px;
+    width: 1.125em;
+    height: 1.125em;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .b-checkbox.checkbox input[type="checkbox"]:not([disabled="disabled"]):not(:checked) + .check,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .b-checkbox.checkbox input[type="checkbox"]:not([disabled="disabled"]):not(:checked) + .check {
+    border-color: var(--tainacan-input-border-color);
+}
+@media screen and (min-width: 1000px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .footer .button:not(.is-small):not(.is-medium):not(.is-large),
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .footer .button:not(.is-small):not(.is-medium):not(.is-large) {
+        height: 2.75em !important;
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-leaflet-map-container .leaflet-container .geocoordinate-input-panel .button:not(.is-small):not(.is-medium):not(.is-large),
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-leaflet-map-container .leaflet-container .geocoordinate-input-panel .button:not(.is-small):not(.is-medium):not(.is-large) {
+    min-height: 3rem;
+    border-radius: 8px !important;
+}
