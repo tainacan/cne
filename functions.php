@@ -84,14 +84,19 @@ function cne_manage_collections_table_columns() {
 
 	foreach ($tainacan_collections_post_types as $collection_post_type) {
 
-		add_filter( 'manage_' . $collection_post_type . '_posts_columns', function($columns) {
+		add_filter( 'manage_' . $collection_post_type . '_posts_columns', function($columns) use ($collection_post_type) {
 			
-			unset($columns['date']);
 			unset($columns['comments']);
+			
+			if ( $collection_post_type === cne_get_instituicoes_collection_post_type() ) 
+				return $columns;
+
+			unset($columns['date']);
 			
 			return array_merge($columns, array(
 				'description' => __('Descrição', 'cne')
 			));
+
 		}, 10, 1 );
 
 		add_action('manage_' . $collection_post_type . '_posts_custom_column', function($column_key, $post_id) {
@@ -146,6 +151,9 @@ function cne_preset_atividade_instituicao($item) {
 
 add_action('tainacan-insert', 'cne_preset_atividade_instituicao', 10, 1);
 
+/**
+ * Pré-preenche os metadados da atividade com os dados da instituição
+ */
 function cne_preset_atividade_data_from_instituicao($item_atividade, $instituicao_id) {
 
 	$metadata_mapping = [
@@ -242,7 +250,7 @@ function cne_preset_atividade_data_from_instituicao($item_atividade, $instituica
 	}
 }
 
-/* Remove edição em linha (Edição rápida) das tabelas padrão do WordPress */
+/* Função para remover a edição em linha (Edição rápida) das tabelas padrão do WordPress */
 function cne_remove_quick_edit( $actions ) {
 	unset($actions['inline hide-if-no-js']);
 	return $actions;
@@ -320,6 +328,7 @@ function cne_list_collections_in_admin($args, $post_type) {
 		$args['labels']['item_link_description'] = __( 'Um link para uma atividade', 'cne ');// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
 	}
 
+	// Remove da maioria dos post types a opção de edição em linha na tabela
 	add_filter('post_row_actions','cne_remove_quick_edit', 10, 1);
 	add_filter('page_row_actions','cne_remove_quick_edit', 10, 1);
 	add_filter('tag_row_actions','cne_remove_quick_edit', 10, 1);
@@ -339,11 +348,20 @@ function cne_add_collections_to_toolbar($admin_bar) {
 	$tainacan_items_repository = \Tainacan\Repositories\Items::get_instance();
 	$instituicoes_args = [
 		'posts_per_page'=> -1,
-		'post_status' => 'publish',
+		'post_status' => 'any',
 		'author' => get_current_user_id(),
 	];
 	$instituicoes_items = $tainacan_items_repository->fetch($instituicoes_args, cne_get_instituicoes_collection_id(), 'WP_Query');
 	$total_instituicoes = $instituicoes_items->found_posts;
+
+	$admin_bar->add_menu( array(	
+		'id'    => 'colecao-instituicoes',
+		'title' => __( 'Gestão de instituições', 'cne' ),
+		'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
+		'meta'  => array(
+			'title' => __( 'Acesse a página que lista todas as suas instituições', 'cne' ),        
+		),
+	));
 
 	// Se houver apenas uma instituição, link direto pra ela
 	if ( $total_instituicoes === 1) {
@@ -358,22 +376,13 @@ function cne_add_collections_to_toolbar($admin_bar) {
 					'title' => get_the_title()
 				),
 			));
-			$admin_bar->add_menu( array(
-				'parent' => 'instituicao-' . get_the_ID(),	
-				'id'    => 'colecao-instituicoes',
-				'title' => __( 'Gerenciar todas as minhas instituições', 'cne' ),
-				'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
-				'meta'  => array(
-					'title' => __( 'Todas as minhas instituições', 'cne' ),        
-				),
-			));
 		}
 
 	} else {
 		
 		// Adiciona coleção de instituições
 		$admin_bar->add_menu( array(
-			'id'    => 'colecao-instituicoes',
+			'id'    => 'lista-instituicoes',
 			'title' => __( 'Minhas instituições', 'cne' ),
 			'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
 			'meta'  => array(
@@ -386,7 +395,7 @@ function cne_add_collections_to_toolbar($admin_bar) {
 				$instituicoes_items->the_post();
 				$admin_bar->add_menu( array(
 					'id'    => 'instituicao-' . get_the_ID(),
-					'parent' => 'colecao-instituicoes',
+					'parent' => 'lista-instituicoes',
 					'title' => get_the_title(),
 					'href'  =>  admin_url( 'admin.php?page=instituicao&id=' . get_the_ID() ),
 					'meta'  => array(
@@ -397,38 +406,43 @@ function cne_add_collections_to_toolbar($admin_bar) {
 		}	
 	}
 
-	// Adiciona coleções de eventos
-	$admin_bar->add_menu( array(
-        'id'    => 'colecoes-eventos',
-        'title' => __( 'Meus eventos', 'cne' ),
-        'href'  => '',
-        'meta'  => array(
-            'title' => __( 'Meus eventos', 'cne' ),    
-        ),
-    ));
+	if ( !cne_user_is_gestor() ) {
 
-	$tainacan_collections_post_types = \Tainacan\Repositories\Repository::get_collections_db_identifiers();
-
-	foreach ($tainacan_collections_post_types as $collection_post_type) {
-		
-		if ( $collection_post_type === cne_get_instituicoes_collection_post_type() )
-			continue;
-
-		$collection_object = get_post_type_object( $collection_post_type );
-		
-		if ( !current_user_can( str_replace('_item', '', $collection_post_type) . '_edit_items') && !current_user_can('tnc_col_all_edit_items') )
-			continue;
-
+		// Adiciona coleções de eventos
 		$admin_bar->add_menu( array(
-			'id'    => 'colecao-evento-' . $collection_post_type,
-			'parent' => 'colecoes-eventos',
-			'title' => $collection_object->labels->name,
-			'href'  => admin_url( 'edit.php?post_type=' . $collection_post_type ),
+			'id'    => 'colecoes-eventos',
+			'title' => __( 'Eventos', 'cne' ),
+			'href'  => '',
 			'meta'  => array(
-				'title' => $collection_object->labels->name,
-				'class' => cne_get_evento_collection_post_type() == $collection_post_type ? 'evento-atual' : ''
+				'title' => __( 'Eventos', 'cne' ),    
 			),
 		));
+
+		$tainacan_collections_post_types = \Tainacan\Repositories\Repository::get_collections_db_identifiers();
+
+		foreach ($tainacan_collections_post_types as $collection_post_type) {
+			
+			if ( $collection_post_type === cne_get_instituicoes_collection_post_type() )
+				continue;
+
+			$collection_object = get_post_type_object( $collection_post_type );
+			
+			if ( !current_user_can( str_replace('_item', '', $collection_post_type) . '_edit_items') && !current_user_can('tnc_col_all_edit_items') )
+				continue;
+
+			$admin_bar->add_menu( array(
+				'id'    => 'colecao-evento-' . $collection_post_type,
+				'parent' => 'colecoes-eventos',
+				'title' => $collection_object->labels->name,
+				'href'  => admin_url( 'edit.php?post_type=' . $collection_post_type ),
+				'meta'  => array(
+					'title' => $collection_object->labels->name,
+					'class' => cne_get_evento_collection_post_type() == $collection_post_type ? 'evento-atual' : ''
+				),
+			));
+		}
+	} else {
+		$admin_bar->remove_menu('archive');
 	}
 
 	wp_reset_postdata();
@@ -494,7 +508,7 @@ function cne_set_enabled_view_modes($registered_view_modes_slugs) {
 }
 add_filter( 'tainacan-enabled-view-modes-for-themes', 'cne_set_enabled_view_modes', 10, 1 );
 
-/* Disables Google Fonts as we won'r use them */
+/* Desabilita Google fontes já que ele não é necessário */
 add_filter('blocksy:typography:google:use-remote', function () {
 	return false;
 });
@@ -560,6 +574,7 @@ require get_stylesheet_directory() . '/inc/block-filters.php';
 require get_stylesheet_directory() . '/inc/block-bindings.php';
 require get_stylesheet_directory() . '/inc/instituicao-single-tweaks.php';
 require get_stylesheet_directory() . '/inc/atividade-single-tweaks.php';
+require get_stylesheet_directory() . '/inc/comprovante.php';
 
 /* -------------------------- MUSEUSBR FETCHER -----------------*/
 require get_stylesheet_directory() . '/museusbr-fetcher/museusbr-fetcher.php';

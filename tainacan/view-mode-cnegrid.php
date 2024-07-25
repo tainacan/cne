@@ -50,6 +50,14 @@
 		return 'd/m';
 	}
 	add_filter( 'pre_option_date_format', 'cne_view_mode_grid_date_without_year');
+
+	$is_in_repository_items_page = false;
+	$referer_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+	if ( !empty($referer_url) ) {
+		$path_string = parse_url($referer_url, PHP_URL_PATH);
+		if ( $path_string === '/itens/' || $path_string === '/items/')
+			$is_in_repository_items_page = true;
+	}
 ?>
 
 <?php if ( have_posts() ) : ?>
@@ -57,14 +65,28 @@
 	<ul class="tainacan-cne-grid-container">
 
 		<?php $item_index = 0; while ( have_posts() ) : the_post(); ?>
-			
-			<li class="tainacan-cne-grid-item <?php echo get_post_type() == cne_get_instituicoes_collection_post_type() ? 'tainacan-cne-grid-item--2' : ''; ?>">
+			<?php 
+				$extra_classes = '';
+				$atividade_passada = false;
+
+				if ( get_post_type() == cne_get_instituicoes_collection_post_type() ) {
+					$extra_classes .= ' tainacan-cne-grid-item--2';
+				} else {
+					// Checando se a atividade já passou
+					$atividade_data_termino = get_post_meta(get_the_ID(), 38419, true);
+					if ( $atividade_data_termino && !empty($atividade_data_termino) && $atividade_data_termino < current_time('Y-m-d') ) {
+						$extra_classes .= ' tainacan-cne-grid-item--past';
+						$atividade_passada = true;
+					}
+				}
+			?>
+			<li class="tainacan-cne-grid-item <?php echo $extra_classes; ?>">
 				<a href="<?php echo cne_get_item_link_for_navigation(get_permalink(), $item_index); ?>">
-					
+					<!-- Cartão de Instituições -->
 					<?php if ( get_post_type() == cne_get_instituicoes_collection_post_type() ) : ?>
-						<?php if ( has_post_thumbnail() ) : ?>
+						<?php if ( tainacan_has_document() ) : ?>
 							<div class="cne-grid-item-title-and-thumbnail">
-								<?php the_post_thumbnail( 'tainacan-large-full' ); ?>
+								<?php echo wp_get_attachment_image( tainacan_get_the_document_raw(), 'tainacan-large-full') ?>
 								<h4><?php the_title(); ?></h4>
 							</div>
 						<?php else : ?>
@@ -73,15 +95,23 @@
 								<h4><?php the_title(); ?></h4>
 							</div>
 						<?php endif; ?>
+
+					<!-- Cartão de Atividades dos Eventos -->
 					<?php else: ?>
-						<?php 
+						<?php
+							if ( $atividade_passada ): ?>
+								<div class="cne-grid-item-past-tag">
+									<?php echo __('Atividade encerrada', 'cne'); ?>
+								</div>
+							<?php endif;
+
 							$datas_item_medatata = tainacan_get_the_metadata([
 								'metadata__in' => $data_metadata_ids,
 								'display_slug_as_class' => true,
 								'before_title' => '<h3 class="screen-reader-text">',
 							]); 
 							
-							if ( $datas_item_medatata ) :?>
+							if ( $datas_item_medatata ): ?>
 								<div class="cne-grid-item-date">
 									<?php echo wp_kses($datas_item_medatata, $valid_elements); ?>
 								</div>
@@ -98,6 +128,10 @@
 						<?php endif; ?>
 					<?php endif; ?>
 					
+					<?php if( $is_in_repository_items_page ): ?>
+						<div class="cne-grid-evento-name"><?php echo get_post_type_object(get_post_type())->labels->name; ?></div>
+					<?php endif; ?>
+
 					<div class="cne-grid-metadata">
 						<?php
 							$item_metadata = tainacan_get_the_metadata([

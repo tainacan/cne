@@ -26,7 +26,7 @@ const MuseusFetcherModal = () => {
 
     return (
         <>
-            <Button size="compact" variant="primary" onClick={ openModal }>
+            <Button size="compact" __next40pxDefaultSize={ true } variant="primary" onClick={ openModal }>
                 { __( 'Importar instituição do MuseusBR', 'cne' ) }
             </Button>
             { isOpen && (
@@ -45,6 +45,7 @@ const MuseusFetcherModal = () => {
                             museuSelecionado={ museuSelecionado }
                             setMuseuSelecionado={ (museuSelecionadoId) => setMuseuSelecionado(museuSelecionadoId) }
                             museus={ museus }
+                            setMuseus={ setMuseus }
                             fetchMuseus={ _.debounce((inputValue) => {
                                 fetchMuseusFromMuseusBR(inputValue);
                             }, 500)} />

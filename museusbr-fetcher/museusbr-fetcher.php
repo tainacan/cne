@@ -100,6 +100,7 @@ function cne_create_instituicao() {
         '1379' => '38384',  // Complemento 
         '1375' => '38382',  // Número 
         '2797' => '85235',  // CEP 
+        '228' => '85239',   // Localização (Geo coordenadas)
         '1219' => '85081',  // Telefone 
         '1508' => '29943',  // Dias e horários de aberturo para o público 
         '1503' => '29946',  // Valor da entrada 
@@ -183,9 +184,9 @@ function cne_create_instituicao() {
             }
 
             // No caso no metadaoo de Região, insere-se baseando-se no Estado
-            if ( $item_metadatum['metadatumId'] == '38402' && $item_metadatum['metadatumValue'] ) {
+            if ( $item_metadatum['metadatumId'] == '38396' && $item_metadatum['metadatumValue'] ) {
 
-                $regiao_metadatum = new \Tainacan\Entities\Metadatum( 73 );
+                $regiao_metadatum = new \Tainacan\Entities\Metadatum( 38402 );
                 $new_regiao_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $new_item, $regiao_metadatum );
 
                 $regiao_value = cne_get_regiao_from_estado($item_metadatum['metadatumValue']);

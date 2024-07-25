@@ -87,8 +87,12 @@ class CNE_Instituicao_Page {
                             <?php the_title(); ?>
                         </h1>
 
-                        <a href="<?php echo get_permalink();  ?>">
-                            <strong><?php _e('Ver no VisiteMuseus', 'cne'); ?></strong>
+                        <a class="page-title-action wp-button-with-icon" href="<?php echo get_permalink();  ?>">
+                            <?php _e('Ver no VisiteMuseus', 'cne'); ?>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </a>
                         <div>
                             <div class="instituicao-status">
@@ -159,21 +163,24 @@ class CNE_Instituicao_Page {
                             ?>
                         </div> 
                     </div>
-                    <div class="instituicao-main-section">      
+                    <!-- <div class="instituicao-main-section">      
                         <?php the_excerpt(); ?>
-                    </div>
+                    </div> -->
                 </header>
                 
-                <?php $this->render_instituicao_section(); ?>
-                
+                <?php 
+                    // $this->render_instituicao_section();
+                ?>
+                <!--                 
                 <div class="instituicao-aviso-area"> 
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#970E05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12 16H12.01" stroke="#970E05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12 8V12" stroke="#970E05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p>ALERTA: As informações fornecidas são de total responsabilidade da Instituição.</p>
-                </div>
+                    <p>AVISO: As informações fornecidas são de total responsabilidade da Instituição.</p>
+                </div> -->
+
                 <hr>
                 
                 <?php $this->render_current_evento_section(); ?>
@@ -251,11 +258,16 @@ class CNE_Instituicao_Page {
             
             <div class="evento-principal-kits">
                 <?php if ( $kit_digital_url ) : ?>
-                    <a href="<?php echo $kit_digital_url;?>" class="page-title-action button" download>
-                        <?php _e('Acesse o kit digital audiovisual do evento', 'cne'); ?>
-                        <span style="padding: 5px;" class="dashicons dashicons-download"></span>
+                    <a href="<?php echo $kit_digital_url;?>" class="button wp-button-with-icon button-primary" download>
+                        <?php _e('Acesse o kit digital e audiovisual do evento', 'cne'); ?>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 13L19 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </a>
                 <?php endif; ?>
+
+                <?php $this->instituicao_evento_comprovante_button(); ?>
             </div>
 
             <strong><p><?php echo $current_evento_collection->get_name(); ?></p></strong>
@@ -264,21 +276,39 @@ class CNE_Instituicao_Page {
             <br>
 
             <div class="evento-principal-dados">
+                <?php if ( count($items) <= 0 ) : ?>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                        <h3 style="display: inline-block; margin-right: 5px;"><?php _e('Minhas atividades no evento', 'cne'); ?></h3>
+                    </div>
+                    <div class="evento-atividades-empty-placeholder">
+                        <p><?php _e('Esta instituição ainda não está participando do evento.', 'cne'); ?></p>
+                        <p><?php _e('Insira ao menos uma atividade para participar!', 'cne'); ?></p>
+                        <a class="page-title-action wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
+                            <?php _e('Cadastrar nova atividade', 'cne'); ?>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 8V16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 12H16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>    
+                <?php else: ?>
 
-                <h3 style="display: inline-block; margin-right: 5px;"><?php _e('Minhas atividades', 'cne'); ?></h3>
-            
-                <a class="page-title-action" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
-                    <?php _e('Cadastrar atividade', 'cne'); ?>
-                    <span style="padding: 5px;" class="dashicons dashicons-plus"></span>
-                </a>
-            
-                <?php 
-                    if ( count($items) <= 0 ) {
-                        echo '<p>' . __('Nenhuma atividade cadastrada ainda', 'cne') . '</p>';
-                    } else {
-                        $this->render_activities_table($items, $visible_metadata_objects);
-                    }
-                ?>
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+                        <h3 style="display: inline-block; margin-right: 5px;"><?php _e('Minhas atividades no evento', 'cne'); ?></h3>
+                    
+                        <a class="page-title-action wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
+                            <?php _e('Cadastrar atividade', 'cne'); ?>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 8V16" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 12H16" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <?php $this->render_activities_table($items, $visible_metadata_objects); ?>
+
+                <?php endif; ?>
             </div>
         <?php
     }
@@ -312,7 +342,7 @@ class CNE_Instituicao_Page {
                 <?php foreach($items as $atividade) : ?>
 
                     <tr id="<?php echo 'post-' . $atividade->get_ID(); ?>" class="format-standard hentry">
-                        <td style="min-width: 120px;">
+                        <td style="min-width: 300px;">
                             <strong>
                                 <a class="row-title" href="<?php echo admin_url( '?page=tainacan_admin#/collections/' . $atividade->get_collection_id() . '/items/' . $atividade->get_ID() . '/edit' ); ?>" aria-label="“<?php echo $atividade->get_title(); ?>” (Editar)">
                                     <?php echo $atividade->get_title(); ?>
@@ -349,6 +379,41 @@ class CNE_Instituicao_Page {
 
                 </tbody>
             </table>
+        <?php
+    }
+
+    /**
+     * Gera o botão que imprime o comprovante de inscrição
+     */
+    function instituicao_evento_comprovante_button() {
+        global $post;
+        ?>
+        <a 
+            class="button wp-button-with-icon button-primary"
+            style="cursor: pointer;"
+            onclick="
+                var iframe = document.createElement('iframe');
+                iframe.className='pdfIframe'
+                document.body.appendChild(iframe);
+                iframe.style.display = 'none';
+                iframe.onload = function () {
+                    setTimeout(function () {
+                        iframe.focus();
+                        iframe.contentWindow.print();
+                        window.URL.revokeObjectURL('<?php echo admin_url( 'admin.php?page=comprovante&id=' . $post->ID ); ?>')
+                        document.body.removeChild(iframe)
+                    }, 1);
+                };
+                iframe.src = '<?php echo admin_url( 'admin.php?page=comprovante&id=' . $post->ID ); ?>';
+                
+            ">
+            <?php echo __('Imprimir comprovante de inscrição', 'cne'); ?>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 18H4C3.46957 18 2.96086 17.7893 2.58579 17.4142C2.21071 17.0391 2 16.5304 2 16V11C2 10.4696 2.21071 9.96086 2.58579 9.58579C2.96086 9.21071 3.46957 9 4 9H20C20.5304 9 21.0391 9.21071 21.4142 9.58579C21.7893 9.96086 22 10.4696 22 11V16C22 16.5304 21.7893 17.0391 21.4142 17.4142C21.0391 17.7893 20.5304 18 20 18H18" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 14H6V22H18V14Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 9V2H18V9" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
         <?php
     }
     

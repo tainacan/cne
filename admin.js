@@ -211,4 +211,5 @@ if (wp && wp.hooks) {
         }
     }
     wp.hooks.addAction('tainacan_item_edition_metadata_loaded', 'tainacan-hooks', tainacanItemEditionItemMetadataLoaded);
+
 }

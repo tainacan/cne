@@ -186,6 +186,13 @@
 					"slug": "xx-large"
 				}
 			]
+		},
+		"blocks": {
+			"core/image": {
+				"lightbox": {
+					"allowEditing": true
+				}
+			}
 		}
 	},
 

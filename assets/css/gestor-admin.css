@@ -100,6 +100,9 @@ body.user-is-gestor.tainacan-admin-page {
     padding: 9px 0 4px;
     line-height: 1.3;
 }
+.user-is-gestor #tainacan-admin-app .tainacan-form {
+    width: unset;
+}
 .user-is-gestor #tainacan-admin-app .cne-tainacan-page-title-container {
     text-align: left;
     padding: 42px 1rem 68px 1rem;
@@ -268,6 +271,7 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app .tainacan-relationship-results-container {
     background-color: #fff !important;
     border: 1px solid var(--tainacan-gray2) !important;
+    border-radius: 0px 0px 8px 8px;
 }
 .user-is-gestor #tainacan-admin-app .tainacan-finder-columns-container:first-child {
     border: none !important;
@@ -279,8 +283,7 @@ body.user-is-gestor.tainacan-admin-page {
 /* Descrição dos metadados abaixo do metadado */
 .user-is-gestor #tainacan-admin-app .page-container.item-edition-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div,
 .user-is-gestor #tainacan-admin-app .page-container.item-creation-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div {
-    display: flex;
-    flex-direction: column;
+    display: grid;
 }
 .user-is-gestor #tainacan-admin-app .page-container.item-edition-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div > .metadatum-description-help-info,
 .user-is-gestor #tainacan-admin-app .page-container.item-creation-container [class*="tainacan-metadatum-component--"].field .collapse-handle + div > .metadatum-description-help-info {
@@ -342,11 +345,44 @@ body.user-is-gestor.tainacan-admin-page {
     display: flex;
     flex-wrap: wrap;
 }
-/* Coluna de radio buttons dos estados */
+/* Coluna de radio buttons dos estados e dos tipos de atividades */
 .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--85989 .tainacan-finder-column.has-only-one-column ul,
-.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38396 .tainacan-finder-column.has-only-one-column ul {
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38396 .tainacan-finder-column.has-only-one-column ul,
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38411 .tainacan-finder-column.has-only-one-column ul {
     column-count: 4;
 }
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38411 {
+    column-span: all;
+}
+@media screen and (max-width: 768px) {
+    .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38411 .tainacan-finder-column.has-only-one-column ul {
+        column-count: 2;
+    }
+}
+
+/* Metadado de datas e horas nas atividades */
+@media screen and (min-width: 769px) {
+    .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38424,
+    .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38419,
+    .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38421,
+    .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38416 {
+        width: 50%;
+        display: inline-block;
+    }
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38424,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38421,
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38424,
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38421 {
+        padding-right: 0.75rem !important;
+    }
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38419,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38416,
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38419,
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .field.tainacan-metadatum-id--38416 {
+        padding-left: 0.75rem !important;
+    }
+}
+
 .user-is-gestor #tainacan-admin-app .child-metadata-inputs {
     padding-left: 16px;
 }
@@ -405,7 +441,10 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app input[type="text"].input,
 .user-is-gestor #tainacan-admin-app input[type="time"].input,
 .user-is-gestor #tainacan-admin-app input[type="url"].input,
-.user-is-gestor #tainacan-admin-app input[type="week"].input {
+.user-is-gestor #tainacan-admin-app input[type="week"].input,
+.user-is-gestor #tainacan-admin-app .taginput .taginput-container,
+.user-is-gestor #tainacan-admin-app .select select,
+.user-is-gestor #tainacan-admin-app select {
     min-height: 48px;
 }
 .user-is-gestor #tainacan-admin-app input.input:hover,
@@ -528,4 +567,103 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-leaflet-map-container .leaflet-container .geocoordinate-input-panel .button:not(.is-small):not(.is-medium):not(.is-large) {
     min-height: 3rem;
     border-radius: 8px !important;
+}
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-url .control+.add-new-term,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-url .control+.add-new-term,
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-relationship .add-link,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-relationship .add-link {
+    display: hidden;
+    visibility: hidden;
+}
+
+/* Os ícones nas tabelas do WordPress só são adicionados para os gestores, já que afetam muitas páginas */
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions {
+    font-size: 16px;
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions a,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .button-link  {
+    color: #838383;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline {
+    position: relative;
+    padding-left: 1.25em;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit::before,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash::before,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view::before,
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline::before {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16504 13.6292H14.0001' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.52001 2.52986C9.0371 1.91186 9.96666 1.82124 10.5975 2.32782C10.6324 2.35531 11.753 3.22586 11.753 3.22586C12.446 3.64479 12.6613 4.5354 12.2329 5.21506C12.2102 5.25146 5.87463 13.1763 5.87463 13.1763C5.66385 13.4393 5.34389 13.5945 5.00194 13.5982L2.57569 13.6287L2.02902 11.3149C1.95244 10.9895 2.02902 10.6478 2.2398 10.3849L8.52001 2.52986Z' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.34766 4L10.9825 6.79142' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit:hover a {
+    color: #011546;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit:hover a::before {
+    background: #85a1cc54;
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    border-radius: 8px;
+    padding: 2px;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 4H3.33333H14' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.33301 4.00065V2.66732C5.33301 2.3137 5.47348 1.97456 5.72353 1.72451C5.97358 1.47446 6.31272 1.33398 6.66634 1.33398H9.33301C9.68663 1.33398 10.0258 1.47446 10.2758 1.72451C10.5259 1.97456 10.6663 2.3137 10.6663 2.66732V4.00065M12.6663 4.00065V13.334C12.6663 13.6876 12.5259 14.0267 12.2758 14.2768C12.0258 14.5268 11.6866 14.6673 11.333 14.6673H4.66634C4.31272 14.6673 3.97358 14.5268 3.72353 14.2768C3.47348 14.0267 3.33301 13.6876 3.33301 13.334V4.00065H12.6663Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9.33301 7.33398V11.334' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M6.66699 7.33398V11.334' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash:hover a {
+    color: #970E05;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash:hover a::before {
+    background: #e5bebe54;
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    border-radius: 8px;
+    padding: 2px;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_641_3519)'%3E%3Cpath d='M0.666992 7.99935C0.666992 7.99935 3.33366 2.66602 8.00033 2.66602C12.667 2.66602 15.3337 7.99935 15.3337 7.99935C15.3337 7.99935 12.667 13.3327 8.00033 13.3327C3.33366 13.3327 0.666992 7.99935 0.666992 7.99935Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_641_3519'%3E%3Crect width='16' height='16' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view:hover a {
+    color: #218963;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view:hover a::before {
+    background: #e2f5c654;
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    border-radius: 8px;
+    padding: 2px;
+}
+body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16504 13.6292H14.0001' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.52001 2.52986C9.0371 1.91186 9.96666 1.82124 10.5975 2.32782C10.6324 2.35531 11.753 3.22586 11.753 3.22586C12.446 3.64479 12.6613 4.5354 12.2329 5.21506C12.2102 5.25146 5.87463 13.1763 5.87463 13.1763C5.66385 13.4393 5.34389 13.5945 5.00194 13.5982L2.57569 13.6287L2.02902 11.3149C1.95244 10.9895 2.02902 10.6478 2.2398 10.3849L8.52001 2.52986Z' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.34766 4L10.9825 6.79142' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }

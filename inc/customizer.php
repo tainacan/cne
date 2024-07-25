@@ -66,17 +66,6 @@ function cne_options_panel($options) {
                             $collections_options
                         )
                     ],
-                    'cne_type_of_collection_taxonomy' => [
-                        'label' => __( 'Taxonomia que define os tipos de coleção', 'cne' ),
-                        'type' => 'ct-select',
-                        'value' => cne_get_type_of_collection_taxonomy_id(),
-                        'view' => 'text',
-                        'design' => 'block',
-                        'sync' => '',
-                        'choices' => blocksy_ordered_keys(
-                            $taxonomies_options
-                        )
-                    ],
                     'cne_instituicoes_relationship_metadata' => [
                         'label' => __( 'Relacionamento que vincular instituições aos eventos', 'cne' ),
                         'type' => 'ct-select',

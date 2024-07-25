@@ -1,0 +1,150 @@
+/* Página do certificado */
+@media print {
+    html,
+    body {
+        webkit-print-color-adjust:exact !important;
+        print-color-adjust:exact !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: white;
+    }
+    .admin_page_comprovante #adminmenumain,
+    .admin_page_comprovante #wpadminbar,
+    .admin_page_comprovante #wpfooter,
+    .admin_page_comprovante > :not(#wpwrap) {
+        display: none;
+    }
+    .admin_page_comprovante #wpwrap,
+    .admin_page_comprovante #wpcontent,
+    .admin_page_comprovante #wpbody {
+        height: auto;
+        min-height: unset;
+    }
+    .admin_page_comprovante #wpcontent {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    .admin_page_comprovante #wpbody-content {
+        margin: 0;
+        padding: 0;
+    }
+    .admin_page_comprovante .comprovante-header {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20pt;
+        background-color: #f3f1f1;
+        min-height: 84pt;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    }
+    .admin_page_comprovante .comprovante-header .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: last baseline;
+        margin: 0;
+    }
+    .admin_page_comprovante .comprovante-header h1 {
+        font-weight: 600;
+        font-size: 16pt;
+        text-transform: uppercase;
+    }
+    .admin_page_comprovante .comprovante-logo {
+        display: flex;
+        flex-direction: column;
+    }
+    .admin_page_comprovante .comprovante-logo img {
+        max-width: 146pt;
+        height: auto
+    }
+    .admin_page_comprovante .comprovante-logo p {
+        margin: 0;
+    }
+    .admin_page_comprovante .comprovante-intro {
+        font-weight: 600;
+        font-size: 12pt;
+    }
+    .admin_page_comprovante .wrap {
+        max-width: 90%;
+        width: 100%;
+        margin: 0 auto !important;
+    }
+    .admin_page_comprovante h1,
+    .admin_page_comprovante h2,
+    .admin_page_comprovante h3,
+    .admin_page_comprovante h4,
+    .admin_page_comprovante h5,
+    .admin_page_comprovante h6 {
+       color: #011546;
+    }
+    .admin_page_comprovante p,
+    .admin_page_comprovante .tainacan-metadata-label,
+    .admin_page_comprovante td,
+    .admin_page_comprovante .tainacan-metadata-value,
+    .admin_page_comprovante a {
+        color: #6a6a6a !important;
+        text-decoration: none;
+        font-size: 9pt;
+    }
+    .admin_page_comprovante td {
+        border-bottom: 1px solid #bababa;
+    }
+    .admin_page_comprovante th {
+        font-size: 8pt !important;
+        text-transform: uppercase;
+    }
+    .admin_page_comprovante .row-title {
+        font-size: 8pt;
+        font-weight: normal;
+    }
+    .admin_page_comprovante table {
+        border: none;
+        margin-top: 8pt;
+    }
+    .admin_page_comprovante .instituicao-evento-banner {
+        border-radius: 8px;
+        max-width: 100%;
+    }
+    .admin_page_comprovante .tainacan-item-section--metadata-sections {
+        max-width: 90%;
+        margin: 0 auto;
+        grid-template-areas: 'contato endereco endereco endereco' !important;
+    }
+    .admin_page_comprovante .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata p,
+    .admin_page_comprovante #metadata-section-contato + .tainacan-item-section__metadata .tainacan-metadata-value  {
+        margin-top: 1pt;
+    }
+    .admin_page_comprovante .tainacan-item-section__metadata .tainacan-metadata-label {
+        margin-bottom: 1pt !important;
+        margin-top: 1pt !important;
+    }
+    .admin_page_comprovante .tainacan-item-section--metadata > #metadata-section-endereco + .tainacan-item-section__metadata {
+        gap: 8pt !important;
+    }
+    .admin_page_comprovante .comprovante-footer {
+        width: 100%;
+        padding: 12pt 0;
+        margin-top: 20pt;
+        background-color: #f3f1f1;
+        min-height: 84pt;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    }
+    .admin_page_comprovante .comprovante-footer h1 {
+        font-weight: 600;
+        font-size: 16pt;
+        text-transform: uppercase;
+    }
+    .admin_page_comprovante .comprovante-footer p {
+        font-size: 11pt;
+        margin: 1pt 0 4pt 0;
+    }
+    .admin_page_comprovante .comprovante-footer .wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+}

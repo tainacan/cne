@@ -16,7 +16,7 @@ function cne_instituicao_single_page_hero_title_before() {
 		if ($item instanceof \Tainacan\Entities\Item) {
 
 			?>
-			<div class="instituicao-title-and-thumbnail-container"> 
+			<div class="instituicao-title-and-thumbnail-container">
 				<?php the_post_thumbnail('tainacan-medium', array('class' => 'instituicao-thumbnail')); ?>
 			<!-- tag will be closed in the after hook -->
 			<?php
@@ -33,6 +33,26 @@ add_action('blocksy:hero:title:before', 'cne_instituicao_single_page_hero_title_
 function cne_instituicao_single_page_hero_title_after() {
 
 	if ( is_singular( cne_get_instituicoes_collection_post_type() ) ) {
+		$item = tainacan_get_item();
+
+		if ( $item->can_edit() ) {
+			$url = $item->get_edit_url();
+	
+			if ( $url ) {
+				$link = '<div class="wp-block-buttons" style="margin-left: auto;">
+						<div class="wp-block-button">
+							<a href="' . esc_url( $url ) . '" class="is-style-outline wp-block-button__link wp-element-button">' .
+								__('Editar dados da instituição', 'cne') . '&nbsp;
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+									<path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+								</svg>
+							</a>
+						</div>
+					</div>';
+				echo $link;
+			}
+		} 
 		?>
 		</div><!-- Closing of the instituicao-title-and-thumbnail-container -->	
         <div class="instituicao-main-section">
@@ -100,7 +120,7 @@ function cne_instituicao_single_page_bottom() {
 				<path d="M12 16H12.01" stroke="#970E05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				<path d="M12 8V12" stroke="#970E05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
-			<p>ALERTA: As informações fornecidas são de total responsabilidade da Instituição.</p>
+			<p>AVISO: As informações fornecidas são de total responsabilidade da Instituição.</p>
 		</div>
 	<?php endif;
 }

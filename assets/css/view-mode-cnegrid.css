@@ -3,7 +3,7 @@
     padding: 4px 4px 16px 4px;
     display: -ms-grid;
     display: grid;
-    grid-template-columns: repeat(auto-fill, max(368px, 25%));
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 28px;
     justify-content: flex-start;
@@ -12,7 +12,19 @@
     animation-name: appear;
     animation-duration: 0.5s;
 }
-
+@media screen and (max-width: 1000px) {
+    .tainacan-cne-grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 680px) {
+    .tainacan-cne-grid-container {
+        grid-template-columns: 1fr;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail h4 {
+        min-height: unset;
+    }
+}
 .tainacan-cne-grid-container .tainacan-cne-grid-item {
     margin: 0px;
     display: block;
@@ -46,7 +58,54 @@
     display: block;
     content: "";
     width: 100%;
-    padding-top: calc(100% * (234 / 370));
+    padding-top: calc(100% * (282 / 320));
+}
+@media screen and (max-width: 680px) {
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata {
+        grid-template-columns: 14px 30px 60px 1fr 1fr !important;
+        grid-template-rows: 48px 42px 45px 48px 20px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail:before {
+        padding-top: calc(100% * (162 / 270));
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-date {
+        width: 72px !important;
+        height: 90px !important;
+        padding: 45px 16px 16px 10px !important;
+        margin-right: 16px !important;
+        margin-bottom: -90px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-date .metadata-slug-data-de-inicio-da-atividade::after {
+        font-size: 14px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-date .metadata-slug-data-de-inicio-da-atividade p,
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-date .metadata-slug-data-de-fim-da-atividade p {
+        font-size: 14px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item--past .cne-grid-item-past-tag {
+        top: 16px !important;
+        left: 16px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade p {
+        font-size: 20px !important;
+        font-weight: bold;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade p,
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-fim-da-atividade p,
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade + .metadata-slug-horario-de-fim-da-atividade::before {
+        font-size: 16px !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade::before {
+        width: 20px !important;
+        height: 20px !important;
+        top: 2px !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-instituicao-2 p,
+    .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-type-core_title p {
+        font-size: 14px !important;
+    }
 }
 .tainacan-cne-grid-container--3.tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-item-thumbnail:before {
     padding-top: calc(100% * (400 / 280));
@@ -172,6 +231,22 @@
     margin-bottom: 0;
 }
 
+.cne-grid-evento-name {
+    height: 26px;
+    width: 100%;
+    background-color: var(--theme-palette-color-1);
+    color: white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
+    text-align: center;
+    margin-top: -26px;
+    z-index: 1;
+    position: relative;
+    padding: 1px;
+}
+
 /* Demais metadados */
 .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade {
     grid-area: tipo;
@@ -179,6 +254,7 @@
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade p {
     text-transform: uppercase;
+    line-height: initial;
     font-size: 28px;
     margin-bottom: 0;
     color: #4b4b4b !important;
@@ -209,7 +285,7 @@
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade::before {
     content: '';
-    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='%23011546' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 6V12L16 14' stroke='%23011546' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='%231EAD9F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 6V12L16 14' stroke='%231EAD9F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     width: 24px;
     height: 24px;
     display: block;
@@ -271,8 +347,7 @@
 /* Grid the Instituições */
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail {
     display: flex;
-    align-items: flex-end;
-    align-items: last baseline;
+    flex-direction: column;
     gap: 16px;
     padding: 16px 16px 0px 16px;
 }
@@ -282,20 +357,46 @@
     font-weight: 700;
     margin-bottom: 0;
     color: var(--theme-palette-color-1) !important;
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    min-height: 78px;
+    line-height: 1.25;
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail img {
-    width: 136px;
-    height: 136px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 238/136;
+}
+@media screen and (min-width: 1000px) {
+    .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail img {
+        aspect-ratio: 1;
+        width: 136px;
+        height: 136px;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail {
+        display: flex;
+        flex-direction: row;
+        align-items: end;
+        gap: 32px;
+    }
+    .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-item-title-and-thumbnail h4 {
+        min-height: unset;
+    }
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata {
-    padding: 16px;
+    padding: 8px 16px 16px 16px;
     gap: 16px;
     display: grid;
     grid-template-areas:
-        'estado    cidade' 
-        'descricao descricao';
-    grid-template-rows: 20px 85px;
-    grid-template-columns: 25px auto;
+        'descricao descricao' 
+        'estado    cidade   ';
+    grid-template-rows: 85px 20px !important;
+    grid-template-columns: 25px auto !important;
 }
 .tainacan-cne-grid-container .tainacan-cne-grid-item--2 .cne-grid-metadata .metadata-slug-descricao {
     grid-area: descricao;
@@ -311,8 +412,28 @@
     -webkit-box-orient: vertical;
 }
 
-@media screen and (max-width: 768px) {
-    .tainacan-cne-grid-container {
-        grid-template-columns: repeat(auto-fit, 100%);
-    }
+/* Atividades passadas */
+.tainacan-cne-grid-container .tainacan-cne-grid-item--past {
+    filter: grayscale(100%);
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--past img {
+    opacity: 0.5;
+}
+.tainacan-cne-grid-container .tainacan-cne-grid-item--past .cne-grid-item-past-tag {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    top: 48px;
+    background: white;
+    color: black;
+    width: 130px;
+    position: absolute;
+    z-index: 1;
+    line-height: 1.75;
+    border-radius: 8px;
+    left: 32px;
 }

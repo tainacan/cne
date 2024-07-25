@@ -3,6 +3,7 @@
     align-items: flex-start;
     gap: 42px;
     flex-wrap: wrap;
+    width: 100%;    
 }
 .single .atividade-main-section > * {
     flex-basis: calc(50% - 42px);
@@ -17,6 +18,13 @@
     .single .atividade-main-section > * {
         flex-basis: 100%;
         max-width: 100%;
+    }
+    [data-prefix="tnc_col_15_item_single"] .entry-header .entry-meta,
+    .single .atividade-main-section .page-title {
+        font-weight: bold;
+    }
+    .single .atividade-description {
+        gap: 18px 3.875em;
     }
 }
 .single .atividade-description {
@@ -40,6 +48,33 @@
     font-size: 24px;
     font-weight: bold;
     position: relative;
+}
+@media screen and (max-width: 769px) {
+    .single .atividade-description .metadata-slug-data-de-inicio-da-atividade,
+    .single .atividade-description .metadata-slug-data-de-fim-da-atividade,
+    .single .atividade-description .metadata-slug-horario-de-inicio-da-atividade,
+    .single .atividade-description .metadata-slug-horario-de-fim-da-atividade {
+        font-size: 16px !important;
+    }
+    .single .atividade-description .metadata-slug-data-de-inicio-da-atividade,
+    .single .atividade-description .metadata-slug-horario-de-inicio-da-atividade {
+        flex-basis: 72px !important;
+    }
+    .single .atividade-description .metadata-slug-data-de-inicio-da-atividade::after,
+    .single .atividade-description .metadata-slug-horario-de-inicio-da-atividade::after {
+        font-size: 16px !important;
+    }
+    .single .atividade-description .metadata-slug-horario-de-fim-da-atividade,
+    .single .atividade-description .metadata-slug-data-de-fim-da-atividade {
+        margin-left: -2em !important;
+    }
+    .single .atividade-description .metadata-slug-horario-de-inicio-da-atividade .date-icon svg,
+    .single .atividade-description .metadata-slug-data-de-inicio-da-atividade .date-icon svg {
+        margin-bottom: -6px !important;
+    }
+    .single .atividade-description .metadata-slug-data-de-fim-da-atividade {
+        flex-basis: calc(100% - 8em) !important;
+    }
 }
 .single .atividade-description .metadata-slug-horario-de-fim-da-atividade,
 .single .atividade-description .metadata-slug-data-de-fim-da-atividade {
@@ -230,6 +265,7 @@
 }
 @media screen and (max-width: 1000px) {
     .single .tainacan-atividade-single-body .tainacan-item-section--metadata-sections {
+        gap: 24px;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto auto auto auto;
         grid-template-areas: 'importante importante enderecovirtual'
@@ -241,6 +277,7 @@
 }
 @media screen and (max-width: 768px) {
     .single .tainacan-atividade-single-body .tainacan-item-section--metadata-sections {
+        gap: 12px;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto auto auto;
         grid-template-areas: 'importante'
@@ -264,6 +301,9 @@
     --theme-font-size: 20px !important;
     --theme-line-height: 1.3;
     --section-alignment: left;
+}
+.single .tainacan-item-section--metadata {
+    margin-bottom: 0;
 }
 .single .tainacan-item-section--metadata:has(#metadata-section-endereco-fisico-da-atividade) {
     grid-area: endereco;
@@ -353,7 +393,7 @@
     border: 1px solid var(--theme-palette-color-5);
     border-radius: 8px;
     padding: 1.75em 2em;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
     align-self: end;
 }
 .single .ct-share-box[data-type="type-1"] > div {
@@ -363,6 +403,14 @@
 .single .atividade-evento-area + .ct-share-box {
     display: none;
     visibility: hidden;
+}
+@media screen and (max-width: 768px) {
+    .single .ct-share-box {
+        padding: 1.5em 1.75em;
+    }
+    .single .ct-share-box[data-type="type-1"] > div {
+        grid-template-columns: repeat(auto-fill, minmax(37px, 1fr));
+    }
 }
 
 /* Banner da instituição */
@@ -395,6 +443,16 @@
     height: auto;
     width: 100%;
     border-radius: 8px;
+}
+@media screen and (min-width: 769px) {
+    .single .atividade-evento-area .is-hidden-tablet {
+      display: none !important;
+    }
+}
+@media screen and (max-width: 768px) {
+    .single .atividade-evento-area .is-hidden-mobile {
+      display: none !important;
+    }
 }
 
 .tainacan-item-single-page .tainacan-item-single h3.tainacan-single-item-section {
@@ -431,10 +489,20 @@
     .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-estado-2 {
         flex-basis: 62px;
     }
-    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-cidade-2,
-    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-bairro-2 {
-        flex-basis: calc((100% - 110px - 68px)/2 - 36px);
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-cidade-2 {
+        flex-basis: calc(100% - 110px - 68px - 36px);
         flex-shrink: 0;
         flex-grow: 1;
+    }
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-bairro-2,
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata >.metadata-slug-numero-endereco-2 {
+        flex-basis: calc(50% - 36px);
+        flex-shrink: 0;
+        flex-grow: 1;
+    }
+}
+@media screen and (max-width: 768px) {
+    .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > * {
+        flex-basis: calc(50% - 16px);
     }
 }

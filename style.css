@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.9.3
+ * Version: 0.10.11
  */
 
 :root {
@@ -12,6 +12,11 @@
 }
 
 /* Widget de Menu no rodapé */
+@media screen and (max-width: 999.998px) {
+	footer .ct-container {
+		text-align: center;
+	}
+}
 footer .widget-menu {
     font-size: 21px;
     font-weight: 700;
@@ -20,19 +25,103 @@ footer .widget-menu li {
     margin-bottom: 0.875rem;
 }
 
+
+/* Responsividade de elementos da Página inicial */
+.home {
+	--wp--preset--spacing--80: clamp(3.8rem, -1rem + 6.4vw, 5.06rem);
+}
+.home h1 > img {
+	width: min(431px, 30vw) !important;
+}
+.home .wp-block-getwid-media-text-slider-slide__content {
+	padding: clamp(25px, -1rem + 6.4vw, 100px) clamp(4px, -1rem + 6.4vw, 50px) !important;
+}
+.home .wp-block-getwid-media-text-slider-slide__content .wp-block-group.alignwide {
+	padding-left: clamp(4px, -1rem + 6.4vw, var(--wp--preset--spacing--80)) !important;
+	padding-right: clamp(4px, -1rem + 6.4vw, var(--wp--preset--spacing--80)) !important;
+}
+
+@media screen and (max-width: 1298px) {
+	.regioes-grid {
+		grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr)) !important;
+	}
+}
+@media screen and (max-width: 1078px) {
+	.regioes-grid > .wp-container-content-4 {
+		grid-column: span 2 !important;
+		grid-row: span 1 !important;
+	}
+	.regioes-grid > .wp-container-content-5 {
+		grid-column: span 4 !important;
+		grid-row: span 1 !important;
+	}
+}
+@media screen and (max-width: 1000px) {
+	.home .wp-block-getwid-media-text-slider-slide__content,
+	.home .wp-block-getwid-media-text-slider-slide {
+		min-height: 400px !important;
+	}
+}
+@media screen and (max-width: 857px) {
+	.regioes-grid > *,
+	.regioes-grid > .wp-container-content-4,
+	.regioes-grid > .wp-container-content-5 {
+		grid-column: 1/-1 !important;
+	}
+}
+@media screen and (max-width: 768px) {
+	.regioes-grid > *,
+	.regioes-grid > .wp-container-content-4,
+	.regioes-grid > .wp-container-content-5 {
+		min-height: 270px !important;
+	}
+	.home .wp-block-getwid-media-text-slider-slide__content,
+	.home .wp-block-getwid-media-text-slider-slide {
+		min-height: 237px !important;
+	}
+}
+
+
 /* Seção da home com chamada para inscrição */
 #home-inscrevase-button a {
 	flex-wrap: wrap;
 	max-width: 592px;
 }
 #home-inscrevase-button a mark {
-	font-size: 32px;
+	font-size: clamp(20px, -2.3333rem + 10.6667vw, 32px);
 	line-height: normal;
+	white-space: nowrap;
 }
-
-@media screen and (min-width: 1000px) {
+#home-inscrevase-logo {
+	width: min(366px, 70%);
+}
+#home-inscrevase-section::before {
+	content: '';
+	width: 6vw;
+	height: 13vw;
+	color: var(--theme-palette-color-9);
+	background: var(--theme-palette-color-9);
+	position: absolute;
+	right: 0;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	margin: 2vw 0;
+}
+#home-inscrevase-section-mobile::before {
+	content: '';
+	width: 25vw;
+	height: 8vw;
+	color: var(--theme-palette-color-9);
+	background: var(--theme-palette-color-9);
+	position: absolute;
+	left: 12%;
+	bottom: 0;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+@media screen and (min-width: 781px) {
 	#home-inscrevase-button {
-		right: -16%;
+		right: max(-42%,-124px);
 		position: relative;
 		z-index: 1;
 	}		
@@ -42,6 +131,12 @@ footer .widget-menu li {
 	#home-inscrevase-button a mark+img {
 		right: -3em;
 		margin-left: -2em;
+	}
+}
+@media screen and (max-width: 380px) {
+	#home-inscrevase-button a mark+img {
+		display: none;
+		visibility: hidden;
 	}
 }
 
@@ -79,13 +174,22 @@ footer .widget-menu li {
 
 /* Formulários do plugin User Registration */
 #user-registration {
+	margin: 0;
+	width: 298px;
 	box-shadow: none !important;
 	background-color: transparent !important;
 }
 .ur-frontend-form {
 	border: none;
-	padding: 0;
+	padding: 0 !important;
 	box-shadow: none;
+}
+.ur-frontend-form p {
+	margin-bottom: 0;
+}
+.ur-frontend-form p.user-registration-register {
+	display: none;
+	visibility: hidden;
 }
 .ur-frontend-form.ur-frontend-form--rounded form input[type="submit"],
 .ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
@@ -271,7 +375,7 @@ footer .widget-menu li {
 	margin-bottom: 0 !important;
 }
 .theme-items-list:not(.is-fullscreen) .search-control {
-	padding-top: 23px !important;
+	padding-top: 24px !important;
 }
 .entry-content:not(.ct-container) .theme-items-list:not(.is-fullscreen) .search-control {
 	padding-top: 25px !important;
@@ -372,6 +476,31 @@ footer .widget-menu li {
 .theme-items-list input[type="week"].input {
     min-height: 52px;
 }
+.tainacan-leaflet-map-container {
+	border-radius: 8px;
+}
+#tainacanFiltersButton {
+	margin-left: auto;
+}
+#tainacanFiltersButton .is-hidden-touch {
+	display: block !important;
+}
+@media screen and (min-width: 769px) {
+	#tainacanFiltersButton {
+		display: none;
+		visibility: hidden;
+	}
+}
+@media screen and (max-width: 768px) {
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters #filters-modal.modal .filters-components-list {
+		padding: 4rem 2rem;
+		height: 100%;
+	}
+	.theme-items-list #filters-modal.modal .modal-content #filters-items-list {
+		margin: 0px !important;
+		height: 100%;
+	}
+}
 
 /* Hide date filter when filtering by institutions */
 body.filtered-by-collection-14 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
@@ -450,3 +579,10 @@ body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-typ
 	--theme-text-color: var(--theme-palette-color-1);
 }
 
+body[class*=" post-type-archive-tnc_col_"] .ct-title-label::after,
+body[class*=" tax-tnc_"] .ct-title-label::after,
+body[data-prefix="tainacan-repository-items_archive"] .ct-title-label::after,
+body[data-prefix="tainacan-terms-items_archive"] .ct-title-label::after {
+	content: none;
+	display: none;
+}

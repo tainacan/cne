@@ -32,10 +32,31 @@ body {
 }
 
 /* Página da instituição no admin */
+.instituicao-admin-area .instituicao-title-and-thumbnail-container .page-title {
+    font-size: 40px;
+}
+@media screen and (max-width: 782px) {
+    .instituicao-admin-area .instituicao-title-and-thumbnail-container .page-title {
+        font-size: 32px !important;
+    }
+    .instituicao-admin-area h2.instituicao-atividade-heading {
+        font-size: 28px !important;
+    }
+    .instituicao-admin-area .evento-principal-dados h3 {
+        font-size: 20px !important;
+    }
+}
+.instituicao-admin-area header.entry-header + hr {
+    margin: 2.5rem 0 2.75rem;
+} 
 .instituicao-admin-area h2.instituicao-atividade-heading {
-    font-size: 38px;
+    font-size: 34px;
     font-weight: bold;
     text-transform: uppercase;
+    line-height: 1;
+}
+.instituicao-admin-area .evento-principal-dados {
+    margin-bottom: 4rem;
 }
 .instituicao-admin-area .evento-principal-dados h3 {
     font-size: 28px;
@@ -53,15 +74,53 @@ body {
     font-weight: 600;
 }
 .instituicao-admin-area .instituicao-evento-banner {
-    width: 100vw;
-    max-width: unset;
-    margin-left: calc(-1 * (100vw - 100%) / 2);
+    max-width: 100%;
+    width: 100%;
+    height: auto;
 }
 .instituicao-admin-area .evento-principal-kits {
     text-align: right;
     float: right;
     margin-left: 1rem;
     margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+@media screen and (max-width: 782px) {
+    .instituicao-admin-area .evento-principal-kits {
+        text-align: center;
+        float: none;
+        margin-left: 0;
+    }
+}
+.instituicao-admin-area .evento-atividades-empty-placeholder {
+    background-color: var(--theme-palette-color-6);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    min-height: 288px;
+    margin: 1rem 0 3rem;
+}
+.instituicao-admin-area .evento-atividades-empty-placeholder p {
+    font-size: 20px;
+    color: var(--theme-palette-color-3);
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+}
+.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action:hover,
+.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action:focus {
+    --theme-palette-color-11: #E46DB0;
+}
+.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action {
+    background-color: var(--theme-palette-color-11) !important;
+    border-color:  var(--theme-palette-color-11) !important;
+    color: white !important;
+    margin-top: 1.5rem;
 }
 
 /* Outras customizações do Admin */
@@ -84,6 +143,7 @@ html.wp-toolbar {
     border-width: 2px;
 }
 .wp-button-with-icon {
+    height: 44px;
     display: inline-flex !important;
     gap: 0.75em;
     align-items: center;
@@ -109,6 +169,8 @@ h1 {
 .wp-heading-inline {
     font-weight: 500;
     color: var(--theme-palette-color-2);
+    position: relative;
+    top: 6px;
 }
 h2 {
     font-size: 1.75em;
@@ -177,11 +239,14 @@ body {
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
-#wpadminbar .display-name {
+.display-name {
     font-weight: bold;
 }
+#wpadminbar .ab-sub-wrapper .display-name{
+    color: var(--theme-palette-color-1) !important;
+}
 #wpadminbar #wp-admin-bar-user-info .username {
-    color: white !important;
+    color: var(--theme-palette-color-1) !important;
     font-size: 11px;
     margin-top: 4px;
 }
@@ -224,6 +289,41 @@ html.wp-toolbar #wp-admin-bar-site-name:not(:hover):not(:focus) > .ab-item:not(:
         padding-top: 72px; 
     }
 }
+
+/* Submenu do Admin */
+#wpadminbar .ab-submenu {
+    background: var(--theme-palette-color-7);
+}
+#wpadminbar .quicklinks .menupop ul li .ab-item,
+#wpadminbar .quicklinks .menupop ul li a strong,
+#wpadminbar .quicklinks .menupop.hover ul li .ab-item,
+#wpadminbar .shortlink-input,
+#wpadminbar.nojs .quicklinks .menupop:hover ul li .ab-item {
+    color: var(--theme-palette-color-1);
+    background: var(--theme-palette-color-7);
+}
+#wpadminbar li:hover .ab-icon::before,
+#wpadminbar li:hover .ab-item::before,
+#wpadminbar li:hover .ab-item::after,
+#wpadminbar li:hover #adminbarsearch::before,
+#wpadminbar #adminbarsearch::before,
+#wpadminbar .ab-icon::before,
+#wpadminbar .ab-item::before,
+#wpadminbar ul.ab-submenu li a:hover,
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary,
+#wpadminbar .quicklinks .menupop ul.ab-sub-secondary .ab-submenu {
+    color: var(--theme-palette-color-1) !important;
+    background: var(--theme-palette-color-6) !important;
+}
+#wpadminbar .quicklinks .menupop ul li .ab-item,
+#wpadminbar .quicklinks .menupop ul li a strong,
+#wpadminbar .quicklinks .menupop.hover ul li .ab-item,
+#wpadminbar .shortlink-input,
+#wpadminbar.nojs .quicklinks .menupop:hover ul li .ab-item {
+    min-height: 44px;
+    line-height: 2.75;
+}
+
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui .button,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui p .button,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui .button-secondary,
@@ -231,8 +331,8 @@ body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .wrap
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .wrap .page-title-action,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .tablenav .tablenav-pages a,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .tablenav .tablenav-pages a,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).post-type-cne-instituicoes .components-button,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) input:not([type="checkbox"]):not([type="radio"]),
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).post-type-cne-instituicoes .components-button:not(.components-combobox-control__reset),
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) input:not([type="checkbox"]):not([type="radio"]):not(.components-combobox-control__input),
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) select {
     border-radius: 8px;
     min-height: 44px;
@@ -254,7 +354,10 @@ body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) selec
     padding-right: 30px !important;
 }
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .row-title {
-    font-size: 16px !important;
+    font-size: 18px !important;
+}
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .column-date {
+    width: 20%;
 }
 .museusbr-fetcher-button-container {
     top: -2px;
@@ -267,108 +370,27 @@ body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table
     margin: 30px 0 12px;
     border: none;
 }
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions {
+    font-size: 16px;
+    position: static;
+}
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table thead td,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table thead th {
     text-transform: uppercase;
-    vertical-align: baseline;
+    vertical-align: bottom;
     font-weight: 600;
 }
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tbody td {
     font-size: 16px;
     border-bottom: 1px solid #bababa;
 }
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions {
-    font-size: 16px;
-    position: static;
-    display: flex;
-    gap: 1rem;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions a,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .button-link  {
-    color: #838383;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline {
-    position: relative;
-    padding-left: 1.25em;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit::before,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash::before,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view::before,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline::before {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    content: '';
-    width: 16px;
-    height: 16px;
-    display: block;
-    position: absolute;
-    top: 2px;
-    left: 0;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit::before {
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16504 13.6292H14.0001' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.52001 2.52986C9.0371 1.91186 9.96666 1.82124 10.5975 2.32782C10.6324 2.35531 11.753 3.22586 11.753 3.22586C12.446 3.64479 12.6613 4.5354 12.2329 5.21506C12.2102 5.25146 5.87463 13.1763 5.87463 13.1763C5.66385 13.4393 5.34389 13.5945 5.00194 13.5982L2.57569 13.6287L2.02902 11.3149C1.95244 10.9895 2.02902 10.6478 2.2398 10.3849L8.52001 2.52986Z' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.34766 4L10.9825 6.79142' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit:hover a {
-    color: #011546;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit:hover a::before {
-    background: #85a1cc54;
-    content: '';
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    border-radius: 8px;
-    padding: 2px;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash::before {
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 4H3.33333H14' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5.33301 4.00065V2.66732C5.33301 2.3137 5.47348 1.97456 5.72353 1.72451C5.97358 1.47446 6.31272 1.33398 6.66634 1.33398H9.33301C9.68663 1.33398 10.0258 1.47446 10.2758 1.72451C10.5259 1.97456 10.6663 2.3137 10.6663 2.66732V4.00065M12.6663 4.00065V13.334C12.6663 13.6876 12.5259 14.0267 12.2758 14.2768C12.0258 14.5268 11.6866 14.6673 11.333 14.6673H4.66634C4.31272 14.6673 3.97358 14.5268 3.72353 14.2768C3.47348 14.0267 3.33301 13.6876 3.33301 13.334V4.00065H12.6663Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9.33301 7.33398V11.334' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M6.66699 7.33398V11.334' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash:hover a {
-    color: #970E05;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash:hover a::before {
-    background: #e5bebe54;
-    content: '';
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    border-radius: 8px;
-    padding: 2px;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view::before {
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_641_3519)'%3E%3Cpath d='M0.666992 7.99935C0.666992 7.99935 3.33366 2.66602 8.00033 2.66602C12.667 2.66602 15.3337 7.99935 15.3337 7.99935C15.3337 7.99935 12.667 13.3327 8.00033 13.3327C3.33366 13.3327 0.666992 7.99935 0.666992 7.99935Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z' stroke='%23BABABA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_641_3519'%3E%3Crect width='16' height='16' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view:hover a {
-    color: #218963;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .view:hover a::before {
-    background: #e2f5c654;
-    content: '';
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    border-radius: 8px;
-    padding: 2px;
-}
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline::before {
-    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16504 13.6292H14.0001' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.52001 2.52986C9.0371 1.91186 9.96666 1.82124 10.5975 2.32782C10.6324 2.35531 11.753 3.22586 11.753 3.22586C12.446 3.64479 12.6613 4.5354 12.2329 5.21506C12.2102 5.25146 5.87463 13.1763 5.87463 13.1763C5.66385 13.4393 5.34389 13.5945 5.00194 13.5982L2.57569 13.6287L2.02902 11.3149C1.95244 10.9895 2.02902 10.6478 2.2398 10.3849L8.52001 2.52986Z' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.34766 4L10.9825 6.79142' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .tablenav.top .tablenav-pages,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tfoot,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .tablenav.bottom .actions {
     display: none;
     visibility: hidden;
+}
+body :not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) ul.subsubsub {
+    font-size: 16px;
+    margin: 7px 0 12px;
 }

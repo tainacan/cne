@@ -12,9 +12,6 @@ const CNE_INSTITUICOES_COLLECTION_ID = 14;//267;
 // Valor padrão para a coleção de Evento atual. Será definido no customizer.
 const CNE_EVENTO_COLLECTION_ID = 15;//267;
 
-// Valor padrão para a taxonomia que define as coleções Evento. Será definido no customizer.
-const CNE_TYPE_OF_COLLECTION_TAXONOMY_ID = 18259;
-
 // Valor padrão para o metadado nível repositório que amarra os eventos às instituições. Será definido no customizer.
 const CNE_INSTITUICOES_RELATIONSHIP_METADATA_ID = 38430;
 
@@ -54,13 +51,6 @@ function cne_is_post_type_a_tainacan_collection( $post_type ) {
 }
 
 /**
- * Função utilitaria para obter o id da taxonomia que define o tipo de coleção
- */
-function cne_get_type_of_collection_taxonomy_id() {
-	return get_theme_mod( 'cne_type_of_collection_taxonomy', CNE_TYPE_OF_COLLECTION_TAXONOMY_ID );
-}
-
-/**
  * Função utilitaria para obter o id do metadado nível repositório de relacionamento entre eventos e instituições
  */
 function cne_get_instituicoes_relationship_metadata_id() {
@@ -80,25 +70,6 @@ function cne_get_collection_id_from_post_type($post_type) {
 		return false;
 
 	return $string_as_array[2];
-}
-
-/** 
- * Obtém apenas coleções do tipo "evento"
- */
-function cne_get_eventos() {
-	$collections_repository = \Tainacan\Repositories\Collections::get_instance();
-	$args = array(
-		'tax_query' => array(
-			array(
-				'taxonomy' => cne_get_type_of_collection_taxonomy_id(),
-				'field' => 'slug',
-				'terms' => 'evento'
-			)
-		),
-		'perpage' => -1	
-	);
-	$collections = $collections_repository->fetch($args, 'OBJECT');
-	return $collections;
 }
 
 /**
