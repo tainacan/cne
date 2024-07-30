@@ -37,6 +37,11 @@
 }
 .single .atividade-description p {
     margin-bottom: 0;
+    overflow: hidden;
+    display: -webkit-box !important;
+    line-clamp: 10;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
 }
 .single .atividade-description .metadata-slug-data-de-inicio-da-atividade,
 .single .atividade-description .metadata-slug-data-de-fim-da-atividade,
@@ -131,15 +136,18 @@
 .single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita .tainacan-metadata-label {
     display: none !important;
 }
-.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita {
+
+.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita:has(+.metadata-slug-ingressos-2) {
     position: absolute;
+    top: -0.5em;
+}
+.single .tainacan-item-section-cne-important .metadata-slug-a-atividade-e-gratuita {
     color: #218963;
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
     width: calc((100% - 32px)/2);
-    top: -0.5em;
 }
 .single .tainacan-item-section-cne-important .metadata-slug-ingressos-2 a {
     padding: 12px 32px;
@@ -162,6 +170,9 @@
     content: 'Ingressos';
     display: block;
     font-size: 1rem;
+}
+.single .metadata-type-url a {
+    word-wrap: anywhere;
 }
 
 .single .atividade-gallery {
@@ -505,4 +516,54 @@
     .single .tainacan-item-section--metadata > #metadata-section-endereco-fisico-da-atividade + .tainacan-item-section__metadata > * {
         flex-basis: calc(50% - 16px);
     }
+}
+
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-compound-group {
+    display: flex;
+    gap: 16px;
+    align-self: center;
+    border: none;
+    padding-left: 0;
+    padding-top: 0;
+    margin: 0;
+    justify-content: center;
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-compound-group .child-metadatum-label,
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadata-label {
+    display: none;
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url {
+    width: auto !important;
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-youtube .wp-block-buttons > a {
+    background-image: url('../images/youtube.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-facebook .wp-block-buttons  > a {
+    background-image: url('../images/facebook.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-url .wp-block-buttons > a {
+    background-image: url('../images/twitter.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-instagram .wp-block-buttons > a {
+    background-image: url('../images/instagram.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-tiktok .wp-block-buttons > a {
+    background-image: url('../images/tiktok.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url.metadata-slug-outra-rede-social .wp-block-buttons > a {
+    background-image: url('../images/link.png');
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    color: var(--theme-palette-color-1);
+    font-size: 0;
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 8px;
+}
+.single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a:hover {
+    background-color: var(--theme-palette-color-6);
 }

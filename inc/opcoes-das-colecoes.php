@@ -1,8 +1,8 @@
 <?php
 /**
- * Lógica para viabilizar a configuração de tipos de coleções, permitindo por exemplo distinguir coleções "evento" de outras, além dos links pros tipos de coleções
+ * Lógica para viabilizar a configuração dos links pros tipos de coleções
  */
-
+CONST TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD = 'cne_texto_de_referencia_do_evento'; // slug do campo na api onde vai ficar guardado o link para o texto de referência do evento
 CONST KIT_DIGITAL_DO_EVENTO_FIELD = 'cne_kit_digital_do_evento'; // slug do campo na api onde vai ficar guardado o link pro kit digital
 
 function cne_register_admin_hooks() {
@@ -31,6 +31,12 @@ function cne_collection_form () {
                 <input class="input" type="url" placeholder="<?php _e('Insira o link para a página do kit digital do evento', 'cne'); ?>" name="<?php echo KIT_DIGITAL_DO_EVENTO_FIELD; ?>">
             </div>
         </div>
+        <div class="field">
+            <label class="label"><?php _e('Texto de referência do Evento:', 'cne'); ?></label>
+            <div class="control is-clearfix">  
+                <input class="input" type="url" placeholder="<?php _e('Insira o link para a página do texto de referência do evento', 'cne'); ?>" name="<?php echo TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD; ?>">
+            </div>
+        </div>
     </div>
     <?php
     return ob_get_clean();
@@ -52,6 +58,9 @@ function cne_collection_save_data( $object ) {
         if ( isset( $post->{KIT_DIGITAL_DO_EVENTO_FIELD} ) )
             update_post_meta( $object->get_id(), KIT_DIGITAL_DO_EVENTO_FIELD, $post->{KIT_DIGITAL_DO_EVENTO_FIELD});
 
+        if ( isset( $post->{TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD} ) )
+            update_post_meta( $object->get_id(), TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD, $post->{TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD});
+
     }
 }
 add_action( 'tainacan-insert-tainacan-collection', 'cne_collection_save_data' );
@@ -61,7 +70,8 @@ add_action( 'tainacan-insert-tainacan-collection', 'cne_collection_save_data' );
  */
 function cne_collection_add_meta_to_response( $extra_meta, $request ) {
     $extra_meta = array(
-        KIT_DIGITAL_DO_EVENTO_FIELD
+        KIT_DIGITAL_DO_EVENTO_FIELD,
+        TEXTO_DE_REFERENCIA_DO_EVENTO_FIELD
     );
     return $extra_meta;
 }

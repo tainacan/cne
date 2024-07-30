@@ -87,11 +87,11 @@ class CNE_Instituicao_Page {
                             <?php the_title(); ?>
                         </h1>
 
-                        <a class="page-title-action wp-button-with-icon" href="<?php echo get_permalink();  ?>">
-                            <?php _e('Ver no VisiteMuseus', 'cne'); ?>
+                        <a class="wp-button-with-icon button button-primary cne-button-cta" href="<?php echo get_permalink();  ?>">
+                            <?php _e('Ver instituição publicada', 'cne'); ?>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
                         <div>
@@ -245,34 +245,39 @@ class CNE_Instituicao_Page {
             return $metadatum->get_display() === 'yes' && cne_get_instituicoes_relationship_metadata_id() != $metadatum->get_ID() ;
         });
 
-        $items = cne_get_atividades(array(), $this->id_instituicao, [ $current_evento_collection_id ], get_current_user() );
+        $items = cne_get_atividades(array( [ 'post_status' => 'any' ] ), $this->id_instituicao, [ $current_evento_collection_id ], get_current_user() );
 
         $kit_digital_url = get_post_meta($current_evento_collection->get_ID(), 'cne_kit_digital_do_evento', true);
+        $texto_referencia_url = get_post_meta($current_evento_collection->get_ID(), 'cne_texto_de_referencia_do_evento', true);
 
         ?>
             <h2 class="instituicao-atividade-heading">Atividades e Eventos</h2>
             
             <?php if ( $current_evento_collection->get_header_image_id() ) : ?>
-                <img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner" alt="<?php echo wp_get_attachment_caption( $current_evento_collection->get_header_image_id() ); ?>" src="<?php echo $current_evento_collection->get_header_image(); ?>">
+				<img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner is-hidden-mobile" src="<?php echo wp_get_attachment_image_url( $current_evento_collection->get_header_image_id(), 'full' ); ?>" alt="<?php echo esc_attr( $current_evento_collection->get_name() ); ?>" />
+				<img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner is-hidden-tablet" src="<?php echo wp_get_attachment_image_url( $current_evento_collection->get__thumbnail_id(), 'large' ); ?>" alt="<?php echo esc_attr( $current_evento_collection->get_name() ); ?>" />
             <?php endif; ?>
             
+            <p><?php echo $current_evento_collection->get_description();?></p>
+
             <div class="evento-principal-kits">
+                <?php if ( $texto_referencia_url ) : ?>
+                    <a href="<?php echo $texto_referencia_url;?>" class="button button-primary" target="_blank">
+                        <?php _e('Texto de referência', 'cne'); ?>
+                    </a>
+                <?php endif; ?>
                 <?php if ( $kit_digital_url ) : ?>
-                    <a href="<?php echo $kit_digital_url;?>" class="button wp-button-with-icon button-primary" download>
-                        <?php _e('Acesse o kit digital e audiovisual do evento', 'cne'); ?>
+                    <a href="<?php echo $kit_digital_url;?>" class="button wp-button-with-icon button-primary" target="_blank">
+                        <?php _e('Acesse o kit digital e audiovisual', 'cne'); ?>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M13 13L19 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 <?php endif; ?>
-
                 <?php $this->instituicao_evento_comprovante_button(); ?>
             </div>
 
-            <strong><p><?php echo $current_evento_collection->get_name(); ?></p></strong>
-            <p><?php echo $current_evento_collection->get_description();?></p>
-            
             <br>
 
             <div class="evento-principal-dados">
@@ -283,7 +288,7 @@ class CNE_Instituicao_Page {
                     <div class="evento-atividades-empty-placeholder">
                         <p><?php _e('Esta instituição ainda não está participando do evento.', 'cne'); ?></p>
                         <p><?php _e('Insira ao menos uma atividade para participar!', 'cne'); ?></p>
-                        <a class="page-title-action wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
+                        <a class="page-title-action button button-primary cne-button-cta wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
                             <?php _e('Cadastrar nova atividade', 'cne'); ?>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -298,7 +303,7 @@ class CNE_Instituicao_Page {
                         <h3 style="display: inline-block; margin-right: 5px;"><?php _e('Minhas atividades no evento', 'cne'); ?></h3>
                     
                         <a class="page-title-action wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
-                            <?php _e('Cadastrar atividade', 'cne'); ?>
+                            <?php _e('Cadastrar nova atividade', 'cne'); ?>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M12 8V16" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -330,7 +335,7 @@ class CNE_Instituicao_Page {
                                 $metadatum_object = $metadatum->get_metadata_type_object()->_toArray();
                                 $metadatum_component = $metadatum_object['component'];
                                 
-                                if ( $metadatum_object['related_mapped_prop'] == 'title' )
+                                if ( $metadatum_object['related_mapped_prop'] == 'title' || $metadatum_object['related_mapped_prop'] == 'description' )
                                     continue;
                         ?>
                             <th class="<?php echo $metadatum_component; ?>"><?php echo $metadatum->get_name(); ?> </th>
@@ -347,6 +352,10 @@ class CNE_Instituicao_Page {
                                 <a class="row-title" href="<?php echo admin_url( '?page=tainacan_admin#/collections/' . $atividade->get_collection_id() . '/items/' . $atividade->get_ID() . '/edit' ); ?>" aria-label="“<?php echo $atividade->get_title(); ?>” (Editar)">
                                     <?php echo $atividade->get_title(); ?>
                                 </a>
+
+                                <?php if ( get_post_status() && get_post_status_object( get_post_status() ) && get_post_status_object( get_post_status( ) )->label ) : ?>
+                                    <span class="post-state"><?php echo get_post_status_object( get_post_status( ) )->label; ?></span>
+                                <?php endif; ?>
                             </strong>
                             <div class="row-actions">
                                 <span class="edit">
@@ -362,9 +371,9 @@ class CNE_Instituicao_Page {
                         </td>
                         <?php
                             echo tainacan_get_the_metadata(array(
-                                'exclude_title' => true,
+                                'exclude_core' => true,
                                 'metadata__in' => $visible_metadata_ids,
-                                'before' => '<td class="metadata-type-$type" $id>',
+                                'before' => '<td class="is-hidden-mobile metadata-type-$type" $id>',
                                 'after' => '</td>',
                                 'before_title' => '<span class="screen-reader-text">',
                                 'after_title' => '</span>',

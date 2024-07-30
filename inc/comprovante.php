@@ -135,13 +135,6 @@ class CNE_Comprovante_Page {
                 </div>
             </div>
             <div class="wrap single instituicao-admin-area" data-prefix="tnc_col_<?php echo cne_get_instituicoes_collection_id(); ?>_item_single">
-                <header class="entry-header">
-                    <div class="instituicao-title-and-thumbnail-container"> 
-                        <p class="comprovante-intro">
-                            A instituição <span style="text-transform: uppercase;"><?php the_title(); ?></span> está participando da <span style="text-transform: uppercase;"><?php echo $current_evento_collection->get_name(); ?></span>
-                        </p>
-                    </div>
-                </header>
 
                 <?php $this->render_current_evento_section($current_evento_collection); ?>
 
@@ -157,11 +150,84 @@ class CNE_Comprovante_Page {
             </div>
         <?php
     }
-    
+
+    function render_current_evento_section($current_evento_collection) {
+
+		function cne_comprovante_date_without_year($date_format) {
+			return 'd/m';
+		}
+		add_filter( 'pre_option_date_format', 'cne_comprovante_date_without_year');
+
+        $metadata_objects = $this->tainacan_metadata_repository->fetch_by_collection(
+            $current_evento_collection,
+            [],
+            'OBJECT'
+        );
+        $visible_metadata_objects = array_filter($metadata_objects, function($metadatum) {
+            return $metadatum->get_display() === 'yes' && cne_get_instituicoes_relationship_metadata_id() != $metadatum->get_ID() ;
+        });
+
+        $items = cne_get_atividades(array(), $this->id_instituicao, [ $current_evento_collection->get_ID() ], get_current_user() );
+
+        ?>
+            <?php if ( $current_evento_collection->get_header_image_id() ) : ?>
+                <img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner" alt="<?php echo wp_get_attachment_caption( $current_evento_collection->get_header_image_id() ); ?>" src="<?php echo $current_evento_collection->get_header_image(); ?>">
+            <?php endif; ?>
+
+            <header class="entry-header">
+                <div class="instituicao-title-and-thumbnail-container"> 
+                    <p class="comprovante-intro">
+                        A instituição <span style="text-transform: uppercase;"><?php the_title(); ?></span> está participando da <span style="text-transform: uppercase;"><?php echo $current_evento_collection->get_name(); ?></span>
+                    </p>
+                </div>
+            </header>
+            
+            <h2 class="instituicao-atividade-heading" style="text-transform: uppercase;">Atividades inscritas no Evento</h2>
+
+            <div class="evento-principal-dados">
+                <?php if ( count($items) > 0 ) : ?>
+
+                    <?php $this->render_activities_table($items, $visible_metadata_objects); ?>
+
+                <?php endif; ?>
+            </div>
+        <?php
+    }
+
+    function render_activities_table($items, $metadata) {
+
+        $visible_metadata_ids = array_map( function($metadatum) {
+            return $metadatum->get_ID();
+        }, $metadata );
+
+        ?>
+            <ul class="comprovante-lista-de-atividades">
+                <?php foreach($items as $atividade) : ?>
+                    <li>
+                        <?php echo $atividade->get_title(); ?>,&nbsp;
+                        <?php
+                            echo tainacan_get_the_metadata(array(
+                                'exclude_title' => true,
+                                'metadata__in' => $visible_metadata_ids,
+                                'before' => '<span class="metadata-type-$type" $id>',
+                                'after' => ' </span>',
+                                'before_title' => '<span class="screen-reader-text">',
+                                'after_title' => '</span>',
+                                'before_value' => '',
+                                'after_value' => '',
+                                'hide_empty' => true,
+                            ), $atividade->get_ID() );
+                        ?>
+                    </li>
+                 <?php endforeach; ?>
+            </ul>
+        <?php
+    }
+
     function render_instituicao_section() {
 
         $metadata_args = array(
-            'metadata__not_in' => [ 85239, 85282 ], 
+            'metadata__not_in' => [ 109069, 85282 ], // Ignora metadados de Geolocalização e Redes Sociais
             'exclude_core' => true,
             'display_slug_as_class' => true,
             'before' 				=> '<div class="tainacan-item-section__metadatum metadata-type-$type" id="$id">',
@@ -188,107 +254,12 @@ class CNE_Comprovante_Page {
         ?>
             <div class="tainacan-item-single-page">
                 <div class="tainacan-item-single tainacan-instituicao-single-body">
-                    <h2 style="text-transform: uppercase;"><?php the_title(); ?></h2> 
+                    <h2 style="text-transform: uppercase;">Dados da instituição</h2> 
                     <div class="tainacan-item-section tainacan-item-section--metadata-sections">
                         <?php tainacan_the_metadata_sections( $sections_args ); ?>
                     </div>
                 </div>
             </div>
-        <?php
-    }
-
-    function render_current_evento_section($current_evento_collection) {
-
-		function cne_comprovante_date_without_year($date_format) {
-			return 'd/m';
-		}
-		add_filter( 'pre_option_date_format', 'cne_comprovante_date_without_year');
-
-        $metadata_objects = $this->tainacan_metadata_repository->fetch_by_collection(
-            $current_evento_collection,
-            [],
-            'OBJECT'
-        );
-        $visible_metadata_objects = array_filter($metadata_objects, function($metadatum) {
-            return $metadatum->get_display() === 'yes' && cne_get_instituicoes_relationship_metadata_id() != $metadatum->get_ID() ;
-        });
-
-        $items = cne_get_atividades(array(), $this->id_instituicao, [ $current_evento_collection->get_ID() ], get_current_user() );
-
-        ?>
-            <h2 class="instituicao-atividade-heading" style="text-transform: uppercase;">Atividades inscritas no Evento</h2>
-            
-            <?php if ( $current_evento_collection->get_header_image_id() ) : ?>
-                <img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner" alt="<?php echo wp_get_attachment_caption( $current_evento_collection->get_header_image_id() ); ?>" src="<?php echo $current_evento_collection->get_header_image(); ?>">
-            <?php endif; ?>
-            
-            <br>
-
-            <div class="evento-principal-dados">
-                <?php if ( count($items) > 0 ) : ?>
-
-                    <?php $this->render_activities_table($items, $visible_metadata_objects); ?>
-
-                <?php endif; ?>
-            </div>
-        <?php
-    }
-
-    function render_activities_table($items, $metadata) {
-
-        $visible_metadata_ids = array_map( function($metadatum) {
-            return $metadatum->get_ID();
-        }, $metadata );
-
-        ?>
-            <table class="wp-list-table widefat striped table-view-list posts">
-                <thead>
-                    <tr>
-                        <th class="tainacan-text--title column-primary"><strong><?php echo __('Título', 'cne'); ?></string></th>
-                        <?php 
-                            foreach( $metadata as $metadatum ) : 
-                                $metadatum_component = '';
-                                $metadatum_object = $metadatum->get_metadata_type_object()->_toArray();
-                                $metadatum_component = $metadatum_object['component'];
-                                
-                                if ( $metadatum_object['related_mapped_prop'] == 'title' )
-                                    continue;
-                        ?>
-                            <th class="<?php echo $metadatum_component; ?>"><?php echo $metadatum->get_name(); ?> </th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-                <tbody id="the-list">
-                        
-                <?php foreach($items as $atividade) : ?>
-
-                    <tr id="<?php echo 'post-' . $atividade->get_ID(); ?>" class="format-standard hentry">
-                        <td style="min-width: 100px;">
-                            <strong>
-                                <a class="row-title" href="<?php echo admin_url( '?page=tainacan_admin#/collections/' . $atividade->get_collection_id() . '/items/' . $atividade->get_ID() . '/edit' ); ?>" aria-label="“<?php echo $atividade->get_title(); ?>” (Editar)">
-                                    <?php echo $atividade->get_title(); ?>
-                                </a>
-                            </strong>
-                        </td>
-                        <?php
-                            echo tainacan_get_the_metadata(array(
-                                'exclude_title' => true,
-                                'metadata__in' => $visible_metadata_ids,
-                                'before' => '<td class="metadata-type-$type" $id>',
-                                'after' => '</td>',
-                                'before_title' => '<span class="screen-reader-text">',
-                                'after_title' => '</span>',
-                                'before_value' => '',
-                                'after_value' => '',
-                                'hide_empty' => false,
-                                'empty_value_message' => ' - '
-                            ), $atividade->get_ID() );
-                        ?>
-                    </tr>
-                 <?php endforeach; ?>
-
-                </tbody>
-            </table>
         <?php
     }
 

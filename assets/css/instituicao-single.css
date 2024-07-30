@@ -1,6 +1,6 @@
 .single .instituicao-title-and-thumbnail-container {
    display: flex;
-   gap: 42px;
+   gap: 24px;
    align-items: end;
    justify-content: space-between;
 }
@@ -35,11 +35,13 @@
     max-width: 127px;
     width: 127px;
     height: auto;
+    margin-right: 12px;
 }
 @media screen and (max-width: 768px) {
     .single .instituicao-thumbnail {
         max-width: 57px;
         width: 57px;
+        margin-right: 0px;
     }
     
 }
@@ -70,6 +72,13 @@
     font-size: 21px;
     font-weight: 700;
 }
+.single .instituicao-description .tainacan-metadata-value {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 14;
+    -webkit-line-clamp: 14;
+    -webkit-box-orient: vertical;
+}
 .single .instituicao-atividades-header {
     padding: 16px 32px;
     background-color: var(--theme-palette-color-2);
@@ -80,6 +89,9 @@
     font-weight: bold;
     text-transform: uppercase;
     color: white;
+}
+.single .metadata-type-url a {
+    word-wrap: anywhere;
 }
 
 .single .instituicao-gallery {
@@ -232,6 +244,9 @@
 }
 .single .tainacan-item-section--metadata:has(#metadata-section-contato) {
     grid-area: contato;
+}
+.single .tainacan-item-section--metadata:has(#metadata-section-contato-privado) {
+    display: none;
 }
 .single .tainacan-item-section--metadata:has(#metadata-section-default_section) {
     grid-area: geral;

@@ -4,11 +4,19 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.10.11
+ * Version: 0.11.3
  */
 
 :root {
 	--theme-font-family: 'NunitoSansSemicondensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+/* Ícone de conta */
+#header .ct-header-account:not(:hover):not(:focus):not(:focus-visible) .ct-account-item .ct-label {
+	visibility: hidden;
+}
+#header .ct-header-account .ct-account-item .ct-label {
+	font-weight: bold;
 }
 
 /* Widget de Menu no rodapé */
@@ -242,13 +250,17 @@ footer .widget-menu li {
 .ur-frontend-form .ur-form-row .ur-form-grid textarea::placeholder,
 .ur-frontend-form .ur-form-row .ur-form-grid select::placeholder,
 .ur-frontend-form .ur-form-row .ur-form-grid .__PrivateStripeElement::placeholder {
-	color: var(--theme-palette-color-5) !important;
+	color: var(--theme-palette-color-4) !important;
 }
 .user-registration-message,
 .user-registration-error,
 .user-registration-info {
 	max-width: 300px;
 	border-radius: 8px;
+}
+.ur-frontend-form .descricao-em-destaque .description {
+	font-weight: bold;
+	color: var(--theme-palette-color-12);
 }
 
 /* Image (icon) inside button */
@@ -289,7 +301,8 @@ footer .widget-menu li {
 	#filters-modal {
 		--tainacan-filters-inline-width: 140px !important;
 	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
 		--tainacan-filters-inline-width: 200px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
@@ -301,7 +314,8 @@ footer .widget-menu li {
 	#filters-modal {
 		--tainacan-filters-inline-width: 120px !important;
 	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
 		--tainacan-filters-inline-width: 160px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
@@ -360,10 +374,12 @@ footer .widget-menu li {
 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
 	--tainacan-filters-inline-width: 120px;
 }
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-109265),
 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025) {
 	--tainacan-filters-inline-width: 80px;
 }
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
 	--tainacan-filters-inline-width: 214px;
 }
 .theme-items-list:not(.is-fullscreen).is-filters-menu-open .search-control .search-control-item .search-area {
@@ -502,8 +518,14 @@ footer .widget-menu li {
 	}
 }
 
-/* Hide date filter when filtering by institutions */
-body.filtered-by-collection-14 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+/* Esconde filtros da coleção de instituições quando se está em páginas nível repositório não relacionadas à instituição */
+[data-prefix="tainacan-repository-items_archive"] #filters-from-collection-id-14 {
+	display: none !important;
+	visibility: hidden !important;
+} 
+
+/* Esconde filtros de data quando se está filtrando por instituições */
+body.filtered-by-collection-14 .repository-level-filters {
 	display: none !important;
 	visibility: hidden !important;
 }

@@ -88,8 +88,20 @@ function cne_manage_collections_table_columns() {
 			
 			unset($columns['comments']);
 			
-			if ( $collection_post_type === cne_get_instituicoes_collection_post_type() ) 
-				return $columns;
+			if ( $collection_post_type === cne_get_instituicoes_collection_post_type() )  {
+
+				$tainacan_collections_repository = \Tainacan\Repositories\Collections::get_instance();   
+				
+				$current_evento_collection_id = cne_get_evento_collection_id();
+				$current_evento_collection = $tainacan_collections_repository->fetch($current_evento_collection_id);
+				
+				if ( !( $current_evento_collection instanceof \Tainacan\Entities\Collection ) ) {
+					return $columns;
+				} else {
+					$columns['current_evento'] = $current_evento_collection->get_name();
+					return $columns;
+				}
+			}
 
 			unset($columns['date']);
 			
@@ -104,6 +116,20 @@ function cne_manage_collections_table_columns() {
 			if ( $column_key == 'description' ) {
 				echo get_the_excerpt($post_id);
 			}
+			if ( $column_key == 'current_evento' ) {
+				$current_evento_collection_id = cne_get_evento_collection_id();
+				?>
+				<a class="page-title-action button button-primary cne-button-cta wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $post_id . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
+					<?php _e('Cadastrar nova atividade', 'cne'); ?>
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M12 8V16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M8 12H16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</a>
+				<?php
+			}
+			
 		}, 10, 2);
 	}
 }
@@ -157,16 +183,16 @@ add_action('tainacan-insert', 'cne_preset_atividade_instituicao', 10, 1);
 function cne_preset_atividade_data_from_instituicao($item_atividade, $instituicao_id) {
 
 	$metadata_mapping = [
-		'38402' => '38402',	// Região (Instituição) => Região (Atividade)
-		'38396' => '38396', // Estado 
-		'38390' => '38390', // Cidade 
-		'38386' => '38386', // Bairro 
-		'38388' => '38388', // Endereço
-		'38384' => '38384', // Complemento
-		'85235' => '85235', // CEP
-		'38382' => '38382', // Número
+		'109029' => '38402',// Região (Instituição) => Região (Atividade)
+		'109034' => '38396', // Estado 
+		'109040' => '38390', // Cidade 
+		'109045' => '38386', // Bairro 
+		'109053' => '38388', // Endereço
+		'109057' => '38384', // Complemento
+		'109065' => '85235', // CEP
+		'109049' => '38382', // Número
 		'85237' => '85237', // Plus Code
-		'85239' => '85239', // Geo Localização
+		'109069' => '85239', // Geo Localização
 
 		'85081' => '85081', // Telefone
 		'85083' => '85083', // Telefone privado
@@ -563,6 +589,13 @@ function cne_add_collection_id_filtering_to_body_class( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'cne_add_collection_id_filtering_to_body_class' );
+
+/* Permite o upload de imagens JFIF */
+function cne_add_jfif_files($mimes){
+    $mimes['jfif'] = "image/jpeg";
+    return $mimes;
+}
+add_filter('mime_types', 'cne_add_jfif_files');
 
 /* ----------------------------- INC IMPORTS  ----------------------------- */
 require get_stylesheet_directory() . '/inc/gestor-tweaks.php';

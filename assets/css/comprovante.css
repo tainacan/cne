@@ -82,7 +82,7 @@
     .admin_page_comprovante td,
     .admin_page_comprovante .tainacan-metadata-value,
     .admin_page_comprovante a {
-        color: #6a6a6a !important;
+        color: #4d4d4d !important;
         text-decoration: none;
         font-size: 9pt;
     }
@@ -101,12 +101,22 @@
         border: none;
         margin-top: 8pt;
     }
+    .admin_page_comprovante .comprovante-lista-de-atividades {
+        list-style: disc;
+        list-style-position: inside;
+    }
+    .admin_page_comprovante .comprovante-lista-de-atividades .metadata-type-date + .metadata-type-date::before,
+    .admin_page_comprovante .comprovante-lista-de-atividades .metadata-type-text + .metadata-type-text::before {
+        content: '-'
+    } 
+    .admin_page_comprovante .comprovante-lista-de-atividades .metadata-type-core_description::before {
+        content: ' - '
+    }
     .admin_page_comprovante .instituicao-evento-banner {
         border-radius: 8px;
         max-width: 100%;
     }
     .admin_page_comprovante .tainacan-item-section--metadata-sections {
-        max-width: 90%;
         margin: 0 auto;
         grid-template-areas: 'contato endereco endereco endereco' !important;
     }

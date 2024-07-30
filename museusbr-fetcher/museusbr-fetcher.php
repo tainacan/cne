@@ -77,7 +77,7 @@ function cne_create_instituicao() {
     $new_item = new \Tainacan\Entities\Item();
     $tainacan_items_repository = \Tainacan\Repositories\Items::get_instance();
 
-    $new_item->set_status( 'draft' );
+    $new_item->set_status( 'auto-draft' );
     $new_item->set_title( $item['label'] );
     $new_item->set_description( $item['description'] );
     $new_item->set_collection_id( $instituicoes_collection_id );
@@ -93,17 +93,17 @@ function cne_create_instituicao() {
         '259' => '29956',   // Esfera Administrativa
         '1587' => '85282',  // Redes Sociais
 
-        '1367' => '38388',  // Endereço (Logradouro)
-        '15563' => '38396', // Estado 
-        '11568' => '38390', // Cidade 
-        '2261' => '38386',  // Bairro 
-        '1379' => '38384',  // Complemento 
-        '1375' => '38382',  // Número 
-        '2797' => '85235',  // CEP 
-        '228' => '85239',   // Localização (Geo coordenadas)
+        '1367' => '109053',  // Endereço (Logradouro)
+        '15563' => '109034', // Estado 
+        '11568' => '109040', // Cidade 
+        '2261' => '109045',  // Bairro 
+        '1379' => '109057',  // Complemento 
+        '1375' => '109049',  // Número 
+        '2797' => '109065',  // CEP 
+        '228' => '109069',   // Localização (Geo coordenadas)
         '1219' => '85081',  // Telefone 
         '1508' => '29943',  // Dias e horários de aberturo para o público 
-        '1503' => '29946',  // Valor da entrada 
+        '1503' => '109510',  // Valor da entrada 
         '1517' => '29949',  // Política de Gratuidade 
         '1213' => '85087',  // E-mail 
         '1200' => '85103',  // Site 
@@ -170,7 +170,7 @@ function cne_create_instituicao() {
                 $proper_value = $item_metadatum['metadatumValue'];
 
                 if ( $metadatum->is_multiple() && !is_array($item_metadatum['metadatumValue']) )
-                    $proper_value = [ $proper_value ];
+                    $proper_value = !empty($proper_value) ? [ $proper_value ] : [];
                 else if ( !$metadatum->is_multiple() && is_array($item_metadatum['metadatumValue']) && count($item_metadatum['metadatumValue']) > 0 )
                     $proper_value = array_shift($proper_value);
 
@@ -183,10 +183,10 @@ function cne_create_instituicao() {
                 }
             }
 
-            // No caso no metadaoo de Região, insere-se baseando-se no Estado
-            if ( $item_metadatum['metadatumId'] == '38396' && $item_metadatum['metadatumValue'] ) {
+            // No caso no metadado de Região, insere-se baseando-se no Estado
+            if ( $item_metadatum['metadatumId'] == '15563' && $item_metadatum['metadatumValue'] ) {
 
-                $regiao_metadatum = new \Tainacan\Entities\Metadatum( 38402 );
+                $regiao_metadatum = new \Tainacan\Entities\Metadatum( 109029 );
                 $new_regiao_item_metadatum = new \Tainacan\Entities\Item_Metadata_Entity( $new_item, $regiao_metadatum );
 
                 $regiao_value = cne_get_regiao_from_estado($item_metadatum['metadatumValue']);
@@ -217,7 +217,7 @@ function cne_create_instituicao() {
 
         // Se o item possui miniatura, importa ela
         $new_thumbnail_id = false;
-        if ( isset( $item['thumbnail'] ) && !empty( parse_url($item['thumbnail']) ) ) {
+        if ( isset( $item['thumbnail'] ) && !empty($item['thumbnail']) && !empty( parse_url($item['thumbnail']) ) ) {
             $new_thumbnail_id = \Tainacan\Media::get_instance()->insert_attachment_from_url($item['thumbnail'], $new_item->get_id());
 
             if ( !$new_thumbnail_id )
@@ -229,7 +229,7 @@ function cne_create_instituicao() {
         }
 
         // Se o item possui documento, importa ele
-        if ( isset( $item_document_url ) && !empty( parse_url($item_document_url) ) ) {
+        if ( isset( $item_document_url ) && !empty($item_document_url) && !empty( parse_url($item_document_url) ) ) {
             $new_attachment_id = \Tainacan\Media::get_instance()->insert_attachment_from_url($item_document_url, $new_item->get_id());
 
             if ( !$new_attachment_id )

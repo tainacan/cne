@@ -15,8 +15,8 @@
 	];
 	$instituicao_metadata_ids = [
 		// Instituições
-		'38396', // Estado
-		'38390', // Cidade
+		'109034', // Estado
+		'109040', // Cidade
 		'20' 	 // Descrição
 	];
 

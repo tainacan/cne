@@ -37,7 +37,7 @@ if (wp && wp.hooks) {
             const newPageSubtitle = document.createElement('p');
 
             if ( item.status === 'auto-draft' )
-                newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Criar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
+                newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Cadastrar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
             else
                 newPageSubtitle.innerText = 'Preencha os campos no seu tempo. As informações serão salvas automaticamente.';
 
@@ -135,6 +135,8 @@ if (wp && wp.hooks) {
             tainacan_plugin.i18n.info_item_private = 'Esta instituição está publicada de forma privada e será visível apenas para os editores com as permissões necessárias.';
             tainacan_plugin.i18n.info_item_publish = 'Esta instituição está publicada de forma pública e será visível para todos os visitantes do site.';
             tainacan_plugin.i18n.label_related_items = 'Atividades relacionadas';
+            tainacan_plugin.i18n.label_create_item = 'Cadastrar instituição';
+            tainacan_plugin.i18n.info_autodraft_updated = 'Rascunho atualizado. Clique em cadastrar instituição para salvar o rascunho.';
         } else {
             tainacan_plugin.i18n.label_ready_to_create_item = 'Pronto para criar esta atividade?';
             tainacan_plugin.i18n.instruction_create_item_select_status = 'Selecione um status para a visibilidade da atividade no site. Você poderá alterar no futuro.';
@@ -146,6 +148,8 @@ if (wp && wp.hooks) {
             tainacan_plugin.i18n.info_item_not_saved = 'Atenção, a atividade ainda não foi salva.';
             tainacan_plugin.i18n.info_item_private = 'Esta atividade está publicada de forma privada e será visível apenas para os editores com as permissões necessárias.';
             tainacan_plugin.i18n.info_item_publish = 'Esta atividade está publicada de forma pública e será visível para todos os visitantes do site.';
+            tainacan_plugin.i18n.label_create_item = 'Cadastrar atividade';
+            tainacan_plugin.i18n.info_autodraft_updated = 'Rascunho atualizado. Clique em cadastrar atividade para salvar o rascunho.';
         }
         tainacan_plugin.i18n.label_create_new_term = 'Adicionar';
         tainacan_plugin.i18n.label_add_value = 'Adicionar';
@@ -158,7 +162,7 @@ if (wp && wp.hooks) {
         tainacan_plugin.i18n.label_children_terms = 'opções derivadas';
         tainacan_plugin.i18n.label_nothing_selected = 'Nada selecionado';
         tainacan_plugin.i18n.label_no_terms_selected = 'Nenhuma opção selecionada';
-        tainacan_plugin.i18n.label_selected_terms = 'Opções selecionadas';
+        tainacan_plugin.i18n.label_selected_terms = 'Opção selecionada';
         tainacan_plugin.i18n.label_selected_metadatum_values = 'Opções selecionadas';
         tainacan_plugin.i18n.info_metadata_section_hidden_conditional = 'Área desabilidata devido a um valor selecionado anterioremente.';
     }
@@ -212,4 +216,14 @@ if (wp && wp.hooks) {
     }
     wp.hooks.addAction('tainacan_item_edition_metadata_loaded', 'tainacan-hooks', tainacanItemEditionItemMetadataLoaded);
 
+
+    /* Usuários gestores não devem ver a opção de rascunho */
+    function tainacanRemoveDraftFromStatus(availableStatuses) {
+        const draftStatusIndex = availableStatuses.findIndex(status => status.slug === 'draft');
+        if (draftStatusIndex > -1)
+            availableStatuses.splice(draftStatusIndex, 1);
+
+        return availableStatuses;
+    }
+    wp.hooks.addFilter('tainacan_admin_available_statuses', 'tainacan-hooks', tainacanRemoveDraftFromStatus);
 }

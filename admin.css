@@ -35,7 +35,7 @@ body {
 .instituicao-admin-area .instituicao-title-and-thumbnail-container .page-title {
     font-size: 40px;
 }
-@media screen and (max-width: 782px) {
+@media screen and (max-width: 769px) {
     .instituicao-admin-area .instituicao-title-and-thumbnail-container .page-title {
         font-size: 32px !important;
     }
@@ -44,6 +44,14 @@ body {
     }
     .instituicao-admin-area .evento-principal-dados h3 {
         font-size: 20px !important;
+    }
+    .instituicao-admin-area .is-hidden-mobile {
+        display: none !important;
+      }
+}
+@media screen and (min-width: 769px) {
+    .instituicao-admin-area .is-hidden-tablet {
+      display: none !important;
     }
 }
 .instituicao-admin-area header.entry-header + hr {
@@ -77,11 +85,9 @@ body {
     max-width: 100%;
     width: 100%;
     height: auto;
+    border-radius: 8px;
 }
 .instituicao-admin-area .evento-principal-kits {
-    text-align: right;
-    float: right;
-    margin-left: 1rem;
     margin-top: 1rem;
     display: flex;
     gap: 0.75rem 1.25rem;
@@ -91,7 +97,6 @@ body {
 @media screen and (max-width: 782px) {
     .instituicao-admin-area .evento-principal-kits {
         text-align: center;
-        float: none;
         margin-left: 0;
     }
 }
@@ -112,14 +117,20 @@ body {
     margin-top: 0;
     margin-bottom: 0.25rem;
 }
-.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action:hover,
-.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action:focus {
+.cne-button-cta:hover,
+.cne-button-cta:focus {
     --theme-palette-color-11: #E46DB0;
+    box-shadow: none !important;
+    text-shadow: none !important;
 }
-.instituicao-admin-area .evento-atividades-empty-placeholder .page-title-action {
+.cne-button-cta {
     background-color: var(--theme-palette-color-11) !important;
     border-color:  var(--theme-palette-color-11) !important;
     color: white !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+.instituicao-admin-area .evento-atividades-empty-placeholder .button {
     margin-top: 1.5rem;
 }
 
@@ -263,7 +274,7 @@ body {
     display: none;
 }
 #wp-admin-bar-site-name > .ab-item {
-    background-image: url('https://evento.museus.gov.br/wp-content/themes/cne/assets/images/logo-white.svg') !important;
+    background-image: url('https://visite.museus.gov.br/wp-content/themes/cne/assets/images/logo-white.svg') !important;
     background-repeat: no-repeat !important;
     background-size: 150px auto !important;
     background-position: center !important;
@@ -271,7 +282,7 @@ body {
     width: 160px;
 }
 html.wp-toolbar #wp-admin-bar-site-name:not(:hover):not(:focus) > .ab-item:not(:hover):not(:focus) {
-    background-image: url('https://evento.museus.gov.br/wp-content/themes/cne/assets/images/logo.svg') !important;
+    background-image: url('https://visite.museus.gov.br/wp-content/themes/cne/assets/images/logo.svg') !important;
     background-repeat: no-repeat !important;
     background-size: 150px auto !important;
     background-position: center !important;
@@ -326,7 +337,7 @@ html.wp-toolbar #wp-admin-bar-site-name:not(:hover):not(:focus) > .ab-item:not(:
 
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui .button,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui p .button,
-body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui .button-secondary,
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page).wp-core-ui .cne-button-cta,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .wrap .add-new-h2,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .wrap .page-title-action,
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) .tablenav .tablenav-pages a,
@@ -358,6 +369,9 @@ body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table
 }
 body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .column-date {
     width: 20%;
+}
+body:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table .column-current_evento {
+    width: 230px;
 }
 .museusbr-fetcher-button-container {
     top: -2px;

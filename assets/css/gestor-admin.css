@@ -10,8 +10,8 @@
     --tainacan-one-column: 1.25rem;
     --tainacan-gray1: #fafafa;
     --tainacan-gray2: #c3c4c7;
-    --tainacan-label-color: #4b4b4b;
-    --tainacan-info-color: #9b9b9b;
+    --tainacan-label-color: #282828;
+    --tainacan-info-color: #4b4b4b;
     --tainacan-input-color: #2c3338;
     --tainacan-input-border-color: #bcb8b8;
     --tainacan-input-border-radius: 6px;
@@ -21,11 +21,31 @@
     position: unset;
     font-size: 1.063em;
 }
+
+/* Barras de scroll mais acessíveis */
+.user-is-gestor #tainacan-admin-app * {
+    scrollbar-color: initial !;
+}
+.user-is-gestor #tainacan-admin-app *::-webkit-scrollbar-thumb {
+    background-color: initial;
+}
+
+@media screen and (min-width: 770px) {
+    .user-is-gestor #tainacan-admin-app * {
+        scrollbar-width: initial;
+    }
+    .user-is-gestor #tainacan-admin-app *::-webkit-scrollbar {
+        width: initial;
+    }
+}
+
 body.user-is-gestor.tainacan-admin-page {
     padding-top: 0;
 }
-.user-is-gestor #adminmenumain {
-    display: none;
+.user-is-gestor #adminmenumain,
+.user-is-gestor #wp-admin-bar-menu-toggle {
+    display: none !important;
+    visibility: hidden;
 }
 .user-is-gestor #wpcontent {
     padding-left: 0;
@@ -41,6 +61,53 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #wpbody-content {
     padding-bottom: 0;
 }
+@media screen and (max-width: 782px) {
+    .user-is-gestor #wpadminbar #wp-admin-bar-comments,
+    .user-is-gestor #wpadminbar #wp-admin-bar-edit,
+    .user-is-gestor #wpadminbar #wp-admin-bar-my-account,
+    .user-is-gestor #wpadminbar #wp-admin-bar-my-sites,
+    .user-is-gestor #wpadminbar #wp-admin-bar-new-content,
+    .user-is-gestor #wpadminbar #wp-admin-bar-site-name,
+    .user-is-gestor #wpadminbar #wp-admin-bar-updates,
+    .user-is-gestor #wpadminbar #wp-admin-bar-wp-logo,
+    .user-is-gestor #wpadminbar .ab-top-menu,
+    .user-is-gestor #wpadminbar .ab-top-secondary {
+        position: relative;
+    }
+    .user-is-gestor.wp-admin #wpadminbar #wp-admin-bar-site-name > .ab-item::before {
+        display: none;
+        visibility: hidden;
+    }
+    .user-is-gestor #wpadminbar ul#wp-admin-bar-root-default > li:first[role="group"] {
+        display: none;
+        visibility: hidden;
+    }
+    .user-is-gestor #wpadminbar .quicklinks .ab-empty-item,
+    .user-is-gestor #wpadminbar .quicklinks > ul > li > a {
+        height: 32px;
+        line-height: 2.25 !important;
+    }
+    .user-is-gestor #wp-admin-bar-site-name > .ab-item,
+    html.wp-toolbar .user-is-gestor #wp-admin-bar-site-name:not(:hover):not(:focus) > .ab-item:not(:hover):not(:focus) {
+        width: 102px !important;
+        background-size: 113px auto !important;
+        line-height: 2.25 !important;
+    }
+    .user-is-gestor #wpadminbar #wp-admin-bar-top-secondary > .menupop > .ab-sub-wrapper {
+        left: unset;
+        right: 0;
+    }
+    .user-is-gestor #wp-admin-bar-colecao-instituicoes {
+        display: block;
+    }
+    .user-is-gestor .menupop.with-avatar > .ab-item {
+        font-size: 0 !important;
+    }
+    .user-is-gestor .menupop.with-avatar > .ab-item > .display-name {
+        display: none;
+        visibility: hidden;
+    }
+}
 
 /* Esconde alguns filtros nas listas de atividades */
 .user-is-gestor ul.subsubsub li.all,
@@ -50,7 +117,7 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app .is-secondary-content,
 .user-is-gestor #tainacan-admin-app.is-fullheight,
 .user-is-gestor #tainacan-admin-app #collection-page-container {
-    height: calc(100vh - var(--wordpress-topbar-height));
+    height: calc(100vh - 154px);
     background: transparent;
 }
 .user-is-gestor #tainacan-admin-app #collection-page-container {
@@ -147,17 +214,23 @@ body.user-is-gestor.tainacan-admin-page {
     display: none;
     visibility: hidden;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1280px) {
     .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list,
     .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list {
         column-count: 2;
         column-gap: 2rem;
     }
 }
+@media screen and (max-height: 650px) {
+    .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list,
+    .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns .column.main-column .metadata-section-metadata-list {
+        column-count: 1 !important;
+    }
+}
 @media screen and (max-width: 769px) {
     .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-form > .columns,
     .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-form > .columns {
-        margin-left: calc(2 * var(--tainacan-one-column));
+        margin-left: calc(2 * var(--tainacan-one-column) - 12px);
         margin-right: calc(1 * var(--tainacan-one-column));
     }
 }
@@ -348,6 +421,7 @@ body.user-is-gestor.tainacan-admin-page {
 /* Coluna de radio buttons dos estados e dos tipos de atividades */
 .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--85989 .tainacan-finder-column.has-only-one-column ul,
 .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38396 .tainacan-finder-column.has-only-one-column ul,
+.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--109034 .tainacan-finder-column.has-only-one-column ul,
 .user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38411 .tainacan-finder-column.has-only-one-column ul {
     column-count: 4;
 }
@@ -386,15 +460,17 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app .child-metadata-inputs {
     padding-left: 16px;
 }
-
-/* Metadado de cidades esconde as abas de seleção da taxonomia */
-.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38390 nav.tabs {
-    display: none;
-    visibility: hidden;
-
+@media screen and (max-width: 768px) {
+    .user-is-gestor #tainacan-admin-app .child-metadata-inputs {
+        padding-left: 24px;
+    }
+    .user-is-gestor #tainacan-admin-app .child-metadata-inputs .field .collapse-handle {
+        margin-left: 0 !important;
+    }
 }
-.user-is-gestor #tainacan-admin-app .tainacan-metadatum-id--38390 .tainacan-form {
-    margin-top: 0;
+
+.user-is-gestor .tainacan-checkbox-search-section + .tainacan-checkbox-list-container {
+    border-color: var(--tainacan-input-border-color);
 }
 
 /* Estiliza botão de taxonomias no input de tax */
@@ -571,8 +647,19 @@ body.user-is-gestor.tainacan-admin-page {
 .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-url .control+.add-new-term,
 .user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-url .control+.add-new-term,
 .user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-relationship .add-link,
-.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-relationship .add-link {
-    display: hidden;
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-relationship .add-link,
+.user-is-gestor #tainacan-admin-app .page-container.item-edition-container .tainacan-metadatum-component--tainacan-taxonomy .add-new-term,
+.user-is-gestor #tainacan-admin-app .page-container.item-creation-container .tainacan-metadatum-component--tainacan-taxonomy .add-new-term {
+    display: none;
+    visibility: hidden;
+}
+
+/* Esconde o botão de rascunho nas opções de status disponíveis */
+.user-is-gestor #tainacan-admin-app .tainacan-modal .status-radios .b-radio:has(input[value="draft"]),
+.user-is-gestor #tainacan-admin-app .tainacan-modal .status-radios .b-radio input[value="draft"],
+.user-is-gestor #tainacan-admin-app .tainacan-modal .status-radios .b-radio input[value="draft"]+.check,
+.user-is-gestor #tainacan-admin-app .tainacan-modal .status-radios .b-radio input[value="draft"]+.control-label {
+    display: none;
     visibility: hidden;
 }
 
@@ -587,6 +674,7 @@ body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-ad
 body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions a,
 body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .button-link  {
     color: #838383;
+    line-height: 2em;
 }
 body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .edit,
 body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .trash,
@@ -604,7 +692,7 @@ body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-ad
     background-position: center;
     content: '';
     width: 16px;
-    height: 16px;
+    height: 26px;
     display: block;
     position: absolute;
     top: 2px;

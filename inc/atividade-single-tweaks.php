@@ -249,6 +249,25 @@ function cne_atividade_single_page_bottom() {
 				tainacan_the_metadata($metadata_args);
 			?>
 			<p>As informações fornecidas são de total responsabilidade da Instituição</p>
+			<?php
+				$related_instituicao_id = get_post_meta( get_the_ID(), cne_get_instituicoes_relationship_metadata_id(), true ); 
+				
+				if ( $related_instituicao_id ) {
+					echo tainacan_get_the_metadata(
+						array(
+							'metadata__in' => [ 85282 ], // Metadado composto das redes sociais
+							'display_slug_as_class' => true,
+							'before' 				=> '<div class="tainacan-item-section__metadatum metadata-type-$type" id="$id">',
+							'after' 				=> '</div>',
+							'before_title' => '<h3 class="tainacan-metadata-label">',
+							'after_title' => '</h3>',
+							'before_value' => '<p class="tainacan-metadata-value">',
+							'after_value' => '</p>',
+						),
+						$related_instituicao_id
+					);
+				}
+			?>
 		</div>
 		<div class="atividade-evento-area">
 			<?php 
