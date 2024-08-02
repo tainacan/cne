@@ -1,6 +1,6 @@
 <?php
 
-if ( is_admin() ) {
+if ( is_admin() && defined ('TAINACAN_VERSION') ) {
     new CNE_Comprovante_Page();
 }
 

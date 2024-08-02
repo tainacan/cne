@@ -4,7 +4,7 @@
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.11.3
+ * Version: 0.13.2
  */
 
 :root {
@@ -39,53 +39,60 @@ footer .widget-menu li {
 	--wp--preset--spacing--80: clamp(3.8rem, -1rem + 6.4vw, 5.06rem);
 }
 .home h1 > img {
-	width: min(431px, 30vw) !important;
+	width: min(431px, 36vw) !important;
 }
-.home .wp-block-getwid-media-text-slider-slide__content {
-	padding: clamp(25px, -1rem + 6.4vw, 100px) clamp(4px, -1rem + 6.4vw, 50px) !important;
+.home .wp-block-cb-carousel .slick-slide {
+	padding: 0 !important;
 }
-.home .wp-block-getwid-media-text-slider-slide__content .wp-block-group.alignwide {
-	padding-left: clamp(4px, -1rem + 6.4vw, var(--wp--preset--spacing--80)) !important;
-	padding-right: clamp(4px, -1rem + 6.4vw, var(--wp--preset--spacing--80)) !important;
+.home .wp-block-cb-carousel .slick-dots {
+	bottom: 6px !important;
 }
-
+.home .wp-block-cb-carousel .slick-dots li button::before {
+	font-size: 14px;
+	color: white !important;
+}
+.home .banner-legenda {
+	position: absolute;
+	bottom: 0;
+	max-width: 50%;
+}
 @media screen and (max-width: 1298px) {
 	.regioes-grid {
 		grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr)) !important;
 	}
 }
 @media screen and (max-width: 1078px) {
-	.regioes-grid > .wp-container-content-4 {
+	.regioes-grid > .wp-container-content-5 {
 		grid-column: span 2 !important;
 		grid-row: span 1 !important;
 	}
-	.regioes-grid > .wp-container-content-5 {
+	.regioes-grid > .wp-container-content-6 {
 		grid-column: span 4 !important;
 		grid-row: span 1 !important;
 	}
 }
 @media screen and (max-width: 1000px) {
-	.home .wp-block-getwid-media-text-slider-slide__content,
-	.home .wp-block-getwid-media-text-slider-slide {
+	.home .wp-block-cb-carousel .slick-slide > .wp-block-cover {
 		min-height: 400px !important;
+		height: 400px !important;
 	}
 }
 @media screen and (max-width: 857px) {
 	.regioes-grid > *,
-	.regioes-grid > .wp-container-content-4,
-	.regioes-grid > .wp-container-content-5 {
+	.regioes-grid > .wp-container-content-5,
+	.regioes-grid > .wp-container-content-6 {
 		grid-column: 1/-1 !important;
 	}
 }
 @media screen and (max-width: 768px) {
 	.regioes-grid > *,
-	.regioes-grid > .wp-container-content-4,
-	.regioes-grid > .wp-container-content-5 {
+	.regioes-grid > .wp-container-content-5,
+	.regioes-grid > .wp-container-content-6 {
 		min-height: 270px !important;
 	}
-	.home .wp-block-getwid-media-text-slider-slide__content,
-	.home .wp-block-getwid-media-text-slider-slide {
+	.home .wp-block-cb-carousel .slick-slide > .wp-block-cover {
 		min-height: 237px !important;
+		height: 237px !important;
 	}
 }
 
@@ -151,7 +158,7 @@ footer .widget-menu li {
 /* Customizações do formulário de newsletter */
 .tnp-subscription .tnp-field input[type="submit"] {
 	width: 100%;
-	font-size: 28px;
+	font-size: var(--wp--preset--font-size--heading-4, 28px);
 	text-transform: uppercase;
 	margin-top: 32px;
 }
@@ -188,9 +195,9 @@ footer .widget-menu li {
 	background-color: transparent !important;
 }
 .ur-frontend-form {
-	border: none;
+	border: none !important;
 	padding: 0 !important;
-	box-shadow: none;
+	box-shadow: none !important;
 }
 .ur-frontend-form p {
 	margin-bottom: 0;
@@ -199,22 +206,26 @@ footer .widget-menu li {
 	display: none;
 	visibility: hidden;
 }
-.ur-frontend-form.ur-frontend-form--rounded form input[type="submit"],
-.ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
-.ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-prev,
-.ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-next {
+.ur-frontend-form .ur-form-row .user-registration-Button {
+	border: none !important;
+}
+.ur-frontend-form form input[type="submit"],
+.ur-frontend-form form button[type="submit"],
+.ur-frontend-form form button.user-registration-multi-part-nav-prev,
+.ur-frontend-form form button.user-registration-multi-part-nav-next {
 	border-radius: 8px !important;
 	width: 100%;
 	margin-top: 2rem;
 }
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="text"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="email"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="url"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="password"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="date"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid input[type="number"],
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid textarea,
-.ur-frontend-form.ur-frontend-form--rounded form .ur-form-row .ur-form-grid select {
+
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="text"],
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="email"],
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="url"],
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="password"],
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="date"],
+.ur-frontend-form form .ur-form-row .ur-form-grid input[type="number"],
+.ur-frontend-form form .ur-form-row .ur-form-grid textarea,
+.ur-frontend-form form .ur-form-row .ur-form-grid select {
 	border-radius: 8px !important;
 	height: 48px !important;
 	border-color: var(--theme-palette-color-5) !important;
@@ -301,9 +312,8 @@ footer .widget-menu li {
 	#filters-modal {
 		--tainacan-filters-inline-width: 140px !important;
 	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
-		--tainacan-filters-inline-width: 200px !important;
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
+		--tainacan-filters-inline-width: 280px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
 		--tainacan-filters-inline-width: 130px !important;
@@ -314,9 +324,11 @@ footer .widget-menu li {
 	#filters-modal {
 		--tainacan-filters-inline-width: 120px !important;
 	}
-	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
+	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
+		--tainacan-filters-inline-width: 142px !important;
+	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
-		--tainacan-filters-inline-width: 160px !important;
+		--tainacan-filters-inline-width: 322px !important;
 	}
 	.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
 		--tainacan-filters-inline-width: 130px !important;
@@ -371,16 +383,21 @@ footer .widget-menu li {
 		'itemslist     itemslist   ';
 	align-items: flex-start;
 }
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941) {
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85941),
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-110277) {
 	--tainacan-filters-inline-width: 120px;
 }
 .theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-109265),
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025) {
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-85025),
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-110269),
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-110275) {
 	--tainacan-filters-inline-width: 80px;
 }
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333),
-.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-82333) {
 	--tainacan-filters-inline-width: 214px;
+}
+.theme-items-list:not(.is-fullscreen).has-horizontal-filters .filter-item-forms:has(#filter-input-id-86396) {
+	--tainacan-filters-inline-width: 360px;
 }
 .theme-items-list:not(.is-fullscreen).is-filters-menu-open .search-control .search-control-item .search-area {
 	min-width: 100% !important;
@@ -454,6 +471,7 @@ footer .widget-menu li {
 .theme-items-list #items-list-area .filter-tags-list {
 	padding: 0;
 }
+.tainacan-modal select, 
 .tainacan-modal input.input, 
 .tainacan-modal .input, 
 .tainacan-modal textarea.textarea, 
@@ -472,6 +490,7 @@ footer .widget-menu li {
 .tainacan-modal input[type="time"].input, 
 .tainacan-modal input[type="url"].input, 
 .tainacan-modal input[type="week"].input, 
+.theme-items-list select,  
 .theme-items-list input.input, 
 .theme-items-list .input, 
 .theme-items-list textarea.textarea, 
@@ -516,6 +535,16 @@ footer .widget-menu li {
 		margin: 0px !important;
 		height: 100%;
 	}
+}
+
+/* Função de zoom do Tainacan */
+.pswp.tainacan-photoswipe-layer {
+	--tainacan-media-background: transparent;
+}
+.pswp.tainacan-photoswipe-layer .pswp__container a:first-of-type,
+.pswp.tainacan-photoswipe-layer .pswp__container p:first-of-type,
+.pswp.tainacan-photoswipe-layer .pswp__container article:first-of-type {
+    align-self: center;
 }
 
 /* Esconde filtros da coleção de instituições quando se está em páginas nível repositório não relacionadas à instituição */
@@ -565,7 +594,7 @@ body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .pa
 [data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .page-title .ct-title-label,
 [data-prefix="tainacan-repository-items_archive"] .hero-section[data-type="type-2"] .page-title .ct-title-label {
 	display: block;
-	font-size: 24px;
+	font-size: var(--wp--preset--font-size--heading-5, 24px);
 	text-transform: none;
 	margin-bottom: .5em;
 	background: var(--theme-palette-color-1);
@@ -582,19 +611,19 @@ body[class*=' post-type-archive-tnc_col_'] .hero-section[data-type="type-2"] .pa
 
 /* Term Taxonomy items list header */
 body.term-norte[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
-	--theme-palette-color-1: var(--theme-palette-color-16);
+	--theme-palette-color-1: var(--theme-palette-color-12);
 }
 body.term-nordeste[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
-	--theme-palette-color-1: var(--theme-palette-color-9);
+	--theme-palette-color-1: var(--theme-palette-color-12);
 }
 body.term-centro-oeste[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
-	--theme-palette-color-1: var(--theme-palette-color-15);
+	--theme-palette-color-1: var(--theme-palette-color-12);
 }
 body.term-sudeste[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
-	--theme-palette-color-1: var(--theme-palette-color-10);
+	--theme-palette-color-1: var(--theme-palette-color-12);
 }
 body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-title {
-	--theme-palette-color-1: var(--theme-palette-color-17);
+	--theme-palette-color-1: var(--theme-palette-color-12);
 }
 body.term-norte[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-description,
 body.term-sul[data-prefix="tainacan-terms-items_archive"] .hero-section[data-type="type-2"] .entry-header .page-description {
@@ -607,4 +636,31 @@ body[data-prefix="tainacan-repository-items_archive"] .ct-title-label::after,
 body[data-prefix="tainacan-terms-items_archive"] .ct-title-label::after {
 	content: none;
 	display: none;
+}
+
+/* Cor de hover e focus dos botões coloridos */
+.wp-block-button__link.has-palette-color-12-background-color.wp-element-button:hover,
+.wp-block-button__link.has-palette-color-12-background-color.wp-element-button:focus {
+	background-color: var(--theme-palette-color-2) !important;
+}
+
+/* Definindo elementos que devem aparecer ao se imprimir páginas do site */
+@media print {
+	body {
+		--theme-content-vertical-spacing: 30px;
+	}
+	[data-footer*="type-1"] .ct-footer [data-row*="middle"],
+	#header [data-column="middle"],
+	#header [data-column="end"] {
+		display: none;
+		visibility: hidden;
+	}
+	[data-footer*="type-1"] .ct-footer [data-row*="bottom"] .wp-block-image.block-visibility-hide-small-screen {
+		display: block !important;
+		visibility: visible !important;
+	}
+	[data-footer*="type-1"] .ct-footer [data-row*="bottom"] .wp-block-image.block-visibility-hide-large-screen.block-visibility-hide-medium-screen {
+		display: none !important;
+		visibility: hidden !important;
+	}
 }

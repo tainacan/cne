@@ -24,7 +24,6 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_enqueue_style( 'cne-atividade-single', get_stylesheet_directory_uri() . '/assets/css/atividade-single.css', array(), wp_get_theme()->get('Version') );
 
 	wp_enqueue_style( 'cne-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
-	wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
 });
 
 /** 
@@ -34,11 +33,10 @@ function cne_admin_enqueue_styles() {
 	wp_enqueue_style( 'cne-admin-style', get_stylesheet_directory_uri() . '/admin.css', array(), wp_get_theme()->get('Version') );
 		
 	if ( cne_user_is_gestor() ) {
-		wp_enqueue_script( 'cne-feather-icons', 'https://unpkg.com/feather-icons', array(), wp_get_theme()->get('Version') );
 		wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
 		wp_enqueue_style( 'cne-gestor-admin-style', get_stylesheet_directory_uri() . '/assets/css/gestor-admin.css', array(), wp_get_theme()->get('Version') );
 		
-		wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks', 'cne-feather-icons'), wp_get_theme()->get('Version') );
+		wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks'), wp_get_theme()->get('Version') );
 		
 		wp_localize_script( 'cne-admin-script', 'cne_theme', array(
 			'instituicoes_collection_id' => cne_get_instituicoes_collection_id(),
@@ -79,6 +77,9 @@ add_filter( 'tainacan-fetch-args', 'cne_fetch_args_posts_items_repository', 11, 
  * Filtra as colunas que aparecem de algumas coleções
  */
 function cne_manage_collections_table_columns() {
+
+	if ( !defined ('TAINACAN_VERSION') )
+		return;
 
 	$tainacan_collections_post_types = \Tainacan\Repositories\Repository::get_collections_db_identifiers();
 
@@ -287,6 +288,9 @@ function cne_remove_quick_edit( $actions ) {
  */
 function cne_list_collections_in_admin($args, $post_type) {
 	
+	if ( !defined ('TAINACAN_VERSION') )
+		return $args;
+
 	$tainacan_collections_post_types = \Tainacan\Repositories\Repository::get_collections_db_identifiers();
 	
 	if ( $post_type == 'tainacan-collection' ) {
@@ -369,6 +373,9 @@ function cne_list_collections_in_admin($args, $post_type) {
 add_filter('register_post_type_args', 'cne_list_collections_in_admin', 10, 2);
 
 function cne_add_collections_to_toolbar($admin_bar) {
+
+	if ( !defined ('TAINACAN_VERSION') )
+		return;
 	
 	// Busca por itens da coleção instituições para montar o menu
 	$tainacan_items_repository = \Tainacan\Repositories\Items::get_instance();
@@ -602,7 +609,7 @@ require get_stylesheet_directory() . '/inc/gestor-tweaks.php';
 require get_stylesheet_directory() . '/inc/customizer.php';
 require get_stylesheet_directory() . '/inc/instituicao.php';
 require get_stylesheet_directory() . '/inc/opcoes-das-colecoes.php';
-//require get_stylesheet_directory() . '/inc/block-styles.php';
+require get_stylesheet_directory() . '/inc/block-styles.php';
 require get_stylesheet_directory() . '/inc/block-filters.php';
 require get_stylesheet_directory() . '/inc/block-bindings.php';
 require get_stylesheet_directory() . '/inc/instituicao-single-tweaks.php';

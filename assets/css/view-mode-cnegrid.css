@@ -87,7 +87,7 @@
         left: 16px !important;
     }
     .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade p {
-        font-size: 20px !important;
+        font-size: var(--wp--preset--font-size--heading-6, 20px) !important;
         font-weight: bold;
     }
     .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-horario-de-inicio-da-atividade p,
@@ -255,7 +255,7 @@
 .tainacan-cne-grid-container .tainacan-cne-grid-item .cne-grid-metadata .metadata-slug-tipo-da-atividade p {
     text-transform: uppercase;
     line-height: initial;
-    font-size: 28px;
+    font-size: var(--wp--preset--font-size--heading-4, 28px);
     margin-bottom: 0;
     color: #4b4b4b !important;
 }

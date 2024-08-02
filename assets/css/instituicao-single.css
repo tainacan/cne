@@ -101,7 +101,6 @@
 .single .instituicao-gallery .tainacan-media-component {
     gap: 0px;
 }
-  
 .single .instituicao-gallery .tainacan-media-component .tainacan-media-component__swiper-main ul.swiper-wrapper {
     max-height: var(--tainacan-media-main-carousel-height, 60vh);
 }
@@ -328,7 +327,7 @@
 .single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a {
     padding: 12px 32px;
     border-radius: 6px;
-    background: var(--theme-palette-color-11);
+    background: var(--theme-palette-color-12);
     color: var(--theme-palette-color-8);
     display: block;
     font-size: 0;
@@ -338,10 +337,10 @@
     width: 100%;
 }
 .single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:hover {
-    background: #9D336F;
+    background: var(--theme-palette-color-2);
 }
 .single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a:focus {
-    background: #E46DB0;
+    background: var(--theme-palette-color-2);
 }
 .single .tainacan-item-section__metadata .metadata-slug-ingressos-2 a::before {
     content: 'Ingressos';

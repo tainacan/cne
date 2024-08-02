@@ -153,12 +153,12 @@
 			"fontSizes": [
 				{
 					"fluid": false,
-					"size": "13px",
+					"size": "12px",
 					"slug": "small"
 				},
 				{
 					"fluid": false,
-					"size": "20px",
+					"size": "24px",
 					"slug": "medium"
 				},
 				{
@@ -184,6 +184,60 @@
 					},
 					"size": "80px",
 					"slug": "xx-large"
+				},
+				{
+					"fluid": {
+						"min": "16px",
+						"max": "20px"
+					},
+					"size": "20px",
+					"slug": "heading-6",
+					"name": "Título 4 (h6)"
+				},
+				{
+					"fluid": {
+						"min": "18px",
+						"max": "24px"
+					},
+					"size": "24px",
+					"slug": "heading-5",
+					"name": "Título 3 (h5)"
+				},
+				{
+					"fluid": {
+						"min": "20px",
+						"max": "28px"
+					},
+					"size": "28px",
+					"slug": "heading-4",
+					"name": "Título 2 (h4)"
+				},
+				{
+					"fluid": {
+						"min": "24px",
+						"max": "32px"
+					},
+					"size": "32px",
+					"slug": "heading-3",
+					"name": "Título 1 (h3)"
+				},
+				{
+					"fluid": {
+						"min": "28px",
+						"max": "40px"
+					},
+					"size": "40px",
+					"slug": "heading-2",
+					"name": "Título grande (H2)"
+				},
+				{
+					"fluid": {
+						"min": "32px",
+						"max": "64px"
+					},
+					"size": "64px",
+					"slug": "heading-1",
+					"name": "Display (H1)"
 				}
 			]
 		},

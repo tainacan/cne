@@ -51,21 +51,23 @@ if (wp && wp.hooks) {
             statusLabel.innerText = tainacan_plugin.i18n['status_' + item.status];
 
             const statusIcon = document.createElement('i');
+            statusIcon.classList.add('tainacan-icon');
+            statusIcon.classList.add('tainacan-icon-1-25em');
             switch ( item.status ) {
                 case 'auto-draft':
                     statusWrapper.style.color = '#3C4D76';
-                    statusIcon.dataset.feather = 'loader';
+                    statusIcon.classList.add('tainacan-icon-autodraft');
                     break;
                 case 'draft':
                     statusWrapper.style.color = '#9B9B9B';
-                    statusIcon.dataset.feather = 'edit';
+                    statusIcon.classList.add('tainacan-icon-draft');
                     break;
                 case 'private':
-                    statusIcon.dataset.feather = 'lock';
+                    statusIcon.classList.add('tainacan-icon-private');
                     break;
                 case 'publish':
                     statusWrapper.style.color = '#218963';
-                    statusIcon.dataset.feather = 'check-circle';
+                    statusIcon.classList.add('tainacan-icon-public');
                     break;
             }
 
@@ -79,8 +81,6 @@ if (wp && wp.hooks) {
             newPageTitleContainer.appendChild(newPageSubtitle);
 
             pageContainer.insertBefore(newPageTitleContainer, pageContainer.firstChild);
-
-            feather.replace();
         }
 
         // Extrai ID da Coleção da URL (já que não podemos confiar no objeto collection de estar carregado)

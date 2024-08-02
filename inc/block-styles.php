@@ -11,13 +11,21 @@ if ( function_exists( 'register_block_style' ) ) {
 	 */
 	function cne_register_block_styles() {
 
-		// Fitlros horizontais na busca facetada
+		// Sem quebra de linha
 		register_block_style(
-			'tainacan/faceted-search',
+			'core/paragraph',
 			array(
-				'name'  => 'horizontal-filters',
-				'label' => esc_html__( 'Filtros horizontais', 'cne' ),
-				// 'is_default'   => true,
+				'name'  => 'nowrap',
+				'label' => esc_html__( 'Sem quebra de linha', 'cne' ),
+				'inline_style' => 'p.is-style-nowrap { white-space: nowrap; }',
+			)
+		);
+		register_block_style(
+			'core/button',
+			array(
+				'name'  => 'nowrap',
+				'label' => esc_html__( 'Sem quebra de linha', 'cne' ),
+				'inline_style' => '.wp-block-button.is-style-nowrap .wp-block-button__link { white-space: nowrap; }',
 			)
 		);
 	}
