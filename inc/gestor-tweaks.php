@@ -195,3 +195,12 @@ function cne_add_welcome_message() {
 }
 add_action( 'admin_notices', 'cne_add_welcome_message', 10 );
 
+/* Esconde várias opções de contato na página do perfil do usuário */
+function cne_hide_user_contactmethods( $contactmethods ) {
+	
+	if ( cne_user_is_gestor() )
+		return [];
+
+	return $contactmethods;
+}
+add_filter( 'user_contactmethods', 'cne_hide_user_contactmethods', 12, 1 );

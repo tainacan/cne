@@ -175,7 +175,6 @@ function cne_preset_atividade_instituicao($item) {
 		}
 	}
 };
-
 add_action('tainacan-insert', 'cne_preset_atividade_instituicao', 10, 1);
 
 /**
@@ -264,10 +263,42 @@ function cne_preset_atividade_data_from_instituicao($item_atividade, $instituica
 							}
 						} else {
 						
-							$atividade_item_metadatum->set_value( $instituicao_item_metadatum->get_value() );
-							
-							if ( $atividade_item_metadatum->validate() ) {
-								\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_item_metadatum );
+							if ( 
+								$instituicao_metadatum->get_metadata_type() == 'Tainacan\Metadata_Types\Taxonomy' &&
+								$atividade_metadatum->get_metadata_type() == 'Tainacan\Metadata_Types\Taxonomy'
+							) {
+								
+								$terms = $instituicao_item_metadatum->get_value();
+
+								if ( false == $terms || null == $terms )
+									continue;
+
+								if ( is_array( $terms ) ) {
+									$terms = array_map( function($term) {
+										return is_object($term) && $term instanceof \Tainacan\Entities\Term ? $term->get_name() : null;
+									}, $terms );
+									$terms = array_filter( $terms, function($term) {
+										return null != $term && !empty($term);
+									});
+								} else {
+									$terms = is_object($terms) && $terms instanceof \Tainacan\Entities\Term ? $terms->get_name() : null;
+								}
+
+								if ( false == $terms || null == $terms || empty($terms) || !count($terms) )
+									continue;
+
+								$atividade_item_metadatum->set_value( $terms );
+								
+								if ( $atividade_item_metadatum->validate() ) {
+									\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_item_metadatum );
+								}
+
+							} else {
+								$atividade_item_metadatum->set_value( $instituicao_item_metadatum->get_value() );
+								
+								if ( $atividade_item_metadatum->validate() ) {
+									\Tainacan\Repositories\Item_Metadata::get_instance()->insert( $atividade_item_metadatum );
+								}
 							}
 						}
 					}

@@ -814,3 +814,14 @@ body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-ad
 body.user-is-gestor:not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) table tr .row-actions .inline::before {
     background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9.16504 13.6292H14.0001' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.52001 2.52986C9.0371 1.91186 9.96666 1.82124 10.5975 2.32782C10.6324 2.35531 11.753 3.22586 11.753 3.22586C12.446 3.64479 12.6613 4.5354 12.2329 5.21506C12.2102 5.25146 5.87463 13.1763 5.87463 13.1763C5.66385 13.4393 5.34389 13.5945 5.00194 13.5982L2.57569 13.6287L2.02902 11.3149C1.95244 10.9895 2.02902 10.6478 2.2398 10.3849L8.52001 2.52986Z' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M7.34766 4L10.9825 6.79142' stroke='%23BABABA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
+
+/* Área de perfil do usuário no admin */
+body.user-is-gestor #application-passwords-section,
+body.user-is-gestor tr.user-url-wrap,
+body.user-is-gestor tr.user-rich-editing-wrap,
+body.user-is-gestor tr.user-admin-color-wrap,
+body.user-is-gestor tr.user-comment-shortcuts-wrap,
+body.user-is-gestor tr.user-admin-bar-front-wrap {
+    display: none;
+    visibility: hidden;
+}

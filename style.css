@@ -1,10 +1,10 @@
 /**
  * Theme Name: Visite Museus
- * Description: Tema filho do Blocksy para a Plataforma de promoção dos museus brasileiros - Ibram
+ * Description: Tema filho do Blocksy para a VisiteMuseus - Plataforma de promoção dos museus brasileiros - Ibram
  * Author: wetah
  * Template: blocksy
  * Text Domain: cne
- * Version: 0.13.2
+ * Version: 1.0.1
  */
 
 :root {
@@ -85,6 +85,10 @@ footer .widget-menu li {
 	}
 }
 @media screen and (max-width: 768px) {
+	.home h1 {
+		margin-top: -36px !important;
+  		margin-left: -36px !important;
+	}
 	.regioes-grid > *,
 	.regioes-grid > .wp-container-content-5,
 	.regioes-grid > .wp-container-content-6 {
@@ -368,6 +372,10 @@ footer .widget-menu li {
 		--tainacan-filters-inline-width: 100% !important;
 	}
 }
+.theme-items-list .metadata-alert {
+	display: none;
+	visibility: hidden;
+}
 .theme-items-list .filter-item-forms .datepicker .dropdown-menu {
 	left: -125px;
 }
@@ -437,6 +445,11 @@ footer .widget-menu li {
 	margin-right: 0 !important;
 	margin-bottom: 0 !important;
 	margin-top: 21px !important;
+}
+.theme-items-list #items-list-area #items-list-results .pagination-area {
+	line-height: 40px;
+	padding-left: 0;
+	padding-right: 0;
 }
 .theme-items-list #items-list-area #items-list-results .pagination-area .pagination .pagination-link {
 	height: 2.5em;
