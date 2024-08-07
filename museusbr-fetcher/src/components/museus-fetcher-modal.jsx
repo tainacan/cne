@@ -16,7 +16,7 @@ const MuseusFetcherModal = () => {
         setMuseus,
         museuSelecionado,
         setMuseuSelecionado,
-        fetchMuseusFromMuseusBR,
+        fetchMuseusFromMuseusBRDebounced,
         prepareItemToCreateInstituicao,
         isFetchingMuseus,
         isCreatingInstituicao
@@ -45,8 +45,8 @@ const MuseusFetcherModal = () => {
                             museus={ museus }
                             setMuseus={ setMuseus }
                             fetchMuseus={ _.debounce((inputValue) => {
-                                fetchMuseusFromMuseusBR(inputValue);
-                            }, 500)} />
+                                fetchMuseusFromMuseusBRDebounced(inputValue);
+                            }, 300)} />
                     </FlexBlock>
                     <FlexItem>
                         { isFetchingMuseus ? <Spinner /> : <span style={{ width: '45px', display: 'block' }}></span> }

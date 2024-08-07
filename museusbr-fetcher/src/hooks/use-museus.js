@@ -3,6 +3,7 @@ import { store as noticesStore } from '@wordpress/notices';
 import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
+import { useCallback } from 'react';
 
 const useMuseus = () => {
     const [ museuSelecionado, setMuseuSelecionado ] = useState( null );
@@ -41,6 +42,8 @@ const useMuseus = () => {
             }
         );
 	};
+
+    const fetchMuseusFromMuseusBRDebounced = useCallback( _.debounce(fetchMuseusFromMuseusBR, 600), [] );
 
     const createInstituicaoFromMuseu = (item, itemMetadata, itemDocumentURL) => {
         const instituicoesCollectionId = cne_museusbr_fetcher.instituicoes_collection_id ? cne_museusbr_fetcher.instituicoes_collection_id : 14;
@@ -141,6 +144,7 @@ const useMuseus = () => {
         museuSelecionado,
         setMuseuSelecionado,
         fetchMuseusFromMuseusBR,
+        fetchMuseusFromMuseusBRDebounced,
         createInstituicaoFromMuseu,
         prepareItemToCreateInstituicao,
         isFetchingMuseus,

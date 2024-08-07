@@ -13,7 +13,7 @@ const MuseusBRAutocomplete = ( {
             <ComboboxControl
                 __next40pxDefaultSize={ true }
                 __experimentalRenderItem={ ({ item }) => <MuseuItemCard item={ item } /> }
-                label={ 'Pesquise um museu' }
+                label={ 'Pesquise pelo nome do museu como está no MuseusBR' }
                 options={ museus }
                 onFilterValueChange={ ( inputValue) => fetchMuseus(inputValue) }
                 value={ museuSelecionado ? museuSelecionado.label : '' }
