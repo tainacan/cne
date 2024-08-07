@@ -4,21 +4,6 @@
  * 
  */
 
-
-/**
- * Função para checar se o usuário atual é um gestor de eventos
- */
-function cne_user_is_gestor( $user = NULL ) {
-	
-	if ( !is_user_logged_in() )
-			return false;
-
-	if ( !isset($user) || $user === NULL )
-		$user = wp_get_current_user();
-
-	return is_user_logged_in() && in_array( CNE_GESTOR_DE_EVENTOS_ROLE, $user->roles ? $user->roles : [] );
-}
-
 /**
  * Altera o link de edição de posts de qualquer coleção Tainacan
  */

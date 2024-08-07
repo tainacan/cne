@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n';
 import axios from 'axios';
 import { store as noticesStore } from '@wordpress/notices';
 import apiFetch from '@wordpress/api-fetch';
@@ -37,7 +36,7 @@ const useMuseus = () => {
             .catch( (error) => {
                 setIsFetchingMuseus( false );
                 // createSuccessNotice(
-                //     __( 'Erro ao buscar museus', 'cne' ),
+                //     'Erro ao buscar museus'
                 // );
             }
         );

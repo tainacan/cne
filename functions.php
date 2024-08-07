@@ -11,7 +11,7 @@ require get_stylesheet_directory() . '/inc/utils.php';
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 	
-	wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
+	wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/assets/css/icons-tweaks.css', array(), wp_get_theme()->get('Version') );
 	wp_enqueue_style( 'view-mode-cnegrid', get_stylesheet_directory_uri() . '/assets/css/view-mode-cnegrid.css', array(), wp_get_theme()->get('Version') );
 	
 	if ( is_page( 'cadastro' ) )
@@ -33,7 +33,7 @@ function cne_admin_enqueue_styles() {
 	wp_enqueue_style( 'cne-admin-style', get_stylesheet_directory_uri() . '/admin.css', array(), wp_get_theme()->get('Version') );
 		
 	if ( cne_user_is_gestor() ) {
-		wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/icons.css', array(), wp_get_theme()->get('Version') );
+		wp_enqueue_style( 'cne-tainacan-icons', get_stylesheet_directory_uri() . '/assets/css/icons-tweaks.css', array(), wp_get_theme()->get('Version') );
 		wp_enqueue_style( 'cne-gestor-admin-style', get_stylesheet_directory_uri() . '/assets/css/gestor-admin.css', array(), wp_get_theme()->get('Version') );
 		
 		wp_enqueue_script( 'cne-admin-script', get_stylesheet_directory_uri() . '/admin.js', array('wp-hooks'), wp_get_theme()->get('Version') );
@@ -107,7 +107,7 @@ function cne_manage_collections_table_columns() {
 			unset($columns['date']);
 			
 			return array_merge($columns, array(
-				'description' => __('Descrição', 'cne')
+				'description' => 'Descrição'
 			));
 
 		}, 10, 1 );
@@ -121,7 +121,7 @@ function cne_manage_collections_table_columns() {
 				$current_evento_collection_id = cne_get_evento_collection_id();
 				?>
 				<a class="page-title-action button button-primary cne-button-cta wp-button-with-icon" href="<?php echo admin_url( '?from-instituicao=' . $post_id . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new' );  ?>">
-					<?php _e('Cadastrar nova atividade', 'cne'); ?>
+					Cadastrar nova atividade &nbsp;
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 						<path d="M12 8V16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -333,60 +333,60 @@ function cne_list_collections_in_admin($args, $post_type) {
 		$args['show_in_menu'] = true;
 		$args['menu_icon'] = 'dashicons-bank';
 		$args['menu_position'] = 3;
-		$args['labels']['name'] = __( 'Instituições', 'cne ');// General name for the post type, usually plural. The same and overridden by $post_type_object->label. Default is ‘Posts’ / ‘Pages’.
-		$args['labels']['singular_name'] = __( 'Instituição', 'cne ');// Name for one object of this post type. Default is ‘Post’ / ‘Page’.
-		$args['labels']['add_new'] = __( 'Adicionar nova', 'cne ');// Label for adding a new item. Default is ‘Add New Post’ / ‘Add New Page’.
-		$args['labels']['add_new_item'] = __( 'Adicionar nova instituição', 'cne ');// Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’.
-		$args['labels']['edit_item'] = __( 'Editar instituição', 'cne ');// Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’.
-		$args['labels']['new_item'] = __( 'Nova instituição', 'cne ');// Label for the new item page title. Default is ‘New Post’ / ‘New Page’.
-		$args['labels']['view_item'] = __( 'Ver instituição', 'cne ');// Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’.
-		$args['labels']['view_items'] = __( 'Ver instituições', 'cne ');// Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’.
-		$args['labels']['search_items'] = __( 'Pesquisar instituições', 'cne ');// Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’.
-		$args['labels']['not_found'] = __( 'Nenhuma instituição encontrada', 'cne ');// Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’.
-		$args['labels']['not_found_in_trash'] = __( 'Nenhuma instituição na lixeira', 'cne ');// Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’.
-		$args['labels']['all_items'] = __( 'Todas as instituições', 'cne ');// Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’.
-		$args['labels']['archives'] = __( 'Lista de instituições', 'cne ');// Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’.
-		$args['labels']['attributes'] = __( 'Dados das instituições', 'cne ');// Label for the attributes meta box. Default is ‘Post Attributes’ / ‘Page Attributes’.
-		$args['labels']['insert_into_item'] = __( 'Inserir na instituição', 'cne ');// Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’.
-		$args['labels']['uploaded_to_this_item'] = __( 'Enviado para essa instituição', 'cne ');// Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’.
-		$args['labels']['filter_items_list'] = __( 'Filtrar lista de instituições', 'cne ');// Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’.
-		$args['labels']['items_list_navigation'] = __( 'Navegação na lista de instituições', 'cne ');// Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’.
-		$args['labels']['items_list'] = __( 'Lista de instituições', 'cne ');// Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’.
-		$args['labels']['item_published'] = __( 'Instituição publicada', 'cne ');// Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’
-		$args['labels']['item_published_privately'] = __( 'Instituição publicada de forma privada', 'cne ');// Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’
-		$args['labels']['item_reverted_to_draft'] = __( 'Instituição mantida como rascunho', 'cne ');// Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’
-		$args['labels']['item_trashed'] = __( 'Instituição na lixeira', 'cne ');// Label used when an item is moved to Trash. Default is ‘Post trashed.’ / ‘Page trashed.’
-		$args['labels']['item_scheduled'] = __( 'Instituiçõe agendada', 'cne ');// Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’
-		$args['labels']['item_updated'] = __( 'Instituição atualizada', 'cne ');// Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’
-		$args['labels']['item_link'] = __( 'Link da instituição', 'cne ');// Title for a navigation link block variation. Default is ‘Post Link’ / ‘Page Link’.
-		$args['labels']['item_link_description'] = __( 'Um link para uma instituição', 'cne ');// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
+		$args['labels']['name'] = 'Instituições';// General name for the post type, usually plural. The same and overridden by $post_type_object->label. Default is ‘Posts’ / ‘Pages’.
+		$args['labels']['singular_name'] = 'Instituição';// Name for one object of this post type. Default is ‘Post’ / ‘Page’.
+		$args['labels']['add_new'] = 'Adicionar nova';// Label for adding a new item. Default is ‘Add New Post’ / ‘Add New Page’.
+		$args['labels']['add_new_item'] = 'Adicionar nova instituição';// Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’.
+		$args['labels']['edit_item'] = 'Editar instituição';// Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’.
+		$args['labels']['new_item'] = 'Nova instituição';// Label for the new item page title. Default is ‘New Post’ / ‘New Page’.
+		$args['labels']['view_item'] = 'Ver instituição';// Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’.
+		$args['labels']['view_items'] = 'Ver instituições';// Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’.
+		$args['labels']['search_items'] = 'Pesquisar instituições';// Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’.
+		$args['labels']['not_found'] = 'Nenhuma instituição encontrada';// Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’.
+		$args['labels']['not_found_in_trash'] = 'Nenhuma instituição na lixeira';// Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’.
+		$args['labels']['all_items'] = 'Todas as instituições';// Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’.
+		$args['labels']['archives'] = 'Lista de instituições';// Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’.
+		$args['labels']['attributes'] = 'Dados das instituições';// Label for the attributes meta box. Default is ‘Post Attributes’ / ‘Page Attributes’.
+		$args['labels']['insert_into_item'] = 'Inserir na instituição';// Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’.
+		$args['labels']['uploaded_to_this_item'] = 'Enviado para essa instituição';// Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’.
+		$args['labels']['filter_items_list'] = 'Filtrar lista de instituições';// Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’.
+		$args['labels']['items_list_navigation'] = 'Navegação na lista de instituições';// Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’.
+		$args['labels']['items_list'] = 'Lista de instituições';// Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’.
+		$args['labels']['item_published'] = 'Instituição publicada';// Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’
+		$args['labels']['item_published_privately'] = 'Instituição publicada de forma privada';// Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’
+		$args['labels']['item_reverted_to_draft'] = 'Instituição mantida como rascunho';// Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’
+		$args['labels']['item_trashed'] = 'Instituição na lixeira';// Label used when an item is moved to Trash. Default is ‘Post trashed.’ / ‘Page trashed.’
+		$args['labels']['item_scheduled'] = 'Instituiçõe agendada';// Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’
+		$args['labels']['item_updated'] = 'Instituição atualizada';// Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’
+		$args['labels']['item_link'] = 'Link da instituição';// Title for a navigation link block variation. Default is ‘Post Link’ / ‘Page Link’.
+		$args['labels']['item_link_description'] = 'Um link para uma instituição';// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
     } else if ( array_search($post_type, $tainacan_collections_post_types) !== false ) {
 		$args['show_ui'] = true;
-		$args['labels']['add_new'] = __( 'Adicionar nova atividade', 'cne ');// Label for adding a new item. Default is ‘Add New Post’ / ‘Add New Page’.
-		$args['labels']['add_new_item'] = __( 'Adicionar nova atividade', 'cne ');// Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’.
-		$args['labels']['edit_item'] = __( 'Editar atividade', 'cne ');// Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’.
-		$args['labels']['new_item'] = __( 'Nova atividade', 'cne ');// Label for the new item page title. Default is ‘New Post’ / ‘New Page’.
-		$args['labels']['view_item'] = __( 'Ver atividade', 'cne ');// Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’.
-		$args['labels']['view_items'] = __( 'Ver atividades', 'cne ');// Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’.
-		$args['labels']['search_items'] = __( 'Pesquisar atividades', 'cne ');// Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’.
-		$args['labels']['not_found'] = __( 'Nenhuma atividade encontrada', 'cne ');// Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’.
-		$args['labels']['not_found_in_trash'] = __( 'Nenhuma atividade na lixeira', 'cne ');// Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’.
-		$args['labels']['all_items'] = __( 'Todas as atividades', 'cne ');// Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’.
-		$args['labels']['archives'] = __( 'Lista de atividades', 'cne ');// Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’.
-		$args['labels']['attributes'] = __( 'Dados das atividades', 'cne ');// Label for the attributes meta box. Default is ‘Post Attributes’ / ‘Page Attributes’.
-		$args['labels']['insert_into_item'] = __( 'Inserir na atividade', 'cne ');// Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’.
-		$args['labels']['uploaded_to_this_item'] = __( 'Enviado para essa atividade', 'cne ');// Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’.
-		$args['labels']['filter_items_list'] = __( 'Filtrar lista de atividades', 'cne ');// Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’.
-		$args['labels']['items_list_navigation'] = __( 'Navegação na lista de atividades', 'cne ');// Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’.
-		$args['labels']['items_list'] = __( 'Lista de atividades', 'cne ');// Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’.
-		$args['labels']['item_published'] = __( 'Atividade publicada', 'cne ');// Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’
-		$args['labels']['item_published_privately'] = __( 'Atividade publicada de forma privada', 'cne ');// Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’
-		$args['labels']['item_reverted_to_draft'] = __( 'Atividade mantida como rascunho', 'cne ');// Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’
-		$args['labels']['item_trashed'] = __( 'Atividade na lixeira', 'cne ');// Label used when an item is moved to Trash. Default is ‘Post trashed.’ / ‘Page trashed.’
-		$args['labels']['item_scheduled'] = __( 'Instituiçõe agendada', 'cne ');// Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’
-		$args['labels']['item_updated'] = __( 'Atividade atualizada', 'cne ');// Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’
-		$args['labels']['item_link'] = __( 'Link da atividade', 'cne ');// Title for a navigation link block variation. Default is ‘Post Link’ / ‘Page Link’.
-		$args['labels']['item_link_description'] = __( 'Um link para uma atividade', 'cne ');// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
+		$args['labels']['add_new'] = 'Adicionar nova atividade';// Label for adding a new item. Default is ‘Add New Post’ / ‘Add New Page’.
+		$args['labels']['add_new_item'] = 'Adicionar nova atividade';// Label for adding a new singular item. Default is ‘Add New Post’ / ‘Add New Page’.
+		$args['labels']['edit_item'] = 'Editar atividade';// Label for editing a singular item. Default is ‘Edit Post’ / ‘Edit Page’.
+		$args['labels']['new_item'] = 'Nova atividade';// Label for the new item page title. Default is ‘New Post’ / ‘New Page’.
+		$args['labels']['view_item'] = 'Ver atividade';// Label for viewing a singular item. Default is ‘View Post’ / ‘View Page’.
+		$args['labels']['view_items'] = 'Ver atividades';// Label for viewing post type archives. Default is ‘View Posts’ / ‘View Pages’.
+		$args['labels']['search_items'] = 'Pesquisar atividades';// Label for searching plural items. Default is ‘Search Posts’ / ‘Search Pages’.
+		$args['labels']['not_found'] = 'Nenhuma atividade encontrada';// Label used when no items are found. Default is ‘No posts found’ / ‘No pages found’.
+		$args['labels']['not_found_in_trash'] = 'Nenhuma atividade na lixeira';// Label used when no items are in the Trash. Default is ‘No posts found in Trash’ / ‘No pages found in Trash’.
+		$args['labels']['all_items'] = 'Todas as atividades';// Label to signify all items in a submenu link. Default is ‘All Posts’ / ‘All Pages’.
+		$args['labels']['archives'] = 'Lista de atividades';// Label for archives in nav menus. Default is ‘Post Archives’ / ‘Page Archives’.
+		$args['labels']['attributes'] = 'Dados das atividades';// Label for the attributes meta box. Default is ‘Post Attributes’ / ‘Page Attributes’.
+		$args['labels']['insert_into_item'] = 'Inserir na atividade';// Label for the media frame button. Default is ‘Insert into post’ / ‘Insert into page’.
+		$args['labels']['uploaded_to_this_item'] = 'Enviado para essa atividade';// Label for the media frame filter. Default is ‘Uploaded to this post’ / ‘Uploaded to this page’.
+		$args['labels']['filter_items_list'] = 'Filtrar lista de atividades';// Label for the table views hidden heading. Default is ‘Filter posts list’ / ‘Filter pages list’.
+		$args['labels']['items_list_navigation'] = 'Navegação na lista de atividades';// Label for the table pagination hidden heading. Default is ‘Posts list navigation’ / ‘Pages list navigation’.
+		$args['labels']['items_list'] = 'Lista de atividades';// Label for the table hidden heading. Default is ‘Posts list’ / ‘Pages list’.
+		$args['labels']['item_published'] = 'Atividade publicada';// Label used when an item is published. Default is ‘Post published.’ / ‘Page published.’
+		$args['labels']['item_published_privately'] = 'Atividade publicada de forma privada';// Label used when an item is published with private visibility. Default is ‘Post published privately.’ / ‘Page published privately.’
+		$args['labels']['item_reverted_to_draft'] = 'Atividade mantida como rascunho';// Label used when an item is switched to a draft. Default is ‘Post reverted to draft.’ / ‘Page reverted to draft.’
+		$args['labels']['item_trashed'] = 'Atividade na lixeira';// Label used when an item is moved to Trash. Default is ‘Post trashed.’ / ‘Page trashed.’
+		$args['labels']['item_scheduled'] = 'Instituiçõe agendada';// Label used when an item is scheduled for publishing. Default is ‘Post scheduled.’ / ‘Page scheduled.’
+		$args['labels']['item_updated'] = 'Atividade atualizada';// Label used when an item is updated. Default is ‘Post updated.’ / ‘Page updated.’
+		$args['labels']['item_link'] = 'Link da atividade';// Title for a navigation link block variation. Default is ‘Post Link’ / ‘Page Link’.
+		$args['labels']['item_link_description'] = 'Um link para uma atividade';// Description for a navigation link block variation. Default is ‘A link to a post.’ / ‘A link to a page.’
 	}
 
 	// Remove da maioria dos post types a opção de edição em linha na tabela
@@ -420,10 +420,10 @@ function cne_add_collections_to_toolbar($admin_bar) {
 
 	$admin_bar->add_menu( array(	
 		'id'    => 'colecao-instituicoes',
-		'title' => __( 'Gestão de instituições', 'cne' ),
+		'title' => 'Gestão de instituições',
 		'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
 		'meta'  => array(
-			'title' => __( 'Acesse a página que lista todas as suas instituições', 'cne' ),        
+			'title' => 'Acesse a página que lista todas as suas instituições',        
 		),
 	));
 
@@ -434,7 +434,7 @@ function cne_add_collections_to_toolbar($admin_bar) {
 			$instituicoes_items->the_post();
 			$admin_bar->add_menu( array(
 				'id'    => 'instituicao-' . get_the_ID(),
-				'title' => __( 'Minha instituição', 'cne' ),
+				'title' => 'Minha instituição',
 				'href'  =>  admin_url( 'admin.php?page=instituicao&id=' . get_the_ID() ),
 				'meta'  => array(
 					'title' => get_the_title()
@@ -447,10 +447,10 @@ function cne_add_collections_to_toolbar($admin_bar) {
 		// Adiciona coleção de instituições
 		$admin_bar->add_menu( array(
 			'id'    => 'lista-instituicoes',
-			'title' => __( 'Minhas instituições', 'cne' ),
+			'title' => 'Minhas instituições',
 			'href'  => admin_url( 'edit.php?post_type=' . cne_get_instituicoes_collection_post_type() ),
 			'meta'  => array(
-				'title' => __( 'Minhas instituições', 'cne' ),        
+				'title' => 'Minhas instituições',        
 			),
 		));
 
@@ -475,10 +475,10 @@ function cne_add_collections_to_toolbar($admin_bar) {
 		// Adiciona coleções de eventos
 		$admin_bar->add_menu( array(
 			'id'    => 'colecoes-eventos',
-			'title' => __( 'Eventos', 'cne' ),
+			'title' => 'Eventos', 'cne',
 			'href'  => '',
 			'meta'  => array(
-				'title' => __( 'Eventos', 'cne' ),    
+				'title' => 'Eventos', 'cne',    
 			),
 		));
 
@@ -536,8 +536,8 @@ function cne_register_tainacan_view_modes() {
 
 		// Grid
 		tainacan_register_view_mode('cnegrid', array(
-			'label' => __( 'Cartão do Visite Museus', 'cne' ),
-			'description' => __( 'Uma grade de itens de atividades e instituições feita para o VisiteMUSEUS', 'cne' ),
+			'label' => 'Cartão do Visite Museus',
+			'description' => 'Uma grade de itens de atividades e instituições feita para o VisiteMUSEUS',
 			'icon' => '<span class="icon"><i class="tainacan-icon tainacan-icon-viewcards tainacan-icon-1-25em"></i></span>',
 			'dynamic_metadata' => false,
 			'template' => get_stylesheet_directory() . '/tainacan/view-mode-cnegrid.php'
@@ -545,8 +545,8 @@ function cne_register_tainacan_view_modes() {
 
 		// Grid 2
 		tainacan_register_view_mode('cnegrid2', array(
-			'label' => __( 'Cartão de instituição', 'cne' ),
-			'description' => __( 'Uma grade de itens de instituições feita para o VisiteMUSEUS', 'cne' ),
+			'label' => 'Cartão de instituição',
+			'description' => 'Uma grade de itens de instituições feita para o VisiteMUSEUS',
 			'icon' => '<span class="icon"><i class="tainacan-icon tainacan-icon-viewrecords tainacan-icon-1-25em"></i></span>',
 			'dynamic_metadata' => false,
 			'template' => get_stylesheet_directory() . '/tainacan/view-mode-cnegrid.php'
@@ -640,6 +640,7 @@ require get_stylesheet_directory() . '/inc/gestor-tweaks.php';
 require get_stylesheet_directory() . '/inc/customizer.php';
 require get_stylesheet_directory() . '/inc/instituicao.php';
 require get_stylesheet_directory() . '/inc/opcoes-das-colecoes.php';
+require get_stylesheet_directory() . '/inc/opcoes-das-secoes-de-metadados.php';
 require get_stylesheet_directory() . '/inc/block-styles.php';
 require get_stylesheet_directory() . '/inc/block-filters.php';
 require get_stylesheet_directory() . '/inc/block-bindings.php';

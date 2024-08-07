@@ -3,20 +3,19 @@
 /**
  * Alterações que impactam o template das páginas de Atividade de Eventos (atividade-single.php)
  */
-
-const atividade_date_and_time_metadata_ids = [
+const ATIVIDADE_DATE_AND_TIME_METADATA_IDS = [
 	'38424', // Data de Início
 	'38419', // Data de Término
 	'38421', // Horário de Início
 	'38416', // Horário de Término
 ];
-const atividade_other_important_metadata_ids = [
+const ATIVIDADE_OTHER_IMPORTANT_METADATA_IDS = [
 	'85404', // Ingressos
 	'48653', // Classificação indicativa
 	'82056', // Formato
 	'87133', // A atividade é gratuita?
 ];
-const atividade_metadata_basic_args = array(
+const ATIVIDADE_METADATA_BASIC_ARGS = array(
 	'display_slug_as_class' => true,
 	'before' 				=> '<div class="tainacan-item-section__metadatum metadata-type-$type" id="$id">',
 	'after' 				=> '</div>',
@@ -36,20 +35,19 @@ function cne_atividade_single_page_hero_title_before() {
 		if ( $item->can_edit() ) {
 			$url = $item->get_edit_url();
 
-			if ( $url ) {
-				$link = '<div class="wp-block-buttons" style="float: right;">
-						<div class="wp-block-button">
-							<a href="' . esc_url( $url ) . '" class="is-style-outline wp-block-button__link wp-element-button">' .
-								__('Editar dados da atividade', 'cne') . '&nbsp;
-								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-									<path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
-							</a>
-						</div>
-					</div>';
-				echo $link;
-			}
+			if ( $url ) : ?>
+				<div class="wp-block-buttons" style="float: right;">
+					<div class="wp-block-button">
+						<a href="<?php echo esc_url( $url ); ?>" class="is-style-outline wp-block-button__link wp-element-button">
+							Editar dados da atividade &nbsp;
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+								<path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+			<?php endif;
 		} 
 	}
 }
@@ -138,10 +136,10 @@ function cne_atividade_single_page_hero_title_after() {
 					
 					$metadata_args = array_merge(
 						array(
-							'metadata__in' => atividade_date_and_time_metadata_ids,
+							'metadata__in' => ATIVIDADE_DATE_AND_TIME_METADATA_IDS,
 							'before_title' => '<h2 class="screen-reader-text tainacan-metadata-label">',
 						),
-						atividade_metadata_basic_args
+						ATIVIDADE_METADATA_BASIC_ARGS
 					);
 					tainacan_the_metadata($metadata_args);
 
@@ -217,10 +215,10 @@ function cne_atividade_single_page_important_metadata() {
 	<?php 
 		$metadata_args = array_merge(
 			array(
-				'metadata__in' => atividade_other_important_metadata_ids,
+				'metadata__in' => ATIVIDADE_OTHER_IMPORTANT_METADATA_IDS,
 				'before_title' => '<h2 class="tainacan-metadata-label">',
 			),
-			atividade_metadata_basic_args
+			ATIVIDADE_METADATA_BASIC_ARGS
 		);
 		tainacan_the_metadata($metadata_args);
 	?>
@@ -283,6 +281,19 @@ function cne_atividade_single_page_bottom() {
 	<?php endif;
 }
 add_action('blocksy:single:content:bottom', 'cne_atividade_single_page_bottom', 2);
+
+/**
+ * Ao invés do slug, usa o 'cne_area_da_secao_de_metadados' para definir a área da seção de metadados.
+ * Isso permite estilizar seções de metadados em diferentes coleções de eventos de uma mesma forma.
+ */
+function cne_atividade_single_page_metadata_section_args($args, $metadata_section) {
+	$metadata_section_area = get_post_meta($metadata_section->get_ID(), 'cne_area_da_secao_de_metadados', true);
+	if ( $metadata_section_area )
+		$args['before_name'] = '<h2 class="tainacan-single-item-section" id="metadata-section-' . $metadata_section_area  . '">';
+	
+	return $args;
+}
+add_filter('tainacan-get-metadata-section-as-html-filter-args', 'cne_atividade_single_page_metadata_section_args', 10, 2);
 
 /**
  * Sobrescreve o conteúdo da single da atividade

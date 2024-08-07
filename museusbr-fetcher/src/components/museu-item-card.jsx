@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n';
 import { Flex, FlexBlock, FlexItem, Icon, __experimentalTruncate as Truncate } from '@wordpress/components';
 
 function MuseuItemCard( { item } ) {
@@ -12,12 +11,12 @@ function MuseuItemCard( { item } ) {
             }
         </FlexItem>
         <FlexBlock>
-            <strong>{ label ? label : <em>{ __( 'Museu sem título', 'cne' ) }</em> }</strong>
+            <strong>{ label ? label : <em>{ 'Museu sem título' }</em> }</strong>
             { 
                 author ?
                     <>
                         <br />
-                        <small>{ __( 'por', 'cne' ) } <em>{ author }</em></small>
+                        <small>{ 'por' } <em>{ author }</em></small>
                     </> :
                     null
             }

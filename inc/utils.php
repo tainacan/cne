@@ -7,13 +7,27 @@
 const CNE_GESTOR_DE_EVENTOS_ROLE = 'tainacan-gestor-de-eventos';
 
 // Valor padrão para a coleção de Instituições. Será definido no customizer.
-const CNE_INSTITUICOES_COLLECTION_ID = 14;//267;
+const CNE_INSTITUICOES_COLLECTION_ID = 14;
 
 // Valor padrão para a coleção de Evento atual. Será definido no customizer.
-const CNE_EVENTO_COLLECTION_ID = 15;//267;
+const CNE_EVENTO_COLLECTION_ID = 15;
 
 // Valor padrão para o metadado nível repositório que amarra os eventos às instituições. Será definido no customizer.
 const CNE_INSTITUICOES_RELATIONSHIP_METADATA_ID = 38430;
+
+/**
+ * Função para checar se o usuário atual é um gestor de eventos
+ */
+function cne_user_is_gestor( $user = NULL ) {
+	
+	if ( !is_user_logged_in() )
+			return false;
+
+	if ( !isset($user) || $user === NULL )
+		$user = wp_get_current_user();
+
+	return is_user_logged_in() && in_array( CNE_GESTOR_DE_EVENTOS_ROLE, $user->roles ? $user->roles : [] );
+}
 
 /**
  * Função utilitaria para obter o id da coleção Museus

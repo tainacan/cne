@@ -20,7 +20,7 @@ function cne_register_block_bindings() {
     }
 
 	register_block_bindings_source( 'cne/collection-total-items', array(
-		'label'              => __( 'Total de Itens da Coleção', 'cne' ),
+		'label'              => 'Total de Itens da Coleção',
 		'get_value_callback' => 'cne_bindings_callback'
 	) );
 }

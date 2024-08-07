@@ -6,8 +6,6 @@ import { CreateButton } from './create-button';
 
 import useMuseus from '../hooks/use-museus';
 
-import { __ } from '@wordpress/i18n';
-
 const MuseusFetcherModal = () => {
     const [ isOpen, setOpen ] = useState( false );
     const openModal = () => setOpen( true );
@@ -27,11 +25,11 @@ const MuseusFetcherModal = () => {
     return (
         <>
             <Button size="compact" __next40pxDefaultSize={ true } variant="primary" onClick={ openModal }>
-                { __( 'Importar instituição do MuseusBR', 'cne' ) }
+                { 'Importar instituição do MuseusBR' }
             </Button>
             { isOpen && (
             <Modal 
-                title={ __('Crie uma instituição a partir de dados existentes do MuseusBR', 'cne') } 
+                title={ 'Crie uma instituição a partir de dados existentes do MuseusBR' } 
                 icon={ <Icon icon="bank" /> }
                 onRequestClose={ closeModal }
                 size="large"

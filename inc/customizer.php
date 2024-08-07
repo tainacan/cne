@@ -6,6 +6,9 @@
  */
 function cne_options_panel($options) {
 
+    if ( !defined('TAINACAN_VERSION') )
+        return $options; 
+
     $collections_repository = \Tainacan\Repositories\Collections::get_instance();
     $collections_options = [];
     $collections = $collections_repository->fetch()->posts;
@@ -37,7 +40,7 @@ function cne_options_panel($options) {
     }
     
     $cne_extra_options = [
-        'title' => __('Configurações do Visite Museus', 'cne'),
+        'title' => 'Configurações do Visite Museus',
         'container' => [ 'priority' => 8 ],
         'options' => [
             'cne_list_section_options' => [
@@ -45,7 +48,7 @@ function cne_options_panel($options) {
                 'setting' => [ 'transport' => 'postMessage' ],
                 'inner-options' => [
                     'cne_instituicoes_collection' => [
-                        'label' => __( 'Coleção de Instituições', 'cne' ),
+                        'label' =>  'Coleção de Instituições',
                         'type' => 'ct-select',
                         'value' => cne_get_instituicoes_collection_id(),
                         'view' => 'text',
@@ -56,7 +59,7 @@ function cne_options_panel($options) {
                         )
                     ],
                     'cne_evento_collection' => [
-                        'label' => __( 'Coleção de Evento Atual', 'cne' ),
+                        'label' => 'Coleção de Evento Atual',
                         'type' => 'ct-select',
                         'value' => cne_get_evento_collection_id(),
                         'view' => 'text',
@@ -67,7 +70,7 @@ function cne_options_panel($options) {
                         )
                     ],
                     'cne_instituicoes_relationship_metadata' => [
-                        'label' => __( 'Relacionamento que vincular instituições aos eventos', 'cne' ),
+                        'label' => 'Relacionamento que vincular instituições aos eventos',
                         'type' => 'ct-select',
                         'value' => cne_get_instituicoes_relationship_metadata_id(),
                         'view' => 'text',

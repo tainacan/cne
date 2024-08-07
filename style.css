@@ -2,9 +2,13 @@
  * Theme Name: Visite Museus
  * Description: Tema filho do Blocksy para a VisiteMuseus - Plataforma de promoção dos museus brasileiros - Ibram
  * Author: wetah
+ * Author URI: https://github.com/tainacan/cne/wiki/Documenta%C3%A7%C3%A3o
  * Template: blocksy
  * Text Domain: cne
- * Version: 1.0.1
+ * Requires at least: 6.6
+ * Requires PHP: 7.0
+ * License: GNU General Public License v3 or later
+ * Version: 1.1.0
  */
 
 :root {

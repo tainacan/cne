@@ -16,7 +16,7 @@ if ( function_exists( 'register_block_style' ) ) {
 			'core/paragraph',
 			array(
 				'name'  => 'nowrap',
-				'label' => esc_html__( 'Sem quebra de linha', 'cne' ),
+				'label' => 'Sem quebra de linha',
 				'inline_style' => 'p.is-style-nowrap { white-space: nowrap; }',
 			)
 		);
@@ -24,7 +24,7 @@ if ( function_exists( 'register_block_style' ) ) {
 			'core/button',
 			array(
 				'name'  => 'nowrap',
-				'label' => esc_html__( 'Sem quebra de linha', 'cne' ),
+				'label' => 'Sem quebra de linha',
 				'inline_style' => '.wp-block-button.is-style-nowrap .wp-block-button__link { white-space: nowrap; }',
 			)
 		);

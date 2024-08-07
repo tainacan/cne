@@ -1,4 +1,3 @@
-import { __ } from '@wordpress/i18n';
 import { ComboboxControl } from '@wordpress/components';
 import { MuseuItemCard } from './museu-item-card';
 
@@ -14,7 +13,7 @@ const MuseusBRAutocomplete = ( {
             <ComboboxControl
                 __next40pxDefaultSize={ true }
                 __experimentalRenderItem={ ({ item }) => <MuseuItemCard item={ item } /> }
-                label={ __( 'Pesquise um museu', 'cne' ) }
+                label={ 'Pesquise um museu' }
                 options={ museus }
                 onFilterValueChange={ ( inputValue) => fetchMuseus(inputValue) }
                 value={ museuSelecionado ? museuSelecionado.label : '' }

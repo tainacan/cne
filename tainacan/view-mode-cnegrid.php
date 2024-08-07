@@ -101,7 +101,7 @@
 						<?php
 							if ( $atividade_passada ): ?>
 								<div class="cne-grid-item-past-tag">
-									<?php echo __('Atividade encerrada', 'cne'); ?>
+									Atividade encerrada
 								</div>
 							<?php endif;
 
@@ -162,7 +162,7 @@
 						<i class="tainacan-icon tainacan-icon-48px tainacan-icon-items"></i>
 					</span>
 				</p>
-				<p><?php echo __( 'Nenhum item encontrado.','cne' ); ?></p>
+				<p>Nenhum item encontrado</p>
 			</div>
 		</section>
 	</div>

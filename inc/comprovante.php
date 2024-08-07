@@ -33,8 +33,8 @@ class CNE_Comprovante_Page {
     public function add_menu_comprovante_page() {
         add_submenu_page(
             '', // Definindo o parent como nulo para não criar um menu, apenas registrar a página
-            __('Comprovante', 'cne'),
-            __('Comprovante', 'cne'),
+            'Comprovante',
+            'Comprovante',
             'read',
             'comprovante',
             array($this, 'render_comprovante_page')
@@ -47,7 +47,7 @@ class CNE_Comprovante_Page {
     function comprovante_admin_title($admin_title, $title) {
         
         if ( isset( $_GET['page'] ) && $_GET['page'] === 'comprovante' )
-            $admin_title = __( 'Comprovante de Inscrição', 'cne');
+            $admin_title = 'Comprovante de Inscrição';
         
         return $admin_title;
     }
@@ -87,8 +87,8 @@ class CNE_Comprovante_Page {
         if ( !isset($_GET['id']) ) {
             ?>  
                 <div class="wrap">
-                    <h1><?php _e( 'Comprovante', 'cne'); ?></h1>
-                    <p><?php _e( 'ID da instituição não informado.', 'cne' ); ?></p>
+                    <h1>Comprovante</h1>
+                    <p>ID da instituição não informado.</p>
                 </div>
             <?php
             
@@ -102,7 +102,7 @@ class CNE_Comprovante_Page {
         if ( !$comprovante_items->have_posts() ) {
             ?>
                 <div class="wrap">
-                   <h1><?php  _e('Instituição não encontrada', 'cne'); ?></h1>
+                   <h1>Instituição não encontrada</h1>
                 </div>
             <?php 
 
@@ -116,8 +116,8 @@ class CNE_Comprovante_Page {
 
         if ( !( $current_evento_collection instanceof \Tainacan\Entities\Collection ) ) {
             ?>
-                <h2><?php _e('Evento', 'cne'); ?></h2>
-                <p><?php _e('Nenhum evento configurado', 'cne'); ?></p>
+                <h2>Evento</h2>
+                <p>Nenhum evento configurado</p>
             <?php
             return;
         }
@@ -127,7 +127,7 @@ class CNE_Comprovante_Page {
         ?>
             <div class="comprovante-header">
                 <div class="wrap">
-                    <h1><?php  _e('Comprovante de Inscrição', 'cne'); ?></h1>
+                    <h1>Comprovante de Inscrição</h1>
                     <div class="comprovante-logo">
                         <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo.svg'; ?>" alt="Logo do Visite Museus" class="logo">
                         <p>Plataforma de promoção dos museus brasileiros</p>
@@ -143,7 +143,7 @@ class CNE_Comprovante_Page {
             </div>
             <div class="comprovante-footer">
                 <div class="wrap">
-                    <h1 style="text-transform: uppercase;"><?php  _e('Instituto Brasileiro de Museus', 'cne'); ?></h1>
+                    <h1 style="text-transform: uppercase;">Instituto Brasileiro de Museus</h1>
                     <p>visitemuseus@museus.gov.br</p>
                     <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/regua_footer_comprovante.png'; ?>" alt="Logos do Sistema Braileiro de Museus, do Instituto Brasileiro de Museus e do Ministério da Cultura, Governo Federal." class="logo">
                 </div>
