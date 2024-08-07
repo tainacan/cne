@@ -1,3 +1,5 @@
+![image](/assets/images/logo-horizontal.svg)
+
 # CNE - Tema para o projeto VisiteMuseus
 
 ## Descrição
