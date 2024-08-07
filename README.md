@@ -1,10 +1,12 @@
-![image](/assets/images/logo-horizontal.svg)
+![Logo do VisiteMuseus](/assets/images/logo-horizontal.svg)
 
 # CNE - Tema para o projeto VisiteMuseus
 
 ## Descrição
 
 Este repositório contém o código do tema WordPress usado no site **[VisiteMuseus](https://visite.museus.gov.br), uma Plataforma de promoção dos museus brasileiros**. O tema em si tem como slug e nome de pasta `cne`, sigla do antigo nome *Cadastro Nacional de Eventos*.
+
+Para além das funcionalidades geralmente encontradas em temas (folhas de estilo, customizações de bloco), este projeto contém diversas implementações específicas para o projeto. O sistema adapta as coleções do Tainacan para serem usadas em cenário de instituições e eventos recorrentes. Há também restrições e adaptações da interface e do fluxo de navegação para os usuários Gestores de Eventos. Por fim, uma funcionalidade especial permite a importação de dados de instituições a partir do Cadastro Nacional de Museus ([MuseusBR](https://cadastro.museus.gov.br)).
 
 ## Table of Contents
 
