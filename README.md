@@ -55,7 +55,7 @@ Outras configurações já feitas mas que não possuem modo de exportação envo
 
 ## Documentação
 
-Para uma explicação técnica sobre as funcionalidades implementadas neste projeto, acesse nossa [Documentação](https://github.com/tainacan/cne/wiki/Documenta%C3%A7%C3%A3o).
+Para uma explicação técnica sobre as funcionalidades implementadas neste projeto, acesse nossa [Documentação](https://github.com/tainacan/cne/wiki).
 
 ## Compilação
 
