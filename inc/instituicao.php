@@ -403,7 +403,7 @@ class CNE_Instituicao_Page
                                     <a href="<?php echo get_delete_post_link($atividade->get_ID()); ?>" class="submitdelete" aria-label="Mover “<?php echo $atividade->get_title(); ?>” para a lixeira">Lixeira</a> |
                                 </span>
                                 <span class="view">
-                                    <a href="<?php echo get_permalink($atividade->get_ID()); ?>" rel="bookmark" aria-label="Ver “<?php echo $atividade->get_title(); ?>”">Ver no site</a>
+                                    <a href="<?php echo get_permalink($atividade->get_ID()); ?>" rel="bookmark" aria-label="Ver “<?php echo $atividade->get_title(); ?>”">Ver</a>
                                 </span>
                             </div>
                         </td>

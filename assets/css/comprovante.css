@@ -157,4 +157,8 @@
         align-items: center;
         margin: 0;
     }
+    .admin_page_comprovante .comprovante-footer img {
+        max-width: 398px;
+        margin: 14px;
+    }
 }

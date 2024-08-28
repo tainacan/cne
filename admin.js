@@ -49,9 +49,7 @@ if (wp && wp.hooks) {
 
                         const newPageSubtitle = document.createElement('p');
 
-                        if ( item.status === 'auto-draft' )
-                            newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Cadastrar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
-                        else
+                        if ( item.status !== 'auto-draft' )
                             newPageSubtitle.innerText = 'Preencha os campos no seu tempo. As informações serão salvas automaticamente.';
 
                         newPageSubtitle.classList.add('cne-tainacan-page-subtitle');

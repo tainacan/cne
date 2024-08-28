@@ -144,7 +144,7 @@ class CNE_Comprovante_Page {
             <div class="comprovante-footer">
                 <div class="wrap">
                     <h1 style="text-transform: uppercase;">Instituto Brasileiro de Museus</h1>
-                    <p>visitemuseus@museus.gov.br</p>
+                    <p>visite.museus@museus.gov.br</p>
                     <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/regua_footer_comprovante.png'; ?>" alt="Logos do Sistema Braileiro de Museus, do Instituto Brasileiro de Museus e do Ministério da Cultura, Governo Federal." class="logo">
                 </div>
             </div>
