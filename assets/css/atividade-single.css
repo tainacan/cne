@@ -385,7 +385,7 @@
 .single .tainacan-item-section__metadata .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: contain;
     background-color: var(--theme-palette-color-7);
     font-size: 0;
     width: 32px;
@@ -400,7 +400,7 @@
 /* Area de compartilhar */
 .single .ct-share-box {
     grid-area: compartilhe;
-    width: 100%;
+    width: fit-content;
     border: 1px solid var(--theme-palette-color-5);
     border-radius: 8px;
     padding: 1.75em 2em;
@@ -409,7 +409,7 @@
 }
 .single .ct-share-box[data-type="type-1"] > div {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(54px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(33px, 1fr));
 }
 .single .atividade-evento-area + .ct-share-box {
     display: none;
@@ -418,9 +418,6 @@
 @media screen and (max-width: 768px) {
     .single .ct-share-box {
         padding: 1.5em 1.75em;
-    }
-    .single .ct-share-box[data-type="type-1"] > div {
-        grid-template-columns: repeat(auto-fill, minmax(37px, 1fr));
     }
 }
 
@@ -556,7 +553,7 @@
 .single .atividade-instituicao-area .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: contain;
     color: var(--theme-palette-color-1);
     font-size: 0;
     width: 32px;

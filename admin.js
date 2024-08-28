@@ -27,93 +27,96 @@ if (wp && wp.hooks) {
 
     function tainacanItemEditionItemLoaded (collection, item) {
 
-        // Adiciona título customizado para a página de edição de itens
-        const pageContainer = document.getElementById('collection-page-container');
-        if (pageContainer) {
-            const newPageTitle = document.createElement('h1');
-            newPageTitle.innerText = ( item.status === 'auto-draft' ? 'Inscrição da ' : 'Edição da ' ) + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'Instituição' : 'Atividade' );
-            newPageTitle.classList.add('cne-tainacan-page-title');
-
-            const newPageSubtitle = document.createElement('p');
-
-            if ( item.status === 'auto-draft' )
-                newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Cadastrar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
-            else
-                newPageSubtitle.innerText = 'Preencha os campos no seu tempo. As informações serão salvas automaticamente.';
-
-            newPageSubtitle.classList.add('cne-tainacan-page-subtitle');
-
-            const statusWrapper = document.createElement('div');
-            statusWrapper.classList.add('cne-tainacan-page-status-wrapper');
-
-            const statusLabel = document.createElement('span');
-            statusLabel.classList.add('cne-tainacan-page-status-label');
-            statusLabel.innerText = tainacan_plugin.i18n['status_' + item.status];
-
-            const statusIcon = document.createElement('i');
-            statusIcon.classList.add('tainacan-icon');
-            statusIcon.classList.add('tainacan-icon-1-25em');
-            switch ( item.status ) {
-                case 'auto-draft':
-                    statusWrapper.style.color = '#3C4D76';
-                    statusIcon.classList.add('tainacan-icon-autodraft');
-                    break;
-                case 'draft':
-                    statusWrapper.style.color = '#9B9B9B';
-                    statusIcon.classList.add('tainacan-icon-draft');
-                    break;
-                case 'private':
-                    statusIcon.classList.add('tainacan-icon-private');
-                    break;
-                case 'publish':
-                    statusWrapper.style.color = '#218963';
-                    statusIcon.classList.add('tainacan-icon-public');
-                    break;
-            }
-
-            statusWrapper.appendChild(statusIcon);
-            statusWrapper.appendChild(statusLabel);
-
-            const newPageTitleContainer = document.createElement('div');
-            newPageTitleContainer.classList.add('cne-tainacan-page-title-container');
-            newPageTitleContainer.appendChild(statusWrapper);
-            newPageTitleContainer.appendChild(newPageTitle);
-            newPageTitleContainer.appendChild(newPageSubtitle);
-
-            pageContainer.insertBefore(newPageTitleContainer, pageContainer.firstChild);
-        }
-
         // Extrai ID da Coleção da URL (já que não podemos confiar no objeto collection de estar carregado)
         const itemEditionUrl = document.location && document.location.hash ? document.location.hash : '';
         const regexForCollectionId = /#\/collections\/(\d+)\/items\/(?:\d+|new)/;
         const matches = itemEditionUrl.match(regexForCollectionId);
         const collectionId =  matches ? matches[1] : null;
 
-        if ( collectionId && !isNaN(collectionId) && collectionId !== cne_theme.instituicoes_collection_id ) {
+        if ( collectionId && !isNaN(collectionId) ) {
             const collectionEndpoint = tainacan_plugin.tainacan_api_url + '/collections/' + collectionId + '?fetch_only=cne_kit_digital_do_evento';
             fetch(collectionEndpoint)
                 .then(response => response.json())
                 .then(data => {
                     collection = data;
+
+                    // Adiciona título customizado para a página de edição de itens
+                    const pageContainer = document.getElementById('collection-page-container');
+                    if (pageContainer) {
+                        const newPageTitle = document.createElement('h1');
+                        newPageTitle.innerText = ( item.status === 'auto-draft' ? 'Inscrição da ' : 'Edição da ' ) + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'Instituição' : 'Atividade' );
+                        newPageTitle.classList.add('cne-tainacan-page-title');
+
+                        const newPageSubtitle = document.createElement('p');
+
+                        if ( item.status === 'auto-draft' )
+                            newPageSubtitle.innerText = 'As informações serão salvas automaticamente desde que você clique em "Cadastrar nova ' + ( ( collection.id == cne_theme.instituicoes_collection_id ) ? 'instituição' : 'atividade' ) + '" no rodapé da página ao menos uma vez.';
+                        else
+                            newPageSubtitle.innerText = 'Preencha os campos no seu tempo. As informações serão salvas automaticamente.';
+
+                        newPageSubtitle.classList.add('cne-tainacan-page-subtitle');
+
+                        const statusWrapper = document.createElement('div');
+                        statusWrapper.classList.add('cne-tainacan-page-status-wrapper');
+
+                        const statusLabel = document.createElement('span');
+                        statusLabel.classList.add('cne-tainacan-page-status-label');
+                        statusLabel.innerText = tainacan_plugin.i18n['status_' + item.status];
+
+                        const statusIcon = document.createElement('i');
+                        statusIcon.classList.add('tainacan-icon');
+                        statusIcon.classList.add('tainacan-icon-1-25em');
+                        switch ( item.status ) {
+                            case 'auto-draft':
+                                statusWrapper.style.color = '#3C4D76';
+                                statusIcon.classList.add('tainacan-icon-autodraft');
+                                break;
+                            case 'draft':
+                                statusWrapper.style.color = '#9B9B9B';
+                                statusIcon.classList.add('tainacan-icon-draft');
+                                break;
+                            case 'private':
+                                statusIcon.classList.add('tainacan-icon-private');
+                                break;
+                            case 'publish':
+                                statusWrapper.style.color = '#218963';
+                                statusIcon.classList.add('tainacan-icon-public');
+                                break;
+                        }
+
+                        statusWrapper.appendChild(statusIcon);
+                        statusWrapper.appendChild(statusLabel);
+
+                        const newPageTitleContainer = document.createElement('div');
+                        newPageTitleContainer.classList.add('cne-tainacan-page-title-container');
+                        newPageTitleContainer.appendChild(statusWrapper);
+                        newPageTitleContainer.appendChild(newPageTitle);
+                        newPageTitleContainer.appendChild(newPageSubtitle);
+
+                        pageContainer.insertBefore(newPageTitleContainer, pageContainer.firstChild);
+                    }
                     
-                   // Adiciona botão de link para o kit digital do evento
-                    if (collection && collection.cne_kit_digital_do_evento) {
-                        const documentField = document.getElementsByClassName('document-field');
+                    if ( collectionId !== cne_theme.instituicoes_collection_id ) {
 
-                        if ( documentField.length ) {
-                            const wrapper = document.createElement('div');
-                            wrapper.style.width = '100%';
-                            wrapper.style.textAlign = 'right';
-                            wrapper.style.margin = '0.5rem 0';
+                        // Adiciona botão de link para o kit digital do evento
+                        if (collection && collection.cne_kit_digital_do_evento) {
+                            const documentField = document.getElementsByClassName('document-field');
 
-                            const button = document.createElement('a');
-                            button.classList.add('button');
-                            button.href = collection.cne_kit_digital_do_evento;
-                            button.innerText = 'Acessar Kit Digital';
-                            button.target = '_blank';
-                            wrapper.appendChild(button);
+                            if ( documentField.length ) {
+                                const wrapper = document.createElement('div');
+                                wrapper.style.width = '100%';
+                                wrapper.style.textAlign = 'right';
+                                wrapper.style.margin = '0.5rem 0';
 
-                            documentField[0].prepend(wrapper);
+                                const button = document.createElement('a');
+                                button.classList.add('button');
+                                button.href = collection.cne_kit_digital_do_evento;
+                                button.innerText = 'Acessar Kit Digital';
+                                button.target = '_blank';
+                                wrapper.appendChild(button);
+
+                                documentField[0].prepend(wrapper);
+                            }
                         }
                     }
                 })

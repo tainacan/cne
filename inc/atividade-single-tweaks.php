@@ -26,6 +26,26 @@ const ATIVIDADE_METADATA_BASIC_ARGS = array(
 );
 
 /**
+ * Sobrescreve o conteúdo da single da atividade
+ * 
+ * @param string $content
+ * @return string
+ */
+function cne_atividade_single_page_content( $content ) {
+
+	if ( !cne_is_post_type_a_tainacan_collection( get_post_type() ) || !is_singular() || is_singular( cne_get_instituicoes_collection_post_type() ) )
+		return $content;
+
+	ob_start();
+	include( get_stylesheet_directory() . '/tainacan/atividade-single-page.php' );
+	$new_content = ob_get_contents();
+	ob_end_clean();
+
+	return $new_content;
+}
+add_filter( 'the_content', 'cne_atividade_single_page_content', 12, 1);
+
+/**
  * Adiciona botão de editar dados da atividade na área do cabeçalho
  */
 function cne_atividade_single_page_hero_title_before() {
@@ -227,6 +247,23 @@ function cne_atividade_single_page_important_metadata() {
 }
 add_action('cne-atividade-important-metadata', 'cne_atividade_single_page_important_metadata');
 
+/**
+ * Ao invés do slug, usa o 'cne_area_da_secao_de_metadados' para definir a área da seção de metadados.
+ * Isso permite estilizar seções de metadados em diferentes coleções de eventos de uma mesma forma.
+ */
+function cne_atividade_single_page_metadata_section_args($args, $metadata_section) {
+	$metadata_section_area = get_post_meta($metadata_section->get_ID(), 'cne_area_da_secao_de_metadados', true);
+	if ( $metadata_section_area )
+		$args['before_name'] = '<h2 class="tainacan-single-item-section" id="metadata-section-' . $metadata_section_area  . '">';
+	
+	return $args;
+}
+add_filter('tainacan-get-metadata-section-as-html-filter-args', 'cne_atividade_single_page_metadata_section_args', 10, 2);
+
+
+/**
+ * Adiciona a instituição responsável pela atividade e a imagem do evento no final da página
+ */
 function cne_atividade_single_page_bottom() {
 	if ( cne_is_post_type_a_tainacan_collection( get_post_type() ) && is_singular() && !is_singular( cne_get_instituicoes_collection_post_type() ) ) : ?>
 
@@ -281,33 +318,3 @@ function cne_atividade_single_page_bottom() {
 	<?php endif;
 }
 add_action('blocksy:single:content:bottom', 'cne_atividade_single_page_bottom', 2);
-
-/**
- * Ao invés do slug, usa o 'cne_area_da_secao_de_metadados' para definir a área da seção de metadados.
- * Isso permite estilizar seções de metadados em diferentes coleções de eventos de uma mesma forma.
- */
-function cne_atividade_single_page_metadata_section_args($args, $metadata_section) {
-	$metadata_section_area = get_post_meta($metadata_section->get_ID(), 'cne_area_da_secao_de_metadados', true);
-	if ( $metadata_section_area )
-		$args['before_name'] = '<h2 class="tainacan-single-item-section" id="metadata-section-' . $metadata_section_area  . '">';
-	
-	return $args;
-}
-add_filter('tainacan-get-metadata-section-as-html-filter-args', 'cne_atividade_single_page_metadata_section_args', 10, 2);
-
-/**
- * Sobrescreve o conteúdo da single da atividade
- */
-function cne_atividade_single_page_content( $content ) {
-
-	if ( !cne_is_post_type_a_tainacan_collection( get_post_type() ) || !is_singular() || is_singular( cne_get_instituicoes_collection_post_type() ) )
-		return $content;
-
-	ob_start();
-	include( get_stylesheet_directory() . '/tainacan/atividade-single-page.php' );
-	$new_content = ob_get_contents();
-	ob_end_clean();
-
-	return $new_content;
-}
-add_filter( 'the_content', 'cne_atividade_single_page_content', 12, 1);

@@ -90,7 +90,7 @@ class CNE_Instituicao_Page
                         <?php the_title(); ?>
                     </h1>
 
-                    <a class="wp-button-with-icon button button-primary cne-button-cta" href="<?php echo get_permalink();  ?>">
+                    <a style="position: relative; top: -3px; right: -3px;" class="wp-button-with-icon button button-primary cne-button-cta" href="<?php echo get_permalink();  ?>">
                         Ver instituição publicada &nbsp;
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -159,7 +159,7 @@ class CNE_Instituicao_Page
 
                             if ($url) : ?>
                                 <a class="page-title-action wp-button-with-icon" href="<?php echo esc_url($url); ?>">
-                                    Editar dados &nbsp;
+                                    Editar instituição &nbsp;
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -231,8 +231,7 @@ class CNE_Instituicao_Page
         <?php
     }
 
-    function render_current_evento_section()
-    {
+    function render_current_evento_section() {
         $current_evento_collection_id = cne_get_evento_collection_id();
         $current_evento_collection = $this->tainacan_collections_repository->fetch($current_evento_collection_id);
 
@@ -261,7 +260,7 @@ class CNE_Instituicao_Page
         $contato_suporte__url = get_post_meta($current_evento_collection->get_ID(), 'cne_contato_suporte_do_evento', true);
 
         ?>
-        <h2 class="instituicao-atividade-heading">Atividades e Eventos</h2>
+        <h2 class="instituicao-atividade-heading">Página especial da <?php echo $current_evento_collection->get_name(); ?></h2>
 
         <?php if ($current_evento_collection->get_header_image_id()) : ?>
             <img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner is-hidden-mobile" src="<?php echo wp_get_attachment_image_url($current_evento_collection->get_header_image_id(), 'full'); ?>" alt="<?php echo esc_attr($current_evento_collection->get_name()); ?>" />
@@ -433,8 +432,7 @@ class CNE_Instituicao_Page
     /**
      * Gera o botão que imprime o comprovante de inscrição
      */
-    function instituicao_evento_comprovante_button()
-    {
+    function instituicao_evento_comprovante_button() {
         global $post;
     ?>
         <a class="button wp-button-with-icon button-primary" style="cursor: pointer;" onclick="

@@ -58,5 +58,6 @@ do_action( 'tainacan-blocksy-single-item-after-title' );
 <div class="tainacan-item-single tainacan-instituicao-single-body"> 
     <div class="tainacan-item-section tainacan-item-section--metadata-sections">
         <?php tainacan_the_metadata_sections( $sections_args ); ?>
+        <?php echo blocksy_get_social_share_box(); ?>
     </div>
 </div>

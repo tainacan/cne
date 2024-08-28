@@ -187,29 +187,32 @@
     display: grid;
     gap: 42px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     grid-template-areas: 'funcionamento funcionamento endereco endereco'
-                         'contato geral endereco endereco';
+                         'contato geral endereco endereco'
+                         'compartilhe geral endereco endereco';
 }
 @media screen and (max-width: 1000px) {
     .single .tainacan-instituicao-single-body .tainacan-item-section--metadata-sections {
         gap: 36px;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto auto auto;
         grid-template-areas: 'funcionamento funcionamento funcionamento'
                             'contato geral geral'
-                            'endereco endereco endereco';
+                            'endereco endereco endereco'
+                            'compartilhe compartilhe compartilhe';
     }
 }
 @media screen and (max-width: 768px) {
     .single .tainacan-instituicao-single-body .tainacan-item-section--metadata-sections {
         gap: 24px;
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto;
         grid-template-areas: 'funcionamento'
                             'contato'
                             'geral'
-                            'endereco';
+                            'endereco'
+                            'compartilhe';
     }
 }
 @media only screen and (min-width: 768px) {
@@ -305,7 +308,7 @@
 .single .tainacan-item-section__metadata .metadata-slug-redes-sociais .tainacan-metadatum.metadata-type-url .wp-block-buttons > a {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: contain;
     background-color: var(--theme-palette-color-7);
     font-size: 0;
     width: 32px;
@@ -444,5 +447,29 @@
     .single .instituicao-aviso-area {
         flex-wrap: wrap;
         text-align: center;
+    }
+}
+
+/* Area de compartilhar */
+.single .ct-share-box {
+    grid-area: compartilhe;
+    width: fit-content;
+    border: 1px solid var(--theme-palette-color-5);
+    border-radius: 8px;
+    padding: 1.75em 2em;
+    margin-bottom: 0;
+    align-self: end;
+}
+.single .ct-share-box[data-type="type-1"] > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(33px, 1fr));
+}
+.single .instituicao-aviso-area + .ct-share-box {
+    display: none;
+    visibility: hidden;
+}
+@media screen and (max-width: 768px) {
+    .single .ct-share-box {
+        padding: 1.5em 1.75em;
     }
 }

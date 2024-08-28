@@ -187,14 +187,14 @@ class CNE_Comprovante_Page {
             <div class="evento-principal-dados">
                 <?php if ( count($items) > 0 ) : ?>
 
-                    <?php $this->render_activities_table($items, $visible_metadata_objects); ?>
+                    <?php $this->render_activities_list($items, $visible_metadata_objects); ?>
 
                 <?php endif; ?>
             </div>
         <?php
     }
 
-    function render_activities_table($items, $metadata) {
+    function render_activities_list($items, $metadata) {
 
         $visible_metadata_ids = array_map( function($metadatum) {
             return $metadatum->get_ID();

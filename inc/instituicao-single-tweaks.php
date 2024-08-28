@@ -1,11 +1,31 @@
 <?php
 
 /**
- * Alterações que impactam o template de página de museu (museu-single-page.php)
+ * Alterações que impactam o template de página da instituição (instituicao-single-page.php)
  */
 
 /**
- * Adiciona Thumbnail do item na página da instituição
+ * Sobrescreve o conteúdo da single da instituição
+ * 
+ * @param string $content
+ * @return string
+ */
+function cne_instituicao_single_page_content( $content ) {
+
+	if ( ! is_singular( cne_get_instituicoes_collection_post_type() ) )
+		return $content;
+	
+	ob_start();
+	include( get_stylesheet_directory() . '/tainacan/instituicao-single-page.php' );
+	$new_content = ob_get_contents();
+	ob_end_clean();
+
+	return $new_content;
+}
+add_filter( 'the_content', 'cne_instituicao_single_page_content', 12, 1);
+
+/**
+ * Adiciona a miniatura do item na página da instituição
  */
 function cne_instituicao_single_page_hero_title_before() {
 
@@ -18,7 +38,7 @@ function cne_instituicao_single_page_hero_title_before() {
 			?>
 			<div class="instituicao-title-and-thumbnail-container">
 				<?php the_post_thumbnail('tainacan-medium', array('class' => 'instituicao-thumbnail')); ?>
-			<!-- tag will be closed in the after hook -->
+			<!-- a tag será fechada no hook after -->
 			<?php
 		}
 
@@ -41,8 +61,8 @@ function cne_instituicao_single_page_hero_title_after() {
 			if ( $url ) : ?>
 				<div class="wp-block-buttons" style="margin-left: auto;">
 					<div class="wp-block-button">
-						<a href="' . esc_url( $url ) . '" class="is-style-outline wp-block-button__link wp-element-button">
-							Editar dados da instituição &nbsp;
+						<a href="<?php echo esc_url( $url ); ?>" class="is-style-outline wp-block-button__link wp-element-button">
+							Editar instituição &nbsp;
 							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
 								<path d="M18.5 2.50023C18.8978 2.1024 19.4374 1.87891 20 1.87891C20.5626 1.87891 21.1022 2.1024 21.5 2.50023C21.8978 2.89805 22.1213 3.43762 22.1213 4.00023C22.1213 4.56284 21.8978 5.1024 21.5 5.50023L12 15.0002L8 16.0002L9 12.0002L18.5 2.50023Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -53,9 +73,9 @@ function cne_instituicao_single_page_hero_title_after() {
 			<?php endif; ?>
 			
 		<?php } ?>
-		</div><!-- Closing of the instituicao-title-and-thumbnail-container -->	
+		</div><!-- Fechamento da instituicao-title-and-thumbnail-container -->	
 		
-        <div class="instituicao-main-section">
+		<div class="instituicao-main-section">
 			<div class="instituicao-description">
 				<?php 
 				
@@ -95,7 +115,7 @@ function cne_instituicao_single_page_hero_title_after() {
 					]);
 				?>
 			</div>  
-        </div>
+		</div>
 
 		<div class="tainacan-item-section tainacan-item-section--special-cne-related-items">
 			<?php
@@ -112,6 +132,9 @@ function cne_instituicao_single_page_hero_title_after() {
 }
 add_action('blocksy:hero:title:after', 'cne_instituicao_single_page_hero_title_after');
 
+/**
+ * Adiciona aviso de responsabilidade na página da instituição
+ */
 function cne_instituicao_single_page_bottom() {
 	if ( is_singular( cne_get_instituicoes_collection_post_type() ) ) : ?>
 		<div class="instituicao-aviso-area"> 
@@ -125,20 +148,3 @@ function cne_instituicao_single_page_bottom() {
 	<?php endif;
 }
 add_action('blocksy:single:content:bottom', 'cne_instituicao_single_page_bottom', 2);
-
-/**
- * Sobrescreve o conteúdo da single da instituição
- */
-function cne_instituicao_single_page_content( $content ) {
-
-	if ( ! is_singular( cne_get_instituicoes_collection_post_type() ) )
-		return $content;
-	
-	ob_start();
-	include( get_stylesheet_directory() . '/tainacan/instituicao-single-page.php' );
-	$new_content = ob_get_contents();
-	ob_end_clean();
-
-	return $new_content;
-}
-add_filter( 'the_content', 'cne_instituicao_single_page_content', 12, 1);

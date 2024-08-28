@@ -459,3 +459,7 @@ body :not(.block-editor-page):not(.wp-customizer):not(.tainacan-admin-page) ul.s
     font-size: 16px;
     margin: 7px 0 12px;
 }
+body.edit-php.post-type-cne-instituicoes .search-box {
+    display: none;
+    visibility: hidden;
+}

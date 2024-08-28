@@ -97,7 +97,7 @@ body.user-is-gestor.tainacan-admin-page {
         left: unset;
         right: 0;
     }
-    .user-is-gestor #wp-admin-bar-colecao-instituicoes {
+    .user-is-gestor #wp-admin-bar-lista-instituicoes {
         display: block;
     }
     .user-is-gestor .menupop.with-avatar > .ab-item {
