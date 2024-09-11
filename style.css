@@ -8,7 +8,7 @@
  * Requires at least: 6.6
  * Requires PHP: 7.0
  * License: GNU General Public License v3 or later
- * Version: 1.1.5
+ * Version: 1.1.6
  */
 
 :root {
@@ -572,6 +572,10 @@ footer .widget-menu li {
 
 /* Esconde filtros de data quando se está filtrando por instituições */
 body.filtered-by-collection-14 .repository-level-filters {
+	display: none !important;
+	visibility: hidden !important;
+}
+body:not(.filtered-by-collection-14) #filters-from-collection-id-14 {
 	display: none !important;
 	visibility: hidden !important;
 }
