@@ -8,7 +8,7 @@
  * Requires at least: 6.6
  * Requires PHP: 7.0
  * License: GNU General Public License v3 or later
- * Version: 1.1.6
+ * Version: 1.1.7
  */
 
 :root {
@@ -197,15 +197,17 @@ footer .widget-menu li {
 
 /* Formulários do plugin User Registration */
 #user-registration {
-	margin: 0;
 	width: 298px;
 	box-shadow: none !important;
 	background-color: transparent !important;
+	padding: 0 !important;
+	margin: 0 !important;
 }
 .ur-frontend-form {
 	border: none !important;
 	padding: 0 !important;
 	box-shadow: none !important;
+	background-color: transparent !important;
 }
 .ur-frontend-form p {
 	margin-bottom: 0;
@@ -220,10 +222,16 @@ footer .widget-menu li {
 .ur-frontend-form form input[type="submit"],
 .ur-frontend-form form button[type="submit"],
 .ur-frontend-form form button.user-registration-multi-part-nav-prev,
-.ur-frontend-form form button.user-registration-multi-part-nav-next {
+.ur-frontend-form form button.user-registration-multi-part-nav-next,
+#user-registration .ur-frontend-form.ur-frontend-form--rounded form input[type="submit"],
+#user-registration .ur-frontend-form.ur-frontend-form--rounded form button[type="submit"],
+#user-registration .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-prev,
+#user-registration .ur-frontend-form.ur-frontend-form--rounded form button.user-registration-multi-part-nav-next {
 	border-radius: 8px !important;
 	width: 100%;
 	margin-top: 2rem;
+	text-transform: uppercase;
+	background: var(--theme-button-background-initial-color) !important;
 }
 
 .ur-frontend-form form .ur-form-row .ur-form-grid input[type="text"],
