@@ -61,7 +61,7 @@ class CNE_Instituicao_Page
             return;
         }
 
-        $this->id_instituicao = $_GET['id'];
+        $this->id_instituicao = absint( $_GET['id'] );
 
         $instituicao_items = $this->tainacan_items_repository->fetch(array('id' => $this->id_instituicao), cne_get_instituicoes_collection_id());
 
@@ -260,7 +260,7 @@ class CNE_Instituicao_Page
         $contato_suporte__url = get_post_meta($current_evento_collection->get_ID(), 'cne_contato_suporte_do_evento', true);
 
         ?>
-        <h2 class="instituicao-atividade-heading">Página especial da <?php echo $current_evento_collection->get_name(); ?></h2>
+        <h2 class="instituicao-atividade-heading">Página especial da <?php echo esc_html( $current_evento_collection->get_name() ); ?></h2>
 
         <?php if ($current_evento_collection->get_header_image_id()) : ?>
             <img title="<?php echo $current_evento_collection->get_name(); ?>" class="instituicao-evento-banner is-hidden-mobile" src="<?php echo wp_get_attachment_image_url($current_evento_collection->get_header_image_id(), 'full'); ?>" alt="<?php echo esc_attr($current_evento_collection->get_name()); ?>" />
@@ -324,7 +324,7 @@ class CNE_Instituicao_Page
                 <div class="evento-atividades-empty-placeholder">
                     <p>Esta instituição ainda não está participando do evento.</p>
                     <p>Insira ao menos uma atividade para participar!</p>
-                    <a class="page-title-action button button-primary cne-button-cta wp-button-with-icon" href="<?php echo admin_url('?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new');  ?>">
+                    <a class="page-title-action button button-primary cne-button-cta wp-button-with-icon" href="<?php echo esc_url( admin_url('?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new') );  ?>">
                         Cadastrar nova atividade &nbsp;
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -338,7 +338,7 @@ class CNE_Instituicao_Page
                 <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
                     <h3 style="display: inline-block; margin-right: 5px;">Minhas atividades no evento</h3>
 
-                    <a class="page-title-action wp-button-with-icon" href="<?php echo admin_url('?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new');  ?>">
+                    <a class="page-title-action wp-button-with-icon" href="<?php echo esc_url( admin_url('?from-instituicao=' . $this->id_instituicao . '&page=tainacan_admin#/collections/' . $current_evento_collection_id . '/items/new') );  ?>">
                         Cadastrar nova atividade &nbsp;
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#01174E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -388,7 +388,7 @@ class CNE_Instituicao_Page
                         <td style="min-width: 300px;">
                             <strong>
                                 <a class="row-title" href="<?php echo admin_url('?page=tainacan_admin#/collections/' . $atividade->get_collection_id() . '/items/' . $atividade->get_ID() . '/edit'); ?>" aria-label="“<?php echo $atividade->get_title(); ?>” (Editar)">
-                                    <?php echo $atividade->get_title(); ?>
+                                    <?php echo esc_html( $atividade->get_title() ); ?>
                                 </a>
 
                                 <?php if (get_post_status() && get_post_status_object(get_post_status()) && get_post_status_object(get_post_status())->label) : ?>

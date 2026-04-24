@@ -95,8 +95,8 @@ class CNE_Comprovante_Page {
             return; 
         }
 
-        $this->id_instituicao = $_GET['id'];
-        
+        $this->id_instituicao = absint( $_GET['id'] );
+
         $comprovante_items = $this->tainacan_items_repository->fetch( array( 'id' => $this->id_instituicao ), cne_get_instituicoes_collection_id() );
 
         if ( !$comprovante_items->have_posts() ) {

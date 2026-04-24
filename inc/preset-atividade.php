@@ -153,7 +153,7 @@ function cne_preset_atividade_data_from_instituicao($item_atividade, $instituica
 									$terms = is_object($terms) && $terms instanceof \Tainacan\Entities\Term ? $terms->get_name() : null;
 								}
 
-								if ( false == $terms || null == $terms || empty($terms) || !count($terms) )
+								if ( false == $terms || null == $terms || empty($terms) || ( is_array($terms) && !count($terms) ) )
 									continue;
 
 								$atividade_item_metadatum->set_value( $terms );
